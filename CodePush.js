@@ -22,7 +22,7 @@ CodePushCommandExecutor.loginWithAccessToken = function () {
 };
 
 CodePushCommandExecutor.execute({
-	type: CodePushCommandTypes.release,
+    type: CodePushCommandTypes.release,
     appName: appName,
     deploymentName: deploymentName,
     description: description,
