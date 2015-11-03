@@ -1,0 +1,90 @@
+{
+  "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
+  "name": "CodePush",
+  "friendlyName": "CodePush",
+  "description": "Uploads a new release to CodePush",
+  "author": "Geoffrey Goh",
+  "helpMarkDown": "Replace with markdown to show in help",
+  "category": "Deploy",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Release $(packagePath) to CodePush ($(appName) - $(deploymentName)) ",
+  "inputs": [
+    {
+      "name": "accessKey",
+      "type": "string",
+      "label": "Access Key",
+      "defaultValue": "YOUR_ACCESS_KEY",
+      "required": true,
+      "helpMarkDown": "Access key used to login to CodePush"
+    },
+    {
+      "name": "appName",
+      "type": "string",
+      "label": "App Name",
+      "defaultValue": "YOUR_APP_NAME",
+      "required": true,
+      "helpMarkDown": "Name of the app you want to push the release to"
+    },
+    {
+      "name": "packagePath",
+      "type": "filePath",
+      "label": "Package Path",
+      "defaultValue": "./www",
+      "required": true,
+      "helpMarkDown": "Path to the built package folder or script to be released"
+    },
+    {
+      "name": "appStoreVersion",
+      "type": "string",
+      "label": "App Store Version",
+      "defaultValue": "1.0.0",
+      "required": true,
+      "helpMarkDown": "Semver compliant app store version of your app"
+    },
+    {
+      "name": "deploymentName",
+      "type": "string",
+      "label": "Deployment Name",
+      "defaultValue": "Staging",
+      "required": false,
+      "helpMarkDown": "Name of the deployment under the app which you want to push the release to"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "label": "Package Description",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Description of the package to be released"
+    },
+    {
+      "name": "isMandatory",
+      "type": "boolean",
+      "label": "Is Mandatory",
+      "defaultValue": false,
+      "required": false,
+      "helpMarkDown": "Whether the release is a mandatory update"
+    }
+  ],
+  "execution": {
+    "Node": {
+      "target": "CodePush.js",
+      "argumentFormat": ""
+    },
+    "PowerShell": {
+      "target": "$(currentDirectory)\\CodePush.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

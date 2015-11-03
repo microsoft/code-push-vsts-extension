@@ -1,0 +1,15 @@
+{
+  "name": "vso-task-code-push",
+  "version": "1.0.0",
+  "description": "A VSO build task for releasing a new package to a CodePush deployment",
+  "main": "CodePush.js",
+  "scripts": {
+    "deploy": "tfx build tasks upload ./ --overwrite"
+  },
+  "author": "Geoffrey",
+  "license": "ISC",
+  "dependencies": {
+	  "code-push-cli": "1.0.4-beta",
+    "vso-task-lib": "^0.4.5"
+  }
+}
