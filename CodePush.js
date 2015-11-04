@@ -1,6 +1,6 @@
 var path = require("path");
 var tl = require("vso-task-lib");
-require('shelljs/global');
+require("shelljs/global");
 
 // User inputs.
 var accessKey       = tl.getInput("accessKey", true);
@@ -12,7 +12,7 @@ var description     = tl.getInput("description", false);
 var isMandatory     = tl.getInput("isMandatory", false);
 
 // Other global variables.
-var localNpmBinaries = exec('npm bin', { silent: true }).output.replace(/(\r\n|\n|\r)/gm, "");
+var localNpmBinaries = exec("npm bin", { silent: true }).output.replace(/(\r\n|\n|\r)/gm, "");
 var codePushCommandPrefix = path.join(localNpmBinaries, "code-push");
 
 // Helper functions.
@@ -24,9 +24,17 @@ function buildCommand(cmd, positionArgs, optionFlags) {
   });
   
   for (var flag in optionFlags) {
-    command = command + " --" + flag + " " + optionFlags[flag];
+    // If the value is falsey, the option flag doesn't have to be specified.
+    if (optionFlags[flag]) {
+      var flagValue = "" + optionFlags[flag];
+      // If the value contains spaces, wrap in double quotes.
+      if (flagValue.indexOf(" ") >= 0) {
+        flagValue = "\"" + flagValue + "\"";
+      }
+      command = command + " --" + flag + " " + flagValue;
+    }
   } 
-  
+  console.log(command);
   return command;
 }
 
@@ -38,7 +46,8 @@ function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
   if (result.code == 0) {
     console.log(result.output);
   } else {
-    tl.exit(1);
+    tl.setResult(1, result.output);
+    ensureLoggedOut();
     throw new Error(result.output);
   }
   
@@ -46,7 +55,7 @@ function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
 }
 
 function ensureLoggedOut() {
-  exec(buildCommand("logout"), { silent: true });
+  exec(buildCommand("logout", /*positionArgs*/ null, { local: true }), { silent: true });
 }
 
 

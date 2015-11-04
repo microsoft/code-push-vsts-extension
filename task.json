@@ -4,7 +4,6 @@
   "friendlyName": "CodePush",
   "description": "A VSO build task for releasing app updates to the CodePush service",
   "author": "Microsoft Corporation",
-  "helpMarkDown": "Replace with markdown to show in help",
   "category": "Deploy",
   "visibility": [
     "Build",
@@ -31,7 +30,7 @@
       "name": "appName",
       "type": "string",
       "label": "App Name",
-      "defaultValue": "YOUR_APP_NAME",
+      "defaultValue": "",
       "required": true,
       "helpMarkDown": "Name of the app you want to release an update for"
     },
@@ -47,7 +46,7 @@
       "name": "appStoreVersion",
       "type": "string",
       "label": "App Store Version",
-      "defaultValue": "1.0.0",
+      "defaultValue": "",
       "required": true,
       "helpMarkDown": "The app store version that this release depends on (must be semver compliant)"
     },
@@ -55,7 +54,7 @@
       "name": "deploymentName",
       "type": "string",
       "label": "Deployment Name",
-      "defaultValue": "Staging",
+      "defaultValue": "",
       "required": false,
       "helpMarkDown": "Name of the deployment under the app which you want to push the release to"
     },
