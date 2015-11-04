@@ -1,10 +1,8 @@
-var path = require('path');
-var tl = require('vso-task-lib');
-var CodePushCommandExecutor = require("code-push-cli/script/command-executor");
-var CodePushSdk = require("code-push");
-var CodePushCommandTypes = require("code-push-cli/definitions/cli").CommandType;
+var path = require("path");
+var tl = require("vso-task-lib");
+require('shelljs/global');
 
-// User inputs
+// User inputs.
 var accessKey       = tl.getInput("accessKey", true);
 var appName         = tl.getInput("appName", true);
 var packagePath     = tl.getPathInput("packagePath", true);
@@ -13,23 +11,61 @@ var deploymentName  = tl.getInput("deploymentName", false);
 var description     = tl.getInput("description", false);
 var isMandatory     = tl.getInput("isMandatory", false);
 
-// Constants
-var SERVER_URL = "https://codepush.azurewebsites.net";
+// Other global variables.
+var localNpmBinaries = exec('npm bin', { silent: true }).output.replace(/(\r\n|\n|\r)/gm, "");
+var codePushCommandPrefix = path.join(localNpmBinaries, "code-push");
 
-CodePushCommandExecutor.loginWithAccessToken = function () {
-    CodePushCommandExecutor.sdk = new CodePushSdk.AccountManager(SERVER_URL);
-    return CodePushCommandExecutor.sdk.loginWithAccessToken(accessKey);
-};
+// Helper functions.
+function buildCommand(cmd, positionArgs, optionFlags) {
+  var command = codePushCommandPrefix + " " + cmd;
+  
+  positionArgs && positionArgs.forEach(function(positionArg) {
+    command = command + " " + positionArg;
+  });
+  
+  for (var flag in optionFlags) {
+    command = command + " --" + flag + " " + optionFlags[flag];
+  } 
+  
+  return command;
+}
 
-CodePushCommandExecutor.execute({
-    type: CodePushCommandTypes.release,
-    appName: appName,
+function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
+  var command = buildCommand(cmd, positionArgs, optionFlags);
+  
+  var result = exec(command, { silent: true });
+  
+  if (result.code == 0) {
+    console.log(result.output);
+  } else {
+    tl.exit(1);
+    throw new Error(result.output);
+  }
+  
+  return result;
+}
+
+function ensureLoggedOut() {
+  exec(buildCommand("logout"), { silent: true });
+}
+
+
+// Ensure all other users are logged out.
+ensureLoggedOut();
+
+// Log in to the CodePush CLI.
+executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
+
+// Run release command.
+executeCommandAndHandleResult(
+  "release", 
+  [appName, packagePath, appStoreVersion], 
+  { 
     deploymentName: deploymentName,
     description: description,
-    mandatory: isMandatory,
-    appStoreVersion: appStoreVersion,
-    package: packagePath
-}).catch(function(error) {
-    console.error(error);
-    tl.exit(0);
-}).done();
+    mandatory: isMandatory
+  }
+);
+
+// Log out.
+ensureLoggedOut();
