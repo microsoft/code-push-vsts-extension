@@ -52,11 +52,18 @@
     },
     {
       "name": "deploymentName",
-      "type": "string",
+      "type": "pickList",
       "label": "Deployment Name",
       "defaultValue": "",
       "required": false,
-      "helpMarkDown": "Name of the deployment under the app which you want to push the release to"
+      "helpMarkDown": "Name of the deployment under the app which you want to push the release to",
+      "options": {
+        "Staging": "Staging",
+        "Production": "Production"
+      },
+      "properties": {
+        "EditableOptions": "True"
+      }
     },
     {
       "name": "description",

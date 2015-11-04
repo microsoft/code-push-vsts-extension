@@ -34,7 +34,7 @@ function buildCommand(cmd, positionArgs, optionFlags) {
       command = command + " --" + flag + " " + flagValue;
     }
   } 
-  console.log(command);
+
   return command;
 }
 
