@@ -1,0 +1,96 @@
+{
+  "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
+  "name": "CodePush",
+  "friendlyName": "CodePush",
+  "description": "A VSO build task for releasing app updates to the CodePush service",
+  "author": "Microsoft Corporation",
+  "category": "Deploy",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [],
+  "version": {
+    "Major": "0",
+    "Minor": "0",
+    "Patch": "1"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Release $(packagePath) to CodePush ($(appName) - $(deploymentName)) ",
+  "inputs": [
+    {
+      "name": "accessKey",
+      "type": "string",
+      "label": "Access Key",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Access key used to authenticate with the CodePush service"
+    },
+    {
+      "name": "appName",
+      "type": "string",
+      "label": "App Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Name of the app you want to release an update for"
+    },
+    {
+      "name": "packagePath",
+      "type": "filePath",
+      "label": "Package Path",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Path to the file or directory that contains the content you want to release"
+    },
+    {
+      "name": "appStoreVersion",
+      "type": "string",
+      "label": "App Store Version",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The app store version that this release depends on (must be semver compliant)"
+    },
+    {
+      "name": "deploymentName",
+      "type": "pickList",
+      "label": "Deployment Name",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Name of the deployment under the app which you want to push the release to",
+      "options": {
+        "Staging": "Staging",
+        "Production": "Production"
+      },
+      "properties": {
+        "EditableOptions": "True"
+      }
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "label": "Package Description",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Description of the package to be released"
+    },
+    {
+      "name": "isMandatory",
+      "type": "boolean",
+      "label": "Mandatory",
+      "defaultValue": false,
+      "required": false,
+      "helpMarkDown": "Specifies whether the release should be considered mandatory"
+    }
+  ],
+  "execution": {
+    "Node": {
+      "target": "CodePush.js",
+      "argumentFormat": ""
+    },
+    "PowerShell": {
+      "target": "$(currentDirectory)\\CodePush.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

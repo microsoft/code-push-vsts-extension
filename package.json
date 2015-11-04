@@ -1,0 +1,15 @@
+{
+  "name": "vso-task-code-push",
+  "version": "0.0.1",
+  "description": "A VSO build task for releasing app updates to the CodePush service",
+  "main": "CodePush.js",
+  "scripts": {
+    "deploy": "tfx build tasks upload ./ --overwrite"
+  },
+  "author": "Microsoft Corporation",
+  "license": "ISC",
+  "dependencies": {
+    "code-push-cli": "1.1.2-beta",
+    "vso-task-lib": "^0.4.5"
+  }
+}
