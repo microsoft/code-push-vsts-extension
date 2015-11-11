@@ -6,7 +6,7 @@ The deploy task can also be paired with a [Cordova build task](https://github.co
 
 ## Quick Start
 
-1. Install the extension from the [VSTS Marketplace](https://marketplace.visualstudio.com/items/ms.vss-services-codepush), or upload the task using the [TFS Extensions Command Line Utility](https://www.npmjs.com/package/tfx-cli).
+1. Install the extension from the [VSTS Marketplace](https://marketplace.visualstudio.com/items/ms-vsclient.code-push), or upload the task using the [TFS Extensions Command Line Utility](https://www.npmjs.com/package/tfx-cli).
 2. Go to your Visual Studio Team Services project, click on the **Build** tab, and create a new build definition (the "+" icon).
 3. Click **Add build step...** and select **CodePush** from the **Deploy** category
 4. Configure the build step - See the options detailed below.

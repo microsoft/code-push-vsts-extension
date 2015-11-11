@@ -1,16 +1,16 @@
 {
     "manifestVersion": 1.0,
-    "extensionId": "vsts-extension-code-push",
-    "name": "CodePush Extension for Visual Studio Team Services",
+    "id": "code-push",
+    "name": "Visual Studio Team Services Extension for CodePush",
     "version": "1.0.0",
-    "publisher": "microsoft",
+    "publisher": "ms-vsclient",
     "public": false,
     "description": "A Visual Studio Team Services deploy task for automating the release of app updates to the CodePush service as part of a CI setup.",
     "categories": [
         "Build and release"
     ],
-    "visibility": [
-        "Build and release"
+    "scopes": [ 
+        "vso.build" 
     ],
     "tags": [
         "Cordova", "React Native", "CodePush", "Deploy", "Continuous Integration", "Android", "iOS"
