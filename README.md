@@ -1,5 +1,7 @@
 # Visual Studio Team Services Extension for CodePush
 
+[Extension Overview](docs/extension-overview.md)
+
 ## Development
 
 To install dependencies, go to the [code-push-vsts-task](code-push-vsts-task) folder and run ```npm install```
