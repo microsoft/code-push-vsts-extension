@@ -27,7 +27,7 @@ To install dependencies, go to the [code-push-vsts-task](code-push-vsts-task) fo
 
 ## Contact Us
 
-* [Email us your questions](mailto:codepushfeed@microsoft.com)
+[Email us your questions](mailto:codepushfeed@microsoft.com)
 
 ## License
 
