@@ -25,4 +25,4 @@ The deploy task can also be paired with a [Cordova build task](https://github.co
 
 ## Contact Us
 
-* [Email us your questions](mailto:codepushfeed@microsoft.com)
+[Email us your questions](mailto:codepushfeed@microsoft.com)
