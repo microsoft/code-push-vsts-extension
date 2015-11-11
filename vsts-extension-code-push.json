@@ -1,0 +1,56 @@
+{
+    "manifestVersion": 1.0,
+    "extensionId": "vsts-extension-code-push",
+    "name": "CodePush Extension for Visual Studio Team Services",
+    "version": "1.0.0",
+    "publisher": "microsoft",
+    "public": false,
+    "description": "A Visual Studio Team Services deploy task for automating the release of app updates to the CodePush service as part of a CI setup.",
+    "categories": [
+        "Build and release"
+    ],
+    "visibility": [
+        "Build and release"
+    ],
+    "tags": [
+        "Cordova", "React Native", "CodePush", "Deploy", "Continuous Integration", "Android", "iOS"
+    ],
+    "links": {
+        "issues": "https://github.com/Microsoft/code-push-vso-extension/issues",
+        "support": "http://stackoverflow.com/questions/tagged/code-push",
+        "repository": "https://github.com/Microsoft/code-push-vso-extension"
+    },
+    "icons": {
+        "default": "codepush_default.png",
+        "wide": "codepush_wide.png"
+    },
+    "branding": {
+        "color": "#000000",
+        "theme": "light"
+    },
+    "content":{
+        "details": {
+            "path": "docs/extension-overview.md"
+        }
+    },
+    "screenshots": [
+      {
+          "path": "docs/screenshots/screenshot-1.png"
+      }
+    ],
+    "files": [
+        {
+            "path": "code-push-vsts-task"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "codepush.tasks.release",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [ "ms.vss-distributed-task.tasks" ],
+            "properties": {
+                "name": "code-push-vsts-task"
+            }
+        }
+    ]
+}

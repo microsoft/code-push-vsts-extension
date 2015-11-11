@@ -1,4 +1,6 @@
-## Visual Studio Team Services Extension for CodePush
+[CodePush](http://microsoft.github.io/code-push/) is a cloud service that enables Cordova and React Native developers to deploy mobile app updates directly to their users’ devices. It works by acting as a central repository that developers can publish certain updates to (e.g. JS, HTML, CSS and image changes), and that apps can query for updates from using our provided client SDKs for [Cordova](https://github.com/Microsoft/cordova-plugin-code-push) and [React Native](https://github.com/Microsoft/react-native-code-push). 
+
+# Visual Studio Team Services Extension for CodePush
 
 This VSTS extension contains a deploy task that allows you to automate the release of app updates via CodePush from CI setup. It can be used with VSTS or TFS and is intended to work with any Cordova or React Native project. 
 Under the hood, it invokes the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli) to run a release command. 
@@ -21,25 +23,6 @@ The deploy task can also be paired with a [Cordova build task](https://github.co
 6. **Package** Description (string) - Description of the package to be released.
 7. **Mandatory** (boolean) - Specifies whether the release should be considered mandatory.
 
-## Development
-
-To install dependencies, go to the [code-push-vsts-task](code-push-vsts-task) folder and run '''npm install'''
-
 ## Contact Us
 
 * [Email us your questions](mailto:codepushfeed@microsoft.com)
-
-## License
-
-'''
-Copyright (c) Microsoft Corporation
-All rights reserved. 
-
-MIT License
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-'''
