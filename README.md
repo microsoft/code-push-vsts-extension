@@ -23,7 +23,7 @@ The deploy task can also be paired with a [Cordova build task](https://github.co
 
 ## Development
 
-To install dependencies, go to the [code-push-vsts-task](code-push-vsts-task) folder and run '''npm install'''
+To install dependencies, go to the [code-push-vsts-task](code-push-vsts-task) folder and run ```npm install```
 
 ## Contact Us
 
@@ -31,7 +31,7 @@ To install dependencies, go to the [code-push-vsts-task](code-push-vsts-task) fo
 
 ## License
 
-'''
+```
 Copyright (c) Microsoft Corporation
 All rights reserved. 
 
@@ -42,4 +42,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-'''
+```
