@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "publisher": "ms-vsclient",
     "public": false,
-    "description": "A Visual Studio Team Services deploy task for automating the release of app updates to the CodePush service as part of a CI setup.",
+    "description": "Provides a deploy task that enables performing continuous delivery to the CodePush service from an automated VSTS build definition",
     "categories": [
         "Build and release"
     ],
@@ -13,7 +13,7 @@
         "vso.build" 
     ],
     "tags": [
-        "Cordova", "React Native", "CodePush", "Deploy", "Continuous Integration", "Android", "iOS"
+        "Cordova", "React Native", "CodePush", "Deploy", "Continuous Integration", "Continuous Delivery", "Android", "iOS"
     ],
     "links": {
         "issues": {
