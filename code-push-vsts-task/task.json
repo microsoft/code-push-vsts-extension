@@ -2,7 +2,7 @@
   "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
   "name": "CodePush",
   "friendlyName": "CodePush",
-  "description": "A VSO build task for releasing app updates to the CodePush service",
+  "description": "A VSTS build task for releasing app updates to the CodePush service",
   "author": "Microsoft Corporation",
   "category": "Deploy",
   "visibility": [
@@ -11,9 +11,9 @@
   ],
   "demands": [],
   "version": {
-    "Major": "0",
+    "Major": "1",
     "Minor": "0",
-    "Patch": "1"
+    "Patch": "0"
   },
   "minimumAgentVersion": "1.83.0",
   "instanceNameFormat": "Release $(packagePath) to CodePush ($(appName) - $(deploymentName)) ",
