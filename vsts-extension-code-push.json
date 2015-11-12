@@ -1,6 +1,6 @@
 {
     "manifestVersion": 1.0,
-    "id": "code-push",
+    "id": "CodePush",
     "name": "Visual Studio Team Services Extension for CodePush",
     "version": "1.0.0",
     "publisher": "ms-vsclient",
@@ -22,7 +22,7 @@
     },
     "icons": {
         "default": "codepush_default.png",
-        "wide": "codepush_wide.png"
+        "large": "codepush_large.png"
     },
     "branding": {
         "color": "#000000",
