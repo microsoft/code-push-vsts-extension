@@ -6,7 +6,7 @@ This extension contains a deployment task which allows you to automate the relea
 
 This task can be used with either VSTS or TFS 2015 on-prem servers (see below) and is intended to work with any Cordova or React Native project. Additionally, the task can be paired nicely with the [Cordova command task](https://marketplace.visualstudio.com/items/ms-vsclient.cordova-extension) (coming soon for React Native), which allows you to easily "prepare" the platform-specific web assets that can be subsequently released to CodePush using this task.
 
-<img src="task_example.png" style="border: 1px solid #ddd; width: 100%" />
+![CodePush Task + Cordova](task_example.png)
 
 ## Quick Start
 
