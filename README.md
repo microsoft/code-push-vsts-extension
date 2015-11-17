@@ -1,3 +1,11 @@
+<table style="width: 100%; border-style: none;"><tr>
+<td style="width: 140px; text-align: center;"><img src="codepush_default.png" /></td>
+<td><strong>Visual Studio Team Services Extension for CodePush</strong><br />
+<i>Provides a deploy task that enables performing continuous delivery to the CodePush service from an automated VSTS build definition</i><br />
+<a href="https://marketplace.visualstudio.com/items/ms-vsclient.code-push">Install now!</a>
+</td>
+</tr></table>
+
 # Visual Studio Team Services Extension for CodePush
 
 [Extension Overview](docs/extension-overview.md)
