@@ -6,6 +6,12 @@
 
 To install dependencies, go to the [code-push-vsts-task](code-push-vsts-task) folder and run ```npm install```
 
+## Testing
+
+Make sure Mocha is installed ```npm install -g mocha```
+
+To run tests, go to the [code-push-vsts-task](code-push-vsts-task) folder and run ```mocha test.js```
+
 ## License
 
 ```
