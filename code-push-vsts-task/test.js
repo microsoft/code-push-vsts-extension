@@ -23,7 +23,7 @@ describe("CodePush Deploy Task", function() {
     // Restore all spied methods.
     spies.forEach(function(spy) {
       spy.restore();
-    })
+    });
     spies = [];
   });
   
@@ -41,15 +41,15 @@ describe("CodePush Deploy Task", function() {
   }
   
   function checkCommandsEqual(expectedCommands, execStub) {
-    assert.equal(execStub.callCount, expectedCommands.length);
-    for (var i=0; i<expectedCommands.length; i++) {
-      var command = execStub.getCall(i).args[0].substring(CodePush.commandPrefix.length + /*space*/1);
-      assert.equal(expectedCommands[i], command, "Expected: " + expectedCommands[i] + " Got: " + command);
-    }
+    assert.equal(execStub.callCount, expectedCommands.length, "Expected " + expectedCommands.length + " commands, but executed " + execStub.callCount);
+    expectedCommands.forEach(function(expectedCommand, i) {
+      var actualCommand = execStub.getCall(i).args[0].substring(CodePush.commandPrefix.length + /*space*/1);
+      assert.equal(expectedCommand, actualCommand, "Expected: " + expectedCommand + " Got: " + actualCommand);
+    });
   }
   
   function performDeployTask(shouldFail) {
-    sinon.spy(CodePush, "performDeployTask");
+    var performDeployTaskSpy = sinon.spy(CodePush, "performDeployTask");
     spies.push(CodePush.performDeployTask)
     
     var tlSetResultSpy = sinon.stub(tl, "setResult", function() {});
@@ -58,10 +58,15 @@ describe("CodePush Deploy Task", function() {
     try {
       CodePush.performDeployTask(ACCESS_KEY, APP_NAME, PACKAGE_PATH, APP_STORE_VERSION, DEPLOYMENT_NAME, DESCRIPTION, IS_MANDATORY);
     } catch (e) {
-      assert(shouldFail, "Task threw an unexpected error");
+      assert(shouldFail, "Threw an unexpected error");
     }
     
-    shouldFail ? assert.equal(tlSetResultSpy.firstCall.args[0], 1, "Did not set task result to 1 on failure") : assert(!tlSetResultSpy.called, "Should not set task result if task succeeds");
+    if (shouldFail) {
+      assert(performDeployTaskSpy.threw(), "Did not throw an error");
+      assert.equal(tlSetResultSpy.called && tlSetResultSpy.firstCall.args[0], 1, "Did not set task result to 1 on failure");
+    } else {
+      assert(!tlSetResultSpy.called, "Should not set task result if task succeeds");
+    }
   }
   
   
