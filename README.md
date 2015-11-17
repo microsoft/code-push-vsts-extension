@@ -14,6 +14,8 @@ This extension contains a deployment task which allows you to automate the relea
 
 This task can be used with either VSTS or TFS 2015 on-prem servers (see below) and is intended to work with any Cordova or React Native project. Additionally, the task can be paired nicely with the [Cordova command task](https://marketplace.visualstudio.com/items/ms-vsclient.cordova-extension) (coming soon for React Native), which allows you to easily "prepare" the platform-specific web assets that can be subsequently released to CodePush using this task.
 
+![CodePush Task + Cordova](docs/task_example.png)
+
 ## Quick Start
 
 1. Using the [CodePush CLI](http://microsoft.github.io/code-push/docs/cli.html), generate a new access key whose description indicates it will be used for VSTS CI builds (e.g `code-push access-key create "VSTS CI"`)
@@ -22,11 +24,15 @@ This task can be used with either VSTS or TFS 2015 on-prem servers (see below) a
 
 3. Go to your Visual Studio Team Services or TFS project, click on the **Build** tab, and create a new build definition (the "+" icon) that is hooked up to your project's appropriate source repo
 
-4. Click **Add build step...** and select the neccessary tasks to generate your release assets (e.g. **Cordova Build**)
+4. Click **Add build step...** and select the neccessary tasks to generate your release assets (e.g. **Gulp**, **Cordova Build**)
 
 5. Click **Add build step...** and select **CodePush** from the **Deploy** category
 
-6. Configure the deploy step with the access key created in #1, specifying the right app and deployment name, and pointing at the output of the task in step #4 - *Check out the tool tips for handy inline documentation.*
+6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and app store version, and pointing to the output of the task in step #4.
+
+7. Click the **Queue Build** button or push a change to your repo in order to run the newly defined build pipeline
+
+8. Run your CodePush-ified app to see the change that was automatically deployed!
 
 ## Task Option Reference
 
