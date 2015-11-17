@@ -17,13 +17,13 @@
     ],
     "links": {
         "issues": {
-            "uri": "https://github.com/Microsoft/code-push-vso-extension/issues"
+            "uri": "https://github.com/Microsoft/code-push-vsts-extension/issues"
         },
         "support": {
-            "uri": "http://stackoverflow.com/questions/tagged/code-push"
+            "uri": "http://stackoverflow.com/questions/tagged/codepush"
         },
         "repository": {
-            "uri": "https://github.com/Microsoft/code-push-vso-extension"
+            "uri": "https://github.com/Microsoft/code-push-vsts-extension"
         }
     },
     "icons": {
@@ -39,11 +39,6 @@
             "path": "docs/extension-overview.md"
         }
     },
-    "screenshots": [
-      {
-          "path": "docs/screenshots/screenshot-1.png"
-      }
-    ],
     "files": [
         {
             "path": "code-push-vsts-task"
