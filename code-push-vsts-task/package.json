@@ -1,6 +1,6 @@
 {
   "name": "vsts-task-code-push",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A VSTS deploy task for releasing app updates to the CodePush service",
   "main": "CodePush.js",
   "scripts": {
