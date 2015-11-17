@@ -1,0 +1,10 @@
+{
+  "name": "code-push-vsts-extension",
+  "version": "1.0.0",
+  "description": "A VSTS extension for releasing app updates to the CodePush service",
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "q": "^1.4.1"
+   }
+}

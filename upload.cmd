@@ -3,15 +3,15 @@ REM
 REM  Copyright (c) Microsoft. All rights reserved.  
 REM  Licensed under the MIT license. See LICENSE file in the project root for full license information.
 REM
-ECHO vso-cordova-tasks upload
+ECHO code-push-vsts-extension upload
 ECHO Copyright Microsoft Corporation
 ECHO.
 ECHO This script will acquire and install some dependant node modules. Each package 
 ECHO is licensed to you by its owner. Microsoft is not responsible for, nor does it 
 ECHO grant any licenses to, third-party packages. Some packages may include 
 ECHO dependencies which are governed by additional licenses. Follow the package 
-ECHO source URL (http://github.com/Microsoft/vso-cordova-tasks) to determine any 
-ECHO dependencies.
+ECHO source URL (http://github.com/Microsoft/code-push-vsts-extension) to determine 
+ECHO any dependencies.
 ECHO.
 SET /p YN="Continue [Y/n]? "
 IF /I '%YN%'=='n' EXIT /B 1
@@ -37,13 +37,13 @@ EXIT /B 0
 ECHO Installing tfx-cli...
 CALL npm install -g tfx-cli
 IF NOT %ERRORLEVEL%==0 GOTO INSTALLFAILED
-ECHO Log in to the VSO/TFS collection you wish to deploy the tasks.
+ECHO Log in to the VSTS/TFS collection you wish to deploy the tasks.
 CALL tfx login --authType basic
 IF NOT %ERRORLEVEL%==0 GOTO LOGINFAILED
 GOTO NPMINSTALL
 
 :UPLOADFAILED
-ECHO Failed to upload! Ensure Node.js is installed and in your path and you are logged into a VSO/TFS collection where you have build administration privileges.
+ECHO Failed to upload! Ensure Node.js is installed and in your path and you are logged into a VSTS/TFS collection where you have build administration privileges.
 EXIT /B %ERRORLEVEL%
 
 :INSTALLFAILED
