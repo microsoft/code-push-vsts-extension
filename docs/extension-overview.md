@@ -1,3 +1,11 @@
+<table style="width: 100%; border-style: none;"><tr>
+<td style="width: 140px; text-align: center;"><img src="codepush_default.png" /></td>
+<td><strong>Visual Studio Team Services Extension for CodePush</strong><br />
+<i>Provides a deploy task that enables performing continuous delivery to the CodePush service from an automated VSTS build definition</i><br />
+<a href="https://marketplace.visualstudio.com/items/ms-vsclient.code-push">Install now!</a>
+</td>
+</tr></table>
+
 [CodePush](http://microsoft.github.io/code-push/) is a cloud service that enables Cordova and React Native developers to deploy mobile app updates directly to their users’ devices. It works by acting as a central repository that developers can publish certain updates to (e.g. JS, HTML, CSS and image changes), and that apps can query for updates from using our provided client SDKs for [Cordova](https://github.com/Microsoft/cordova-plugin-code-push) and [React Native](https://github.com/Microsoft/react-native-code-push). 
 
 # Visual Studio Team Services Extension for CodePush
@@ -20,16 +28,93 @@ This task can be used with either VSTS or TFS 2015 on-prem servers (see below) a
 
 6. Configure the deploy step with the access key created in #1, specifying the right app and deployment name, and pointing at the output of the task in step #4 - *Check out the tool tips for handy inline documentation.*
 
-## Options
+## Task Option Reference
 
-1. **Access Key** (string, required) - An access key used to authenticate with the CodePush service. If you don't have an access key, you can [generate one using the CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication).
-2. **App Name** (string, required) - Name of the app you want to release an update for.
-3. **Package Path** (filePath, required) - Path to the file or directory that contains the content you want to release.
-4. **App Store Version** (string, required) - The app store version that this release depends on (must be semver compliant).
-5. **Deployment Name** (string) - Name of the deployment under the app which you want to push the release to.
-6. **Package** Description (string) - Description of the package to be released.
-7. **Mandatory** (boolean) - Specifies whether the release should be considered mandatory.
+The CodePush deploy task includes the following options which can be used to customize your release:
+
+1. **Access Key** (String, required) - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication).
+
+2. **App Name** (String, Required) - The name of the app you want to release the update for.
+
+3. **Package Path** (File path, Required) - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to your generate JS bundle file (e.g. `ios/main.jsbundle`)
+
+4. **App Store Version** (String, Required) - The app store version that the release depends on. The value must be [semver](http://semver.org/) compliant.
+
+5. **Deployment Name** (String) - Name of the deployment that the update should be released to. Defaults to `Staging`.
+
+6. **Package** Description (String) - Description of the update being released.
+
+7. **Mandatory** (Boolean) - Specifies whether the release should be considered mandatory or not. Defaults to `false`.
+
+##Installation
+
+### Visual Studio Team Services / Visual Studio Online
+
+1. Install the [Visual Studio Team Services Extension for CodePush](https://marketplace.visualstudio.com/items/ms-vsclient.code-push)
+
+2. You will now find a **CodePush** task underneath the **Deploy** category
+
+### TFS 2015 Update 1 or Earlier
+
+1. [Enable basic auth](http://go.microsoft.com/fwlink/?LinkID=699518) in your TFS instance
+
+2. Install the tfx-cli and login
+
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	npm install -g tfx-cli
+	tfx login --authType basic 
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3. Enter your collection URL (Ex: https://localhost:8080/tfs/DefaultCollection) and user name and password 
+
+4. Download the [latest release](http://go.microsoft.com/fwlink/?LinkID=691191) of the CodePush task locally and unzip it
+
+5. Type the following from the root of the repo from Windows:
+
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	upload
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	Or from a Mac:
+
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	sh upload.sh
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+5. Profit!
 
 ## Contact Us
+* [Email us your questions](mailto:codepushfeed@microsoft.com)
+* [Ask for help on StackOverflow](https://stackoverflow.com/questions/tagged/codepush)
+* [Follow the CodePush blog](http://microsoft.github.io/code-push/blog/index.html)
 
-[Email us your questions](mailto:codepushfeed@microsoft.com)
+## Terms of Use
+By downloading and running this project, you agree to the license terms of the third party application software, Microsoft products, and components to be installed. 
+
+The third party software and products are provided to you by third parties. You are responsible for reading and accepting the relevant license terms for all software that will be installed. Microsoft grants you no rights to third party software.
+
+## License
+
+```
+The MIT License (MIT)
+
+Copyright (c) Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
