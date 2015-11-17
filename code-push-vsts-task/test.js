@@ -80,6 +80,7 @@ describe("CodePush Deploy Task", function() {
     checkCommandsEqual(expectedCommands, execStub);
   });
   
+  
   it("Logout failure should not cause task to terminate", function() {
     var execStub = stubExecToFailOnCommandType("logout");
     
