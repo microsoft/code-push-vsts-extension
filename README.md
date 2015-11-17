@@ -48,7 +48,7 @@ The CodePush deploy task includes the following options which can be used to cus
 
 5. **Deployment Name** (String) - Name of the deployment that the update should be released to. Defaults to `Staging`.
 
-6. **Package** Description (String) - Description of the update being released.
+6. **Package Description** (String) - Description of the update being released.
 
 7. **Mandatory** (Boolean) - Specifies whether the release should be considered mandatory or not. Defaults to `false`.
 
