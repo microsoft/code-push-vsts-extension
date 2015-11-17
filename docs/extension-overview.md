@@ -81,7 +81,7 @@ The CodePush deploy task includes the following options which can be used to cus
 	sh upload.sh
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Profit!
+6. Live long and prosper!
 
 ## Contact Us
 * [Email us your questions](mailto:codepushfeed@microsoft.com)
