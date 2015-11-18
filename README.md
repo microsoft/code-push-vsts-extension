@@ -99,6 +99,12 @@ By downloading and running this project, you agree to the license terms of the t
 
 The third party software and products are provided to you by third parties. You are responsible for reading and accepting the relevant license terms for all software that will be installed. Microsoft grants you no rights to third party software.
 
+## Testing
+
+Make sure Mocha is installed ```npm install -g mocha```
+
+To run tests, go to the [code-push-vsts-task](code-push-vsts-task) folder and run ```mocha test.js```
+
 ## License
 
 ```

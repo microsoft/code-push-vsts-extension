@@ -2,18 +2,14 @@ var path = require("path");
 var tl = require("vso-task-lib");
 require("shelljs/global");
 
-// User inputs.
-var accessKey       = tl.getInput("accessKey", true);
-var appName         = tl.getInput("appName", true);
-var packagePath     = tl.getPathInput("packagePath", true);
-var appStoreVersion = tl.getInput("appStoreVersion", true);
-var deploymentName  = tl.getInput("deploymentName", false);
-var description     = tl.getInput("description", false);
-var isMandatory     = tl.getInput("isMandatory", false);
-
-// Other global variables.
+// Global variables.
 var localNpmBinaries = exec("npm bin", { silent: true }).output.replace(/(\r\n|\n|\r)/gm, "");
 var codePushCommandPrefix = path.join(localNpmBinaries, "code-push");
+
+// Export for unit testing.
+function log(message) {
+  console.log(message);
+}
 
 // Helper functions.
 function buildCommand(cmd, positionArgs, optionFlags) {
@@ -31,9 +27,14 @@ function buildCommand(cmd, positionArgs, optionFlags) {
       if (flagValue.indexOf(" ") >= 0) {
         flagValue = "\"" + flagValue + "\"";
       }
-      command = command + " --" + flag + " " + flagValue;
+      
+      command = command + " --" + flag;
+      // For boolean flags, the presence of the flag is enough to indicate its value.
+      if (flagValue != "true" && flagValue != "false") {
+        command = command + " " + flagValue;
+      }
     }
-  } 
+  }
 
   return command;
 }
@@ -44,7 +45,7 @@ function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
   var result = exec(command, { silent: true });
   
   if (result.code == 0) {
-    console.log(result.output);
+    module.exports.log(result.output);
   } else {
     tl.setResult(1, result.output);
     ensureLoggedOut();
@@ -58,23 +59,48 @@ function ensureLoggedOut() {
   exec(buildCommand("logout", /*positionArgs*/ null, { local: true }), { silent: true });
 }
 
+// The main function to be executed.
+function performDeployTask(accessKey, appName, packagePath, appStoreVersion, deploymentName, description, isMandatory) {
+  // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
+  accessKey       = accessKey || tl.getInput("accessKey", true);
+  appName         = appName || tl.getInput("appName", true);
+  packagePath     = packagePath || tl.getPathInput("packagePath", true);
+  appStoreVersion = appStoreVersion || tl.getInput("appStoreVersion", true);
+  deploymentName  = deploymentName || tl.getInput("deploymentName", false);
+  description     = description || tl.getInput("description", false);
+  isMandatory     = isMandatory || tl.getInput("isMandatory", false);
+  
+  // Ensure all other users are logged out.
+  ensureLoggedOut();
+  
+  // Log in to the CodePush CLI.
+  executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
+  
+  // Run release command.
+  executeCommandAndHandleResult(
+    "release", 
+    [appName, packagePath, appStoreVersion], 
+    { 
+      deploymentName: deploymentName,
+      description: description,
+      mandatory: isMandatory
+    }
+  );
+  
+  // Log out.
+  ensureLoggedOut();
+}
 
-// Ensure all other users are logged out.
-ensureLoggedOut();
+module.exports = {
+  buildCommand: buildCommand,
+  commandPrefix: codePushCommandPrefix,
+  ensureLoggedOut: ensureLoggedOut,
+  executeCommandAndHandleResult: executeCommandAndHandleResult,
+  log: log,
+  performDeployTask: performDeployTask
+}
 
-// Log in to the CodePush CLI.
-executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
-
-// Run release command.
-executeCommandAndHandleResult(
-  "release", 
-  [appName, packagePath, appStoreVersion], 
-  { 
-    deploymentName: deploymentName,
-    description: description,
-    mandatory: isMandatory
-  }
-);
-
-// Log out.
-ensureLoggedOut();
+if (require.main === module) {
+  // Only run the deploy task if the script is being run directly, and not imported as a module (eg. during test)
+  performDeployTask();
+}
