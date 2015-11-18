@@ -4,7 +4,7 @@
     "name": "CodePush",
     "version": "1.0.0",
     "publisher": "ms-vsclient",
-    "public": false,
+    "public": true,
     "description": "Provides a deploy task that enables performing continuous delivery to the CodePush service from an automated VSTS build definition",
     "categories": [
         "Build and release"
@@ -37,11 +37,18 @@
     "content":{
         "details": {
             "path": "docs/extension-overview.md"
+        },
+        "thirdpartynotice": {
+            "path": "thirdpartynotices.txt"
         }
     },
     "files": [
         {
             "path": "code-push-vsts-task"
+        },
+        {
+            "path": "images",
+            "addressable": true
         }
     ],
     "contributions": [
