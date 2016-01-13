@@ -3,7 +3,7 @@ var tl = require("vso-task-lib");
 require("shelljs/global");
 
 // Global variables.
-var localNpmBinaries = exec("npm bin", { silent: true }).output.replace(/(\r\n|\n|\r)/gm, "");
+var localNpmBinaries = path.join(__dirname, "node_modules/.bin")
 var codePushCommandPrefix = path.join(localNpmBinaries, "code-push");
 
 // Export for unit testing.

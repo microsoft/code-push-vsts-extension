@@ -73,7 +73,7 @@ The CodePush deploy task includes the following options which can be used to cus
 
 3. Enter your collection URL (Ex: https://localhost:8080/tfs/DefaultCollection) and user name and password 
 
-4. Download the [latest release](http://go.microsoft.com/fwlink/?LinkID=691191) of the CodePush task locally and unzip it
+4. Download the [latest release](https://github.com/Microsoft/code-push-vsts-extension/releases) of the CodePush task locally and unzip it
 
 5. Type the following from the root of the repo from Windows:
 
