@@ -2,7 +2,7 @@
     "manifestVersion": 1.0,
     "id": "code-push",
     "name": "CodePush",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "publisher": "ms-vsclient",
     "public": true,
     "description": "Provides a deploy task that enables performing continuous delivery to the CodePush service from an automated VSTS build definition",
