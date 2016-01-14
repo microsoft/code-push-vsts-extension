@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "code-push-cli": "1.1.2-beta",
-    "vso-task-lib": "^0.4.5"
+    "vsts-task-lib": "0.5.7"
   },
   "devDependencies": {
     "sinon": "1.17.2",
