@@ -3,7 +3,7 @@ var tl = require("vso-task-lib");
 require("shelljs/global");
 
 // Global variables.
-var codePushCommandPrefix = "node " + path.join(__dirname, "node_modules/code-push-cli/script/cli");
+var codePushCommandPrefix = "node " + path.join(__dirname, "node_modules", "code-push-cli", "script", "cli");
 
 // Export for unit testing.
 function log(message) {
