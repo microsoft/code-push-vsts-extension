@@ -63,7 +63,7 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, dep
   // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
   var authType = tl.getInput("authType", false);
   if (authType === "AccessKey") {
-      tl.getInput("accessKey", true);
+      accessKey = tl.getInput("accessKey", true);
   } else if (authType === "ServiceEndpoint") {
       var serviceAccount = tl.getEndpointAuthorization(tl.getInput("serviceEndpoint", true));
       accessKey = serviceAccount.parameters.password;

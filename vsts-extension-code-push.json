@@ -75,7 +75,7 @@
             "properties": {
                 "name": "codepush-auth-key",
                 "displayName": "Code Push",
-                "url": "https://accounts.google.com/o/oauth2/v2/auth",
+                "url": "",
                 "inputDescriptors": [],
                 "authenticationSchemes": [
                     {
