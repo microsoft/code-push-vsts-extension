@@ -61,13 +61,25 @@ function ensureLoggedOut() {
 // The main function to be executed.
 function performDeployTask(accessKey, appName, packagePath, appStoreVersion, deploymentName, description, isMandatory) {
   // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
-  accessKey       = accessKey || tl.getInput("accessKey", true);
+  var authType = tl.getInput("authType", false);
+  if (authType === "AccessKey") {
+      accessKey = tl.getInput("accessKey", true);
+  } else if (authType === "ServiceEndpoint") {
+      var serviceAccount = tl.getEndpointAuthorization(tl.getInput("serviceEndpoint", true));
+      accessKey = serviceAccount.parameters.password;
+  }
+
   appName         = appName || tl.getInput("appName", true);
   packagePath     = packagePath || tl.getPathInput("packagePath", true);
   appStoreVersion = appStoreVersion || tl.getInput("appStoreVersion", true);
   deploymentName  = deploymentName || tl.getInput("deploymentName", false);
   description     = description || tl.getInput("description", false);
   isMandatory     = isMandatory || tl.getInput("isMandatory", false);
+  
+  if (!accessKey) {
+      console.error("Access key required");
+      tl.setResult(1, "Access key required");
+  }
   
   // Ensure all other users are logged out.
   ensureLoggedOut();
