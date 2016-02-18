@@ -69,7 +69,6 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, dep
       accessKey = serviceAccount.parameters.password;
   }
 
-  accessKey       = accessKey;
   appName         = appName || tl.getInput("appName", true);
   packagePath     = packagePath || tl.getPathInput("packagePath", true);
   appStoreVersion = appStoreVersion || tl.getInput("appStoreVersion", true);
