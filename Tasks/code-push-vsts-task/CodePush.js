@@ -69,6 +69,11 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, dep
   description     = description || tl.getInput("description", false);
   isMandatory     = isMandatory || tl.getInput("isMandatory", false);
   
+  if (!accessKey) {
+      var serviceAccount = tl.getEndpointAuthorization(tl.getInput("serviceAccount", true));
+      accessKey = serviceAccount.password;
+  }
+  
   // Ensure all other users are logged out.
   ensureLoggedOut();
   

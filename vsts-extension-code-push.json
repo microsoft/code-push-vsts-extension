@@ -59,6 +59,52 @@
             "properties": {
                 "name": "code-push-vsts-task"
             }
+        },
+        {
+            "id": "code-push-service-endpoint",
+            "description": "CodePushAuthenticationEndpoint",
+            "type": "ms.vss-endpoint.service-endpoint-type",
+            "targets": [
+                "ms.vss-endpoint.endpoint-types"
+            ],
+            "properties": {
+                "name": "code-push",
+                "displayName": "Code Push",
+                "url": "https://microsoft.github.io/code-push",
+                "inputDescriptors": [],
+                "authenticationSchemes": [
+                    {
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
+                        "inputDescriptors": [
+                            {
+                                "id": "username",
+                                "name": "Username",
+                                "description": "",
+                                "inputMode": "textbox",
+                                "isConfidential": false,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string"
+                                },
+                                "values": {
+                                    "isDisabled": true
+                                }
+                            },
+                            {
+                                "id": "password",
+                                "name": "Access Key",
+                                "description": "Access Key from Code Push CLI",
+                                "inputMode": "textbox",
+                                "isConfidential": true,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     ]
 }

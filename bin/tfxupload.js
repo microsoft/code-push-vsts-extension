@@ -9,15 +9,22 @@ var path = require("path"),
   exec = Q.nfbind(require("child_process").exec);
 
 function installTasks() {
-  var promise = Q();
-  var taskPath = path.join(process.cwd(), "code-push-vsts-task");
-  promise = promise.then(function() {
-      console.log("Uploading task code-push-vsts-task");
-      process.chdir(taskPath);
-      return npmInstall();
-    })
-    .then(tfxUpload);
-  return promise;
+    var promise = Q();
+    var tasksPath = path.join(process.cwd(), 'Tasks');
+    var tasks = fs.readdirSync(tasksPath);
+    console.log(tasks.length + ' tasks found.')
+    tasks.forEach(function(task) {
+        promise = promise.then(function() {
+                console.log('Processing task ' + task);
+                process.chdir(path.join(tasksPath,task));
+                return npmInstall();
+            });
+
+        if (process.argv.indexOf("--installonly") == -1) {
+            promise = promise.then(tfxUpload);
+        }
+    });    
+    return promise;
 }
 
 function npmInstall() {
