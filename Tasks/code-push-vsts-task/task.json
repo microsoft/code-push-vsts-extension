@@ -22,21 +22,21 @@
             "name": "authType",
             "type": "pickList",
             "label": "Authentication Method",
-            "defaultValue": "ServiceAccount",
+            "defaultValue": "ServiceEndpoint",
             "helpMarkDown": "",
             "options": {
-                "ServiceAccount": "Service Account",
+                "ServiceEndpoint": "Service Endpoint",
                 "AccessKey": "Access Key"
             }
         },
         {
-            "name": "serviceAccount",
-            "type": "connectedService:code-push",
-            "label": "Service Account",
+            "name": "serviceEndpoint",
+            "type": "connectedService:codepush-auth-key",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The VSTS Service Account that specifies the idenity for Code Push.",
-            "visibleRule": "authType = ServiceAccount"
+            "helpMarkDown": "The VSTS Service Endpoint that specifies the identity for Code Push.",
+            "visibleRule": "authType = ServiceEndpoint"
         },
         {
             "name": "accessKey",

@@ -4,13 +4,18 @@
     "name": "CodePush",
     "version": "1.0.1",
     "publisher": "ms-vsclient",
-    "public": true,
     "description": "Provides a deploy task that enables performing continuous delivery to the CodePush service from an automated VSTS build definition",
     "categories": [
         "Build and release"
     ],
-    "scopes": [ 
-        "vso.build" 
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "scope": [
+        "vso.build",
+        "vso.serviceendpoint"
     ],
     "tags": [
         "Cordova", "React Native", "CodePush", "Deploy", "Continuous Integration", "Continuous Delivery", "Android", "iOS"
@@ -39,12 +44,12 @@
             "path": "docs/extension-overview.md"
         },
         "thirdpartynotice": {
-            "path": "thirdpartynotices.txt"
+            "path": "ThirdPartyNotices.txt"
         }
     },
     "files": [
         {
-            "path": "code-push-vsts-task"
+            "path": "Tasks/code-push-vsts-task"
         },
         {
             "path": "images",
@@ -57,20 +62,20 @@
             "type": "ms.vss-distributed-task.task",
             "targets": [ "ms.vss-distributed-task.tasks" ],
             "properties": {
-                "name": "code-push-vsts-task"
+                "name": "Tasks/code-push-vsts-task"
             }
         },
         {
-            "id": "code-push-service-endpoint",
+            "id": "codepush-service-endpoint",
             "description": "CodePushAuthenticationEndpoint",
             "type": "ms.vss-endpoint.service-endpoint-type",
             "targets": [
                 "ms.vss-endpoint.endpoint-types"
             ],
             "properties": {
-                "name": "code-push",
+                "name": "codepush-auth-key",
                 "displayName": "Code Push",
-                "url": "https://microsoft.github.io/code-push",
+                "url": "https://accounts.google.com/o/oauth2/v2/auth",
                 "inputDescriptors": [],
                 "authenticationSchemes": [
                     {
@@ -79,21 +84,23 @@
                             {
                                 "id": "username",
                                 "name": "Username",
-                                "description": "",
+                                "description": "Username",
                                 "inputMode": "textbox",
                                 "isConfidential": false,
                                 "validation": {
-                                    "isRequired": true,
+                                    "isRequired": false,
                                     "dataType": "string"
                                 },
                                 "values": {
+                                    "inputId": "usernameInput",
+                                    "defaultValue": "",
                                     "isDisabled": true
                                 }
                             },
                             {
                                 "id": "password",
                                 "name": "Access Key",
-                                "description": "Access Key from Code Push CLI",
+                                "description": "Access key from CodePush CLI.",
                                 "inputMode": "textbox",
                                 "isConfidential": true,
                                 "validation": {
