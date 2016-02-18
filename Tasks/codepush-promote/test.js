@@ -1,17 +1,14 @@
 var sinon = require("sinon");
 var assert = require("assert");
 var tl = require("vsts-task-lib");
-var CodePush = require("./CodePush");
+var CodePush = require("./codepush-promote");
 
-const ACCESS_KEY        = "key123";
-const APP_NAME          = "TestApp";
-const PACKAGE_PATH      = "TestApp/www";
-const APP_STORE_VERSION = "1.0.0";
-const DEPLOYMENT_NAME   = "TestDeployment";
-const DESCRIPTION       = "This is a Test App";
-const IS_MANDATORY      = true;
+const ACCESS_KEY               = "key123";
+const APP_NAME                 = "TestApp";
+const SOURCE_DEPLOYMENT_NAME   = "TestSourceDeployment";
+const TARGET_DEPLOYMENT_NAME   = "TestTargetDeployment";
 
-describe("CodePush Deploy Task", function() {
+describe("CodePush Promote Task", function() {
   var spies = [];
   
   before(function() {
@@ -48,21 +45,21 @@ describe("CodePush Deploy Task", function() {
     });
   }
   
-  function performDeployTask(shouldFail) {
-    var performDeployTaskSpy = sinon.spy(CodePush, "performDeployTask");
-    spies.push(CodePush.performDeployTask)
+  function performPromoteTask(shouldFail) {
+    var performPromoteTaskSpy = sinon.spy(CodePush, "performPromoteTask");
+    spies.push(CodePush.performPromoteTask)
     
     var tlSetResultSpy = sinon.stub(tl, "setResult", function() {});
     spies.push(tl.setResult);
     
     try {
-      CodePush.performDeployTask(ACCESS_KEY, APP_NAME, PACKAGE_PATH, APP_STORE_VERSION, DEPLOYMENT_NAME, DESCRIPTION, IS_MANDATORY);
+      CodePush.performPromoteTask(ACCESS_KEY, APP_NAME, SOURCE_DEPLOYMENT_NAME, TARGET_DEPLOYMENT_NAME);
     } catch (e) {
       assert(shouldFail, "Threw an unexpected error");
     }
     
     if (shouldFail) {
-      assert(performDeployTaskSpy.threw(), "Did not throw an error");
+      assert(performPromoteTaskSpy.threw(), "Did not throw an error");
       assert.equal(tlSetResultSpy.called && tlSetResultSpy.firstCall.args[0], 1, "Did not set task result to 1 on failure");
     } else {
       assert(!tlSetResultSpy.called, "Should not set task result if task succeeds");
@@ -70,15 +67,15 @@ describe("CodePush Deploy Task", function() {
   }
   
   
-  it("Should invoke CLI to logout, login, release (with provided arguments), and logout", function() {
+  it("Should invoke CLI to logout, login, promote (with provided arguments), and logout", function() {
     var execStub = stubExecToFailOnCommandType(/*all succeed*/);
     
-    performDeployTask(); 
+    performPromoteTask(); 
     
     var expectedCommands = [
       "logout --local",
       "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --mandatory",
+      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME,
       "logout --local"
     ];
     
@@ -89,12 +86,12 @@ describe("CodePush Deploy Task", function() {
   it("Logout failure should not cause task to terminate", function() {
     var execStub = stubExecToFailOnCommandType("logout");
     
-    performDeployTask();
+    performPromoteTask();
     
     var expectedCommands = [
       "logout --local",
       "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --mandatory",
+      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME,
       "logout --local"
     ];
     
@@ -103,9 +100,9 @@ describe("CodePush Deploy Task", function() {
   
   
   it("Should logout and throw error if login fails", function() {
-    var execStub = stubExecToFailOnCommandType("login")
+    var execStub = stubExecToFailOnCommandType("login");
     
-    performDeployTask(/*shouldFail*/ true);
+    performPromoteTask(/*shouldFail*/ true);
     
     var expectedCommands = [
       "logout --local",
@@ -117,15 +114,14 @@ describe("CodePush Deploy Task", function() {
   });
   
   
-  it("Should logout and throw error if release fails", function() {
-    var execStub = stubExecToFailOnCommandType("release");
+  it("Should logout and throw error if promote fails", function() {
+    var execStub = stubExecToFailOnCommandType("promote");
     
-    performDeployTask(/*shouldFail*/ true);
+    performPromoteTask(/*shouldFail*/ true);
 
     var expectedCommands = [
       "logout --local",
       "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --mandatory",
       "logout --local"
     ];
     

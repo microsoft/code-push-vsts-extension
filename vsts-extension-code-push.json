@@ -52,6 +52,9 @@
             "path": "Tasks/code-push-vsts-task"
         },
         {
+            "path": "Tasks/codepush-promote"
+        },
+        {
             "path": "images",
             "addressable": true
         }
@@ -63,6 +66,14 @@
             "targets": [ "ms.vss-distributed-task.tasks" ],
             "properties": {
                 "name": "Tasks/code-push-vsts-task"
+            }
+        },
+        {
+            "id": "codepush.tasks.promote",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [ "ms.vss-distributed-task.tasks" ],
+            "properties": {
+                "name": "Tasks/codepush-promote"
             }
         },
         {

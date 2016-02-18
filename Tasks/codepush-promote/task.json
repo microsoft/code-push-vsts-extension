@@ -1,8 +1,8 @@
 {
-    "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
-    "name": "codepush-release",
-    "friendlyName": "CodePush - Release",
-    "description": "A VSTS build task for releasing app updates to the CodePush service",
+    "id": "4e901d0e-189b-4403-a030-1d06ff8a3b28",
+    "name": "codepush-promote",
+    "friendlyName": "CodePush - Promote",
+    "description": "A VSTS build task for promoting CodePush releases from one deployment to another",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -13,10 +13,10 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "1"
+        "Patch": "0"
     },
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Release $(packagePath) to CodePush ($(appName) - $(deploymentName)) ",
+    "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) for $(appName)",
     "inputs": [
         {
             "name": "authType",
@@ -56,23 +56,22 @@
             "helpMarkDown": "Name of the app you want to release an update for"
         },
         {
-            "name": "packagePath",
-            "type": "filePath",
-            "label": "Package Path",
+            "name": "sourceDeploymentName",
+            "type": "pickList",
+            "label": "Deployment Name",
             "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Path to the file or directory that contains the content you want to release"
+            "required": false,
+            "helpMarkDown": "Name of the deployment under the app which to promote from",
+            "options": {
+                "Staging": "Staging",
+                "Production": "Production"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
         },
         {
-            "name": "appStoreVersion",
-            "type": "string",
-            "label": "App Store Version",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "The app store version that this release depends on (must be semver compliant)"
-        },
-        {
-            "name": "deploymentName",
+            "name": "targetDeploymentName",
             "type": "pickList",
             "label": "Deployment Name",
             "defaultValue": "",
@@ -85,31 +84,15 @@
             "properties": {
                 "EditableOptions": "True"
             }
-        },
-        {
-            "name": "description",
-            "type": "string",
-            "label": "Package Description",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Description of the package to be released"
-        },
-        {
-            "name": "isMandatory",
-            "type": "boolean",
-            "label": "Mandatory",
-            "defaultValue": false,
-            "required": false,
-            "helpMarkDown": "Specifies whether the release should be considered mandatory"
         }
     ],
     "execution": {
         "Node": {
-            "target": "CodePush.js",
+            "target": "codepush-promote.js",
             "argumentFormat": ""
         },
         "PowerShell": {
-            "target": "$(currentDirectory)\\CodePush.ps1",
+            "target": "$(currentDirectory)\\codepush-promote.ps1",
             "argumentFormat": "",
             "workingDirectory": "$(currentDirectory)"
         }
