@@ -58,7 +58,7 @@
         {
             "name": "packagePath",
             "type": "filePath",
-            "label": "Package Path",
+            "label": "Update Contents Path",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Path to the file or directory that contains the content you want to release"
@@ -66,10 +66,10 @@
         {
             "name": "appStoreVersion",
             "type": "string",
-            "label": "App Store Version",
+            "label": "Target Binary Version",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The app store version that this release depends on (must be semver compliant)"
+            "helpMarkDown": "The binary version that this update is targeting (must be semver compliant)"
         },
         {
             "name": "deploymentName",
@@ -89,10 +89,10 @@
         {
             "name": "description",
             "type": "string",
-            "label": "Package Description",
+            "label": "Description",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Description of the package to be released"
+            "helpMarkDown": "Description of the update being released"
         },
         {
             "name": "isMandatory",

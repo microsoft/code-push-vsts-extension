@@ -85,7 +85,7 @@
             ],
             "properties": {
                 "name": "codepush-auth-key",
-                "displayName": "Code Push",
+                "displayName": "CodePush",
                 "url": "",
                 "inputDescriptors": [],
                 "authenticationSchemes": [
@@ -111,7 +111,7 @@
                             {
                                 "id": "password",
                                 "name": "Access Key",
-                                "description": "Access key from CodePush CLI.",
+                                "description": "Access key used to authenticate with the CodePush server.",
                                 "inputMode": "textbox",
                                 "isConfidential": true,
                                 "validation": {
