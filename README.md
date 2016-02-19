@@ -34,23 +34,51 @@ This task can be used with either VSTS or TFS 2015 on-prem servers (see below) a
 
 8. Run your CodePush-ified app to see the change that was automatically deployed!
 
+### Saving Your Access Key
+
+1. Generate your access key as described above
+
+2. Go into your Visual Studio Team Services or TFS project and click on the gear in the upper right hand corner
+
+3. Click on the **Services** tab
+
+4. Click on **New Service Endpoint** and select **CodePush**
+
+5. Give the new endpoint a name and enter the access key we generated earlier.
+
+6. You can now use this access key to authenticate your CodePush build/release tasks.
+
 ## Task Option Reference
 
-The CodePush deploy task includes the following options which can be used to customize your release:
+### CodePush - Release
 
-1. **Access Key** (String, required) - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication).
+The CodePush Release task includes the following options which can be used to customize your release:
+
+1. **Access Key** (String, required) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and stored away in vsts using the service endpoint included with the extension.
 
 2. **App Name** (String, Required) - The name of the app you want to release the update for.
 
-3. **Package Path** (File path, Required) - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to your generate JS bundle file (e.g. `ios/main.jsbundle`)
+3. **Update Contents Path** (File path, Required) - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to your generate JS bundle file (e.g. `ios/main.jsbundle`)
 
-4. **App Store Version** (String, Required) - The app store version that the release depends on. The value must be [semver](http://semver.org/) compliant.
+4. **Target Binary Version** (String, Required) - The binary version that this release depends on. The value must be [semver](http://semver.org/) compliant.
 
 5. **Deployment Name** (String) - Name of the deployment that the update should be released to. Defaults to `Staging`.
 
-6. **Package Description** (String) - Description of the update being released.
+6. **Description** (String) - Description of the update being released.
 
 7. **Mandatory** (Boolean) - Specifies whether the release should be considered mandatory or not. Defaults to `false`.
+
+### CodePush - Promote
+
+The CodePush Promote task includes the following options which can be used to customize your release:
+
+1. **Access Key** (String, required) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and stored away in vsts using the service endpoint included with the extension.
+
+2. **App Name** (String, Required) - The name of the app that has the deployments you are targetting for promotion.
+
+3. **Source Deployment Name** (String) - Name of the deployment you want to promote the latest release from. Defaults to `Staging`.
+
+4. **Destination Deployment Name** (String) - Name of the deployment you want to promote the release to. Defaults to `Staging`.
 
 ##Installation
 
