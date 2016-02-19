@@ -69,7 +69,6 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
         accessKey = serviceAccount.parameters.password;
     }
 
-    accessKey = accessKey;
     appName = appName || tl.getInput("appName", true);
     sourceDeploymentName = sourceDeploymentName || tl.getInput("sourceDeploymentName", true);
     targetDeploymentName = targetDeploymentName || tl.getInput("targetDeploymentName", true);
