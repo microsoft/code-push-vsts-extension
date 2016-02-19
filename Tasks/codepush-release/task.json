@@ -1,7 +1,7 @@
 {
     "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
     "name": "codepush-release",
-    "friendlyName": "CodePush - Release",
+    "friendlyName": "CodePush Release",
     "description": "A VSTS build/release task for releasing app updates to the CodePush service",
     "author": "Microsoft Corporation",
     "category": "Deploy",
