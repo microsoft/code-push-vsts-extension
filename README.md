@@ -12,7 +12,7 @@
 
 This extension contains a set of deployment tasks which allow you to automate the release of app updates via CodePush from your CI environment. This can reduce the effort needed to keep your dev/alpha/beta/etc. deployments up-to-date, since you can simply push changes to the configured source control branches, and let your automated build take care of the rest. No need to manually release or promote from the CodePush CLI!
 
-These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below) and are intended to work with any Cordova or React Native project. Additionally, the tasks can be paired nicely with the [Cordova Command task](https://marketplace.visualstudio.com/items/ms-vsclient.cordova-extension) and/or the [React Native Bundle task](https://marketplace.visualstudio.com/items?itemName=ms-vsclient.react-native-extension), which allows you to easily "prepare" the platform-specific assets that can be subsequently released to CodePush using these tasks.
+These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below) and are intended to work with any Cordova or React Native project. Additionally, the tasks can be paired nicely with the [Cordova Command task](https://marketplace.visualstudio.com/items/ms-vsclient.cordova-extension) and/or the [React Native Bundle task](https://marketplace.visualstudio.com/items?itemName=ms-vsclient.react-native-extension), which allow you to easily "prepare" the platform-specific assets that can be subsequently released to CodePush.
 
 ![CodePush Task + Cordova](images/task-example.png)
 
