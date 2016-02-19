@@ -2,7 +2,7 @@
     "id": "4e901d0e-189b-4403-a030-1d06ff8a3b28",
     "name": "codepush-promote",
     "friendlyName": "CodePush - Promote",
-    "description": "A VSTS build task for promoting CodePush releases from one deployment to another",
+    "description": "A VSTS build/release task for promoting CodePush releases from one deployment to another",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -25,8 +25,8 @@
             "defaultValue": "ServiceEndpoint",
             "helpMarkDown": "",
             "options": {
-                "ServiceEndpoint": "Service Endpoint",
-                "AccessKey": "Access Key"
+                "AccessKey": "Access Key",
+                "ServiceEndpoint": "Service Endpoint"
             }
         },
         {
@@ -35,7 +35,7 @@
             "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The VSTS Service Endpoint that specifies the identity for Code Push.",
+            "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
             "visibleRule": "authType = ServiceEndpoint"
         },
         {
@@ -53,18 +53,18 @@
             "label": "App Name",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Name of the app you want to release an update for"
+            "helpMarkDown": "Name of the app you want to promote a release for"
         },
         {
             "name": "sourceDeploymentName",
             "type": "pickList",
-            "label": "Deployment Name",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Name of the deployment under the app which to promote from",
+            "label": "Source Deployment",
+            "defaultValue": "Staging",
+            "required": true,
+            "helpMarkDown": "Name of the deployment you want to promote the latest release from",
             "options": {
-                "Staging": "Staging",
-                "Production": "Production"
+                "Production": "Production",
+                "Staging": "Staging"
             },
             "properties": {
                 "EditableOptions": "True"
@@ -73,13 +73,13 @@
         {
             "name": "targetDeploymentName",
             "type": "pickList",
-            "label": "Deployment Name",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Name of the deployment under the app which you want to push the release to",
+            "label": "Destination Deployment",
+            "defaultValue": "Production",
+            "required": true,
+            "helpMarkDown": "Name of the deployment you want to promote the release to",
             "options": {
-                "Staging": "Staging",
-                "Production": "Production"
+                "Production": "Production",
+                "Staging": "Staging"
             },
             "properties": {
                 "EditableOptions": "True"

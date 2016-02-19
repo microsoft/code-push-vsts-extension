@@ -2,7 +2,7 @@
     "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
     "name": "codepush-release",
     "friendlyName": "CodePush - Release",
-    "description": "A VSTS build task for releasing app updates to the CodePush service",
+    "description": "A VSTS build/release task for releasing app updates to the CodePush service",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -25,8 +25,8 @@
             "defaultValue": "ServiceEndpoint",
             "helpMarkDown": "",
             "options": {
-                "ServiceEndpoint": "Service Endpoint",
-                "AccessKey": "Access Key"
+                "AccessKey": "Access Key",
+                "ServiceEndpoint": "Service Endpoint"
             }
         },
         {
@@ -35,7 +35,7 @@
             "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The VSTS Service Endpoint that specifies the identity for Code Push.",
+            "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
             "visibleRule": "authType = ServiceEndpoint"
         },
         {
@@ -79,8 +79,8 @@
             "required": false,
             "helpMarkDown": "Name of the deployment under the app which you want to push the release to",
             "options": {
-                "Staging": "Staging",
-                "Production": "Production"
+                "Production": "Production",
+                "Staging": "Staging"
             },
             "properties": {
                 "EditableOptions": "True"

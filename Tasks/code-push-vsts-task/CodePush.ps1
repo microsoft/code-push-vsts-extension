@@ -1,4 +1,5 @@
 param (
+    [string]$authType,
     [string]$accessKey,
     [string]$serviceEndpoint,
     [string]$appName,
@@ -9,6 +10,7 @@ param (
     [string]$isMandatory
 ) 
   
+$env:INPUT_authType = $authType
 $env:INPUT_accessKey = $accessKey
 $env:INPUT_serviceEndpoint = $serviceEndpoint
 $env:INPUT_appName = $appName
