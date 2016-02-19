@@ -34,9 +34,9 @@ These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below)
 
 8. Run your CodePush-ified app to see the change that was automatically deployed!
 
-### Configuring Your CodePush Credentials
+## Configuring Your CodePush Credentials
 
-In addition to specifying your access key directly within a build task instance (as done in step #4 above), you can also configure your CodePush credentials globally and refer to them within each build or release definition as needed. To do this, perform the following steps:
+In addition to specifying your access key directly within a build task instance (as illustrated in step #4 above), you can also configure your CodePush credentials globally and refer to them within each build or release definition as needed. To do this, perform the following steps:
 
 1. Generate your access key as described above
 
