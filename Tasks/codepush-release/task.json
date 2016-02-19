@@ -1,8 +1,8 @@
 {
     "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
-    "name": "CodePush",
-    "friendlyName": "CodePush",
-    "description": "A VSTS build task for releasing app updates to the CodePush service",
+    "name": "codepush-release",
+    "friendlyName": "CodePush - Release",
+    "description": "A VSTS build/release task for releasing app updates to the CodePush service",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -25,8 +25,8 @@
             "defaultValue": "ServiceEndpoint",
             "helpMarkDown": "",
             "options": {
-                "ServiceEndpoint": "Service Endpoint",
-                "AccessKey": "Access Key"
+                "AccessKey": "Access Key",
+                "ServiceEndpoint": "Service Endpoint"
             }
         },
         {
@@ -35,7 +35,7 @@
             "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The VSTS Service Endpoint that specifies the identity for Code Push.",
+            "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
             "visibleRule": "authType = ServiceEndpoint"
         },
         {
@@ -58,7 +58,7 @@
         {
             "name": "packagePath",
             "type": "filePath",
-            "label": "Package Path",
+            "label": "Update Contents Path",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Path to the file or directory that contains the content you want to release"
@@ -66,10 +66,10 @@
         {
             "name": "appStoreVersion",
             "type": "string",
-            "label": "App Store Version",
+            "label": "Target Binary Version",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The app store version that this release depends on (must be semver compliant)"
+            "helpMarkDown": "The binary version that this update is targeting (must be semver compliant)"
         },
         {
             "name": "deploymentName",
@@ -79,8 +79,8 @@
             "required": false,
             "helpMarkDown": "Name of the deployment under the app which you want to push the release to",
             "options": {
-                "Staging": "Staging",
-                "Production": "Production"
+                "Production": "Production",
+                "Staging": "Staging"
             },
             "properties": {
                 "EditableOptions": "True"
@@ -89,10 +89,10 @@
         {
             "name": "description",
             "type": "string",
-            "label": "Package Description",
+            "label": "Description",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Description of the package to be released"
+            "helpMarkDown": "Description of the update being released"
         },
         {
             "name": "isMandatory",
@@ -105,11 +105,11 @@
     ],
     "execution": {
         "Node": {
-            "target": "CodePush.js",
+            "target": "codepush-release.js",
             "argumentFormat": ""
         },
         "PowerShell": {
-            "target": "$(currentDirectory)\\CodePush.ps1",
+            "target": "$(currentDirectory)\\codepush-release.ps1",
             "argumentFormat": "",
             "workingDirectory": "$(currentDirectory)"
         }

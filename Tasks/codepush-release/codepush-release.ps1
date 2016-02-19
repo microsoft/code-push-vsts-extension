@@ -1,4 +1,5 @@
 param (
+    [string]$authType,
     [string]$accessKey,
     [string]$serviceEndpoint,
     [string]$appName,
@@ -9,6 +10,7 @@ param (
     [string]$isMandatory
 ) 
   
+$env:INPUT_authType = $authType
 $env:INPUT_accessKey = $accessKey
 $env:INPUT_serviceEndpoint = $serviceEndpoint
 $env:INPUT_appName = $appName
@@ -18,4 +20,4 @@ $env:INPUT_deploymentName = $deploymentName
 $env:INPUT_description = $description
 $env:INPUT_isMandatory = $isMandatory
 
-node CodePush.js
+node codepush-release.js

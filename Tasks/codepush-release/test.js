@@ -1,6 +1,6 @@
 var sinon = require("sinon");
 var assert = require("assert");
-var tl = require("vso-task-lib");
+var tl = require("vsts-task-lib");
 var CodePush = require("./CodePush");
 
 const ACCESS_KEY        = "key123";

@@ -1,0 +1,100 @@
+{
+    "id": "4e901d0e-189b-4403-a030-1d06ff8a3b28",
+    "name": "codepush-promote",
+    "friendlyName": "CodePush - Promote",
+    "description": "A VSTS build/release task for promoting CodePush releases from one deployment to another",
+    "author": "Microsoft Corporation",
+    "category": "Deploy",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "demands": [],
+    "version": {
+        "Major": "1",
+        "Minor": "0",
+        "Patch": "0"
+    },
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) for $(appName)",
+    "inputs": [
+        {
+            "name": "authType",
+            "type": "pickList",
+            "label": "Authentication Method",
+            "defaultValue": "ServiceEndpoint",
+            "helpMarkDown": "",
+            "options": {
+                "AccessKey": "Access Key",
+                "ServiceEndpoint": "Service Endpoint"
+            }
+        },
+        {
+            "name": "serviceEndpoint",
+            "type": "connectedService:codepush-auth-key",
+            "label": "Service Endpoint",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
+            "visibleRule": "authType = ServiceEndpoint"
+        },
+        {
+            "name": "accessKey",
+            "type": "string",
+            "label": "Access Key",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Access key used to authenticate with the CodePush service",
+            "visibleRule": "authType = AccessKey"
+        },
+        {
+            "name": "appName",
+            "type": "string",
+            "label": "App Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Name of the app you want to promote a release for"
+        },
+        {
+            "name": "sourceDeploymentName",
+            "type": "pickList",
+            "label": "Source Deployment",
+            "defaultValue": "Staging",
+            "required": true,
+            "helpMarkDown": "Name of the deployment you want to promote the latest release from",
+            "options": {
+                "Production": "Production",
+                "Staging": "Staging"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "targetDeploymentName",
+            "type": "pickList",
+            "label": "Destination Deployment",
+            "defaultValue": "Production",
+            "required": true,
+            "helpMarkDown": "Name of the deployment you want to promote the release to",
+            "options": {
+                "Production": "Production",
+                "Staging": "Staging"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "codepush-promote.js",
+            "argumentFormat": ""
+        },
+        "PowerShell": {
+            "target": "$(currentDirectory)\\codepush-promote.ps1",
+            "argumentFormat": "",
+            "workingDirectory": "$(currentDirectory)"
+        }
+    }
+}
