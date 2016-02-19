@@ -1,7 +1,7 @@
 <table style="width: 100%; border-style: none;"><tr>
 <td style="width: 140px; text-align: center;"><img src="codepush_default.png" /></td>
 <td><strong>Visual Studio Team Services Extension for CodePush</strong><br />
-<i>Provides a deploy task that enables performing continuous delivery to the CodePush service from an automated VSTS build definition</i><br />
+<i>Provides build/release tasks that enable performing continuous delivery to the CodePush service from an automated VSTS build or release definition</i><br />
 <a href="https://marketplace.visualstudio.com/items/ms-vsclient.code-push">Install now!</a>
 </td>
 </tr></table>
@@ -28,7 +28,7 @@ These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below)
 
 5. Click **Add build step...** and select **CodePush - Release** from the **Deploy** category
 
-6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and app store version, and pointing to the output of the task in step #4.
+6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and app store version, and pointing to the output of the task in step #4. 
 
 7. Click the **Queue Build** button or push a change to your repo in order to run the newly defined build pipeline
 
@@ -36,25 +36,29 @@ These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below)
 
 ### Configuring Your CodePush Credentials
 
+In addition to specifying your access key directly within a build task instance (as done in step #4 above), you can also configure your CodePush credentials globally and refer to them within each build or release definition as needed. To do this, perform the following steps:
+
 1. Generate your access key as described above
 
-2. Go into your Visual Studio Team Services or TFS project and click on the gear icon in the upper right hand corner
+2. Go into your Visual Studio Team Services or TFS project and click on the gear icon in the upper right corner
 
 3. Click on the **Services** tab
 
 4. Click on **New Service Endpoint** and select **CodePush**
 
-5. Give the new endpoint a name and enter the access key you generated earlier.
+5. Give the new endpoint a name and enter the access key you generated earlier
 
-6. You can now use this access key to authenticate your CodePush build/release tasks.
+6. Select this endpoint via the name you chose in #5 whenever you add either the **CodePush - Release** or **CodePush - Promote** tasks to a build or release definition
 
 ## Task Option Reference
 
+In addition to the custom service endpoint, this extension also contributes the following two build and release tasks:
+
 ### CodePush - Release
 
-The CodePush Release task includes the following options which can be used to customize your release:
+The **CodePush - Release** task allows you to release an update to the CodePush server, and includes the following options:
 
-1. **Access Key** (String, required) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and stored away in vsts using the service endpoint included with the extension.
+1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task, or configured within a service endpoint that you reference from the task.
 
 2. **App Name** (String, Required) - The name of the app you want to release the update for.
 
@@ -70,9 +74,9 @@ The CodePush Release task includes the following options which can be used to cu
 
 ### CodePush - Promote
 
-The CodePush Promote task includes the following options which can be used to customize your release:
+The **CodePush - Promote** task allows you to promote a previously released update from one deployment to another, and includes the following options:
 
-1. **Access Key** (String, required) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and stored away in vsts using the service endpoint included with the extension.
+1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task, or configured within a service endpoint that you reference from the task.
 
 2. **App Name** (String, Required) - The name of the app that has the deployments you are targetting for promotion.
 
