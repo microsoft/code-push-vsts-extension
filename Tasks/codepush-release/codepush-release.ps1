@@ -20,4 +20,4 @@ $env:INPUT_deploymentName = $deploymentName
 $env:INPUT_description = $description
 $env:INPUT_isMandatory = $isMandatory
 
-node CodePush.js
+node codepush-release.js

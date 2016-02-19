@@ -49,7 +49,7 @@
     },
     "files": [
         {
-            "path": "Tasks/code-push-vsts-task"
+            "path": "Tasks/codepush-release"
         },
         {
             "path": "Tasks/codepush-promote"
@@ -65,7 +65,7 @@
             "type": "ms.vss-distributed-task.task",
             "targets": [ "ms.vss-distributed-task.tasks" ],
             "properties": {
-                "name": "Tasks/code-push-vsts-task"
+                "name": "Tasks/codepush-release"
             }
         },
         {
@@ -86,7 +86,7 @@
             "properties": {
                 "name": "codepush-auth-key",
                 "displayName": "CodePush",
-                "url": "",
+                "url": "https://microsoft.github.io/code-push",
                 "inputDescriptors": [],
                 "authenticationSchemes": [
                     {

@@ -105,11 +105,11 @@
     ],
     "execution": {
         "Node": {
-            "target": "CodePush.js",
+            "target": "codepush-release.js",
             "argumentFormat": ""
         },
         "PowerShell": {
-            "target": "$(currentDirectory)\\CodePush.ps1",
+            "target": "$(currentDirectory)\\codepush-release.ps1",
             "argumentFormat": "",
             "workingDirectory": "$(currentDirectory)"
         }

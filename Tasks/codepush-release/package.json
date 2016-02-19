@@ -1,8 +1,8 @@
 {
-  "name": "vsts-task-code-push",
-  "version": "1.0.0",
+  "name": "vsts-task-code-push-release",
+  "version": "1.0.1",
   "description": "A VSTS build/release task for releasing app updates to the CodePush service",
-  "main": "CodePush.js",
+  "main": "codepush-release.js",
   "scripts": {
     "deploy": "tfx build tasks upload ./ --overwrite"
   },
