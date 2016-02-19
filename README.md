@@ -10,9 +10,9 @@
 
 # Visual Studio Team Services Extension for CodePush
 
-This extension contains a deployment task which allows you to automate the release of app updates via CodePush from your CI environment. This can reduce the effort needed to keep your dev/alpha/beta/etc. deployments up-to-date, since you can simply push changes to the configured source control branches, and let your automated build take care of the rest. No need to manually release or promote from the CodePush CLI!
+This extension contains a set of deployment tasks which allow you to automate the release of app updates via CodePush from your CI environment. This can reduce the effort needed to keep your dev/alpha/beta/etc. deployments up-to-date, since you can simply push changes to the configured source control branches, and let your automated build take care of the rest. No need to manually release or promote from the CodePush CLI!
 
-This task can be used with either VSTS or TFS 2015 on-prem servers (see below) and is intended to work with any Cordova or React Native project. Additionally, the task can be paired nicely with the [Cordova command task](https://marketplace.visualstudio.com/items/ms-vsclient.cordova-extension) (coming soon for React Native), which allows you to easily "prepare" the platform-specific web assets that can be subsequently released to CodePush using this task.
+These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below) and are intended to work with any Cordova or React Native project. Additionally, the tasks can be paired nicely with the [Cordova command task](https://marketplace.visualstudio.com/items/ms-vsclient.cordova-extension) (coming soon for React Native), which allows you to easily "prepare" the platform-specific web assets that can be subsequently released to CodePush using these tasks.
 
 ![CodePush Task + Cordova](images/task-example.png)
 
@@ -26,7 +26,7 @@ This task can be used with either VSTS or TFS 2015 on-prem servers (see below) a
 
 4. Click **Add build step...** and select the neccessary tasks to generate your release assets (e.g. **Gulp**, **Cordova Build**)
 
-5. Click **Add build step...** and select **CodePush** from the **Deploy** category
+5. Click **Add build step...** and select **CodePush - Release** from the **Deploy** category
 
 6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and app store version, and pointing to the output of the task in step #4.
 
@@ -34,17 +34,17 @@ This task can be used with either VSTS or TFS 2015 on-prem servers (see below) a
 
 8. Run your CodePush-ified app to see the change that was automatically deployed!
 
-### Saving Your Access Key
+### Configuring Your CodePush Credentials
 
 1. Generate your access key as described above
 
-2. Go into your Visual Studio Team Services or TFS project and click on the gear in the upper right hand corner
+2. Go into your Visual Studio Team Services or TFS project and click on the gear icon in the upper right hand corner
 
 3. Click on the **Services** tab
 
 4. Click on **New Service Endpoint** and select **CodePush**
 
-5. Give the new endpoint a name and enter the access key we generated earlier.
+5. Give the new endpoint a name and enter the access key you generated earlier.
 
 6. You can now use this access key to authenticate your CodePush build/release tasks.
 
@@ -78,7 +78,7 @@ The CodePush Promote task includes the following options which can be used to cu
 
 3. **Source Deployment Name** (String) - Name of the deployment you want to promote the latest release from. Defaults to `Staging`.
 
-4. **Destination Deployment Name** (String) - Name of the deployment you want to promote the release to. Defaults to `Staging`.
+4. **Destination Deployment Name** (String) - Name of the deployment you want to promote the release to. Defaults to `Production`.
 
 ##Installation
 
@@ -86,7 +86,7 @@ The CodePush Promote task includes the following options which can be used to cu
 
 1. Install the [Visual Studio Team Services Extension for CodePush](https://marketplace.visualstudio.com/items/ms-vsclient.code-push)
 
-2. You will now find a **CodePush** task underneath the **Deploy** category
+2. You will now find the **CodePush - Release** and **CodePush - Promote** tasks underneath the **Deploy** category
 
 ### TFS 2015 Update 1 or Earlier
 
@@ -101,7 +101,7 @@ The CodePush Promote task includes the following options which can be used to cu
 
 3. Enter your collection URL (Ex: https://localhost:8080/tfs/DefaultCollection) and user name and password 
 
-4. Download the [latest release](https://github.com/Microsoft/code-push-vsts-extension/releases) of the CodePush task locally and unzip it
+4. Download the [latest release](https://github.com/Microsoft/code-push-vsts-extension/releases) of the CodePush tasks locally and unzip it
 
 5. Type the following from the root of the repo from Windows:
 
