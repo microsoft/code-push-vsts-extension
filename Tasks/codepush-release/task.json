@@ -74,10 +74,10 @@
         {
             "name": "deploymentName",
             "type": "pickList",
-            "label": "Deployment Name",
-            "defaultValue": "",
+            "label": "Deployment",
+            "defaultValue": "Staging",
             "required": false,
-            "helpMarkDown": "Name of the deployment under the app which you want to push the release to",
+            "helpMarkDown": "Name of the deployment you want to release the update to",
             "options": {
                 "Production": "Production",
                 "Staging": "Staging"
