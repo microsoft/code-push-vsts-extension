@@ -60,7 +60,7 @@ The **CodePush Release** task allows you to release an update to the CodePush se
 
 5. **Deployment** (String) - Name of the deployment you want to release the update to. Defaults to `Staging`.
 
-6. **Description** (String) - Description of the update being released.
+6. **Description** (String) - Description of the update being released. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
 
 7. **Mandatory** (Boolean) - Specifies whether the release should be considered mandatory or not. Defaults to `false`.
 
