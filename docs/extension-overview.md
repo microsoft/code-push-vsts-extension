@@ -10,7 +10,7 @@ These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below)
 
 ## Quick Start
 
-1. Using the [CodePush CLI](http://microsoft.github.io/code-push/docs/cli.html), generate a new access key whose description indicates it will be used for VSTS CI builds (e.g `code-push access-key create "VSTS CI"`)
+1. Using the [CodePush CLI](http://microsoft.github.io/code-push/docs/cli.html), generate a new access key whose description indicates it will be used for VSTS CI builds (e.g. `code-push access-key create "VSTS CI"`)
 
 2. Install the CodePush extension from the [VSTS Marketplace](https://marketplace.visualstudio.com/items/ms-vsclient.code-push)
 
@@ -20,7 +20,7 @@ These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below)
 
 5. Click **Add build step...** and select **CodePush Release** from the **Deploy** category
 
-6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and app store version, and pointing to the output of the task in step #4. 
+6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and app store version, and pointing to the output of the task(s) you added in step #4 (e.g. the directory containing your compiled/processed JS/HTML/CSS) 
 
 7. Click the **Queue Build** button or push a change to your repo in order to run the newly defined build pipeline
 
@@ -38,7 +38,7 @@ In addition to specifying your access key directly within a build task instance 
 
 4. Click on **New Service Endpoint** and select **CodePush**
 
-5. Give the new endpoint a name and enter the access key you generated earlier
+5. Give the new endpoint a name and enter the access key you generated in step#1
 
 6. Select this endpoint via the name you chose in #5 whenever you add either the **CodePush Release** or **CodePush Promote** tasks to a build or release definition
 
@@ -50,15 +50,15 @@ In addition to the custom service endpoint, this extension also contributes the 
 
 The **CodePush Release** task allows you to release an update to the CodePush server, and includes the following options:
 
-1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task, or configured within a service endpoint that you reference from the task.
+1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task (via the `Access Key` authentication method), or configured within a service endpoint that you reference from the task (via the `Service Endpoint` authentication method).
 
 2. **App Name** (String, Required) - The name of the app you want to release the update for.
 
-3. **Update Contents Path** (File path, Required) - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to your generate JS bundle file (e.g. `ios/main.jsbundle`)
+3. **Update Contents Path** (File path, Required) - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to either your generated JS bundle file (e.g. `ios/main.jsbundle`) or a directory containing your JS bundle and assets, depending on if you're using the React Native assets system. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#update-contents-parameter) for more details.
 
-4. **Target Binary Version** (String, Required) - The binary version that this release depends on. The value must be [semver](http://semver.org/) compliant.
+4. **Target Binary Version** (String, Required) - The binary version that this release is targeting. The value must be [semver](http://semver.org/) compliant. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#target-binary-version-parameter) for more details.
 
-5. **Deployment Name** (String) - Name of the deployment that the update should be released to. Defaults to `Staging`.
+5. **Deployment** (String) - Name of the deployment you want to release the update to. Defaults to `Staging`.
 
 6. **Description** (String) - Description of the update being released.
 
@@ -68,13 +68,13 @@ The **CodePush Release** task allows you to release an update to the CodePush se
 
 The **CodePush Promote** task allows you to promote a previously released update from one deployment to another, and includes the following options:
 
-1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task, or configured within a service endpoint that you reference from the task.
+1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task (via the `Access Key` authentication method), or configured within a service endpoint that you reference from the task (via the `Service Endpoint` authentication method).
 
 2. **App Name** (String, Required) - The name of the app that has the deployments you are targetting for promotion.
 
-3. **Source Deployment Name** (String) - Name of the deployment you want to promote the latest release from. Defaults to `Staging`.
+3. **Source Deployment** (String) - Name of the deployment you want to promote the latest release from. Defaults to `Staging`.
 
-4. **Destination Deployment Name** (String) - Name of the deployment you want to promote the release to. Defaults to `Production`.
+4. **Destination Deployment** (String) - Name of the deployment you want to promote the release to. Defaults to `Production`.
 
 ##Installation
 
