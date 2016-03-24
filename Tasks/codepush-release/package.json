@@ -4,7 +4,8 @@
   "description": "A VSTS build/release task for releasing app updates to the CodePush service",
   "main": "codepush-release.js",
   "scripts": {
-    "deploy": "tfx build tasks upload ./ --overwrite"
+    "deploy": "tfx build tasks upload ./ --overwrite",
+    "test": "mocha test.js"
   },
   "author": "Microsoft Corporation",
   "license": "ISC",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "sinon": "1.17.2",
-    "assert": "1.3.0"
+    "assert": "1.3.0",
+    "mocha": "~2.4.5"
   }
 }
