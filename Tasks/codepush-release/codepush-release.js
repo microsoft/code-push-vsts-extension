@@ -55,17 +55,17 @@ function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
 }
 
 function ensureLoggedOut() {
-  exec(buildCommand("logout", /*positionArgs*/ null, { local: true }), { silent: true });
+  exec(buildCommand("logout"), { silent: true });
 }
 
 // The main function to be executed.
-function performDeployTask(accessKey, appName, packagePath, appStoreVersion, deploymentName, description, isMandatory) {
+function performDeployTask(accessKey, appName, packagePath, appStoreVersion, deploymentName, description, rollout, isMandatory, isDisabled) {
   // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
   var authType = tl.getInput("authType", false);
   if (authType === "AccessKey") {
       accessKey = tl.getInput("accessKey", true);
-  } else if (authType === "ServiceEndpoint") {
-      var serviceAccount = tl.getEndpointAuthorization(tl.getInput("serviceEndpoint", true));
+  } else if (authType === "ServiceEndpointCodePush" || authType === "ServiceEndpointHockeyApp") {
+      var serviceAccount = tl.getEndpointAuthorization(tl.getInput(authType, true));
       accessKey = serviceAccount.parameters.password;
   }
 
@@ -74,7 +74,9 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, dep
   appStoreVersion = appStoreVersion || tl.getInput("appStoreVersion", true);
   deploymentName  = deploymentName || tl.getInput("deploymentName", false);
   description     = description || tl.getInput("description", false);
+  rollout         = rollout || tl.getInput("rollout", false);
   isMandatory     = isMandatory || tl.getInput("isMandatory", false);
+  isDisabled      = isDisabled || tl.getInput("isDisabled", false);
   
   if (!accessKey) {
       console.error("Access key required");
@@ -94,7 +96,9 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, dep
     { 
       deploymentName: deploymentName,
       description: description,
-      mandatory: isMandatory
+      rollout: rollout,
+      mandatory: isMandatory,
+      disabled: isDisabled
     }
   );
   

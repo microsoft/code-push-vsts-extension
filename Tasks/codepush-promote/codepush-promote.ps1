@@ -1,7 +1,8 @@
 param (
     [string]$authType,
     [string]$accessKey,
-    [string]$serviceEndpoint,
+    [string]$serviceEndpointCodePush,
+    [string]$serviceEndpointHockeyApp,
     [string]$appName,
     [string]$sourceDeploymentName,
     [string]$targetDeploymentName
@@ -9,7 +10,8 @@ param (
   
 $env:INPUT_authType = $authType
 $env:INPUT_accessKey = $accessKey
-$env:INPUT_serviceEndpoint = $serviceEndpoint
+$env:INPUT_serviceEndpointCodePush = $serviceEndpointCodePush
+$env:INPUT_serviceEndpointHockeyApp = $serviceEndpointHockeyApp
 $env:INPUT_appName = $appName
 $env:INPUT_sourceDeploymentName = $sourceDeploymentName
 $env:INPUT_targetDeploymentName = $targetDeploymentName
