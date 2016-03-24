@@ -73,10 +73,10 @@ describe("CodePush Promote Task", function() {
     performPromoteTask(); 
     
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
       "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME,
-      "logout --local"
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);
@@ -89,10 +89,10 @@ describe("CodePush Promote Task", function() {
     performPromoteTask();
     
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
       "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME,
-      "logout --local"
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);
@@ -105,9 +105,9 @@ describe("CodePush Promote Task", function() {
     performPromoteTask(/*shouldFail*/ true);
     
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
-      "logout --local"
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);
@@ -120,9 +120,9 @@ describe("CodePush Promote Task", function() {
     performPromoteTask(/*shouldFail*/ true);
 
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
-      "logout --local"
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);

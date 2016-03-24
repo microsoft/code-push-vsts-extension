@@ -1,7 +1,7 @@
 var sinon = require("sinon");
 var assert = require("assert");
 var tl = require("vsts-task-lib");
-var CodePush = require("./CodePush");
+var CodePush = require("./codepush-release");
 
 const ACCESS_KEY        = "key123";
 const APP_NAME          = "TestApp";
@@ -58,7 +58,7 @@ describe("CodePush Deploy Task", function() {
     spies.push(tl.setResult);
     
     try {
-      CodePush.performDeployTask(ACCESS_KEY, APP_NAME, PACKAGE_PATH, APP_STORE_VERSION, DEPLOYMENT_NAME, DESCRIPTION, ROLLOUT, IS_MANDATORY. IS_DISABLED);
+      CodePush.performDeployTask(ACCESS_KEY, APP_NAME, PACKAGE_PATH, APP_STORE_VERSION, DEPLOYMENT_NAME, DESCRIPTION, ROLLOUT, IS_MANDATORY, IS_DISABLED);
     } catch (e) {
       assert(shouldFail, "Threw an unexpected error");
     }
@@ -127,7 +127,6 @@ describe("CodePush Deploy Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --rollout " + ROLLOUT + " --mandatory --disabled",
       "logout"
     ];
     
