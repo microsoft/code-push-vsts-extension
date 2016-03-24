@@ -22,30 +22,31 @@
             "name": "authType",
             "type": "pickList",
             "label": "Authentication Method",
-            "defaultValue": "ServiceEndpoint",
+            "defaultValue": "AccessKey",
             "helpMarkDown": "",
             "options": {
                 "AccessKey": "Access Key",
-                "ServiceEndpoint": "Service Endpoint"
+                "ServiceEndpointCodePush": "Service Endpoint (CodePush)",
+                "ServiceEndpointHockeyApp": "Service Endpoint (HockeyApp)"
             }
         },
         {
-            "name": "serviceEndpoint",
+            "name": "serviceEndpointCodePush",
             "type": "connectedService:codepush-auth-key",
-            "label": "Service Endpoint",
+            "label": "Service Endpoint (CodePush)",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
-            "visibleRule": "authType = ServiceEndpoint"
+            "visibleRule": "authType = ServiceEndpointCodePush"
         },
         {
-            "name": "accessKey",
-            "type": "string",
-            "label": "Access Key",
+            "name": "serviceEndpointHockeyApp",
+            "type": "connectedService:hockeyapp-endpoint-type",
+            "label": "Service Endpoint (HockeyApp)",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Access key used to authenticate with the CodePush service",
-            "visibleRule": "authType = AccessKey"
+            "helpMarkDown": "HockeyApp service endpoint that is configured with your account credentials.",
+            "visibleRule": "authType = ServiceEndpointHockeyApp"
         },
         {
             "name": "appName",

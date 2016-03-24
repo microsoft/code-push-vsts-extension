@@ -10,7 +10,7 @@
 
 # Visual Studio Team Services Extension for CodePush
 
-This extension contains a set of deployment tasks which allow you to automate the release of app updates via CodePush from your CI environment. This can reduce the effort needed to keep your dev/alpha/beta/etc. deployments up-to-date, since you can simply push changes to the configured source control branches, and let your automated build take care of the rest. No need to manually release or promote from the CodePush CLI!
+This extension contains a set of deployment tasks which allow you to automate the release of app updates via CodePush from your CI environment. This can reduce the effort needed to keep your dev/alpha/beta/etc. deployments up-to-date, since you can simply push changes to the configured source control branches, and let your automated build take care of the rest. No need to manually release, promote or rollout from the CodePush CLI!
 
 These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below) and are intended to work with any Cordova or React Native project. Additionally, the tasks can be paired nicely with the [Cordova Command task](https://marketplace.visualstudio.com/items/ms-vsclient.cordova-extension) and/or the [React Native Bundle task](https://marketplace.visualstudio.com/items?itemName=ms-vsclient.react-native-extension), which allow you to easily "prepare" the platform-specific assets that can be subsequently released to CodePush.
 
@@ -20,35 +20,41 @@ These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below)
 
 1. Using the [CodePush CLI](http://microsoft.github.io/code-push/docs/cli.html), generate a new access key whose description indicates it will be used for VSTS CI builds (e.g. `code-push access-key create "VSTS CI"`)
 
+    *NOTE: If you provisioned your CodePush account from HockeyApp, you can use the API key that is displayed in the HockeyApp portal, and don't need to generate an additional key via the CodePush CLI.*
+    
 2. Install the CodePush extension from the [VSTS Marketplace](https://marketplace.visualstudio.com/items/ms-vsclient.code-push)
 
 3. Go to your Visual Studio Team Services or TFS project, click on the **Build** tab, and create a new build definition (the "+" icon) that is hooked up to your project's appropriate source repo
 
-4. Click **Add build step...** and select the neccessary tasks to generate your release assets (e.g. **Gulp**, **Cordova Build**)
+4. Click **Add build step...** and select the neccessary tasks to generate your release assets (e.g. **Gulp**, **Cordova Build**, **React Native Prepare**)
 
 5. Click **Add build step...** and select **CodePush Release** from the **Deploy** category
 
-6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and app store version, and pointing to the output of the task(s) you added in step #4 (e.g. the directory containing your compiled/processed JS/HTML/CSS) 
+6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and target binary version, and pointing to the output of the task(s) you added in step #4 (e.g. the directory containing your compiled/processed JS/HTML/CSS) 
 
 7. Click the **Queue Build** button or push a change to your repo in order to run the newly defined build pipeline
 
 8. Run your CodePush-ified app to see the change that was automatically deployed!
 
-## Configuring Your CodePush Credentials
+## Globally Configuring Your Credentials
 
-In addition to specifying your access key directly within a build task instance (as illustrated in step #4 above), you can also configure your CodePush credentials globally and refer to them within each build or release definition as needed. To do this, perform the following steps:
+In addition to specifying your access key directly within a build task instance (as illustrated in step #4 of the getting started section), you can also configure your CodePush credentials globally and refer to them within each build or release definition as needed. This can simplify the use of CodePush across a team, and increase security, since every build and release definition doesn't need to manually configure the account credentials. To do this, simply perform the following steps:
 
-1. Generate your access key as described above
+1. Generate or retrieve your access key as described above
+
+    *NOTE: If you need to retrieve a previously generated access key, you can run the `code-push access-key ls` command and look for the key with the description you specified when initially creating it.*
 
 2. Go into your Visual Studio Team Services or TFS project and click on the gear icon in the upper right corner
 
 3. Click on the **Services** tab
 
-4. Click on **New Service Endpoint** and select **CodePush**
+4. Click on **New Service Endpoint** and select **CodePush** or **HockeyApp**
 
-5. Give the new endpoint a name and enter the access key you generated in step#1
+5. Give the new endpoint a name (e.g. "MyApp-CodePush") and enter the access key you generated in step #1
 
 6. Select this endpoint via the name you chose in #5 whenever you add either the **CodePush Release** or **CodePush Promote** tasks to a build or release definition
+
+7. Release app updates!
 
 ## Task Option Reference
 
@@ -58,25 +64,41 @@ In addition to the custom service endpoint, this extension also contributes the 
 
 The **CodePush Release** task allows you to release an update to the CodePush server, and includes the following options:
 
-1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task (via the `Access Key` authentication method), or configured within a service endpoint that you reference from the task (via the `Service Endpoint` authentication method).
+1. **Authentication Method** - Specifies how you would like to authenticate with the CodePush server. The available options are:
 
-2. **App Name** (String, Required) - The name of the app you want to release the update for.
+    1. **Access Key** - Allows you to directly specify an access key to the task. This value can either have been generated by the CodePush CLI, or provided to you by the HockeyApp portal after you auto-provisioned your CodePush account and app.
+    
+    2. **Service Endpoint (CodePush)** - Allows you to reference a globally configured CodePush service endpoint.
+    
+    4. **Service Endpoint (HockeyApp)** - Allows you to reference a globally configured HockeyApp service endpoint.
 
-3. **Update Contents Path** (File path, Required) - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to either your generated JS bundle file (e.g. `ios/main.jsbundle`) or a directory containing your JS bundle and assets, depending on if you're using the React Native assets system. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#update-contents-parameter) for more details.
+2. **App Name** *(String, Required)* - The name of the app you want to release the update for.
 
-4. **Target Binary Version** (String, Required) - The binary version that this release is targeting. The value must be [semver](http://semver.org/) compliant. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#target-binary-version-parameter) for more details.
+3. **Update Contents Path** *(File path, Required)* - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to either your generated JS bundle file (e.g. `ios/main.jsbundle`) or a directory containing your JS bundle and assets, depending on if you're using the React Native assets system. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#update-contents-parameter) for more details.
 
-5. **Deployment** (String) - Name of the deployment you want to release the update to. Defaults to `Staging`.
+4. **Target Binary Version** *(String, Required)* - The binary version that this release is targeting. The value must be [semver](http://semver.org/) compliant. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#target-binary-version-parameter) for more details.
 
-6. **Description** (String) - Description of the update being released. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
+5. **Deployment** *(String)* - Name of the deployment you want to release the update to. Defaults to `Staging`.
 
-7. **Mandatory** (Boolean) - Specifies whether the release should be considered mandatory or not. Defaults to `false`.
+6. **Description** *(String)* - Description of the update being released. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
+
+7. **Rollout** *(String)* - Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a "%" suffix). Defaults to `null`, which is equivalent to `100`, and therefore, makes the release available to everyone.
+
+8. **Mandatory** *(Boolean)* - Specifies whether the release should be considered mandatory or not. Defaults to `false`.
+
+9. **Disabled** *(Boolean)* - Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Defaults to `false`.
 
 ### CodePush Promote
 
 The **CodePush Promote** task allows you to promote a previously released update from one deployment to another, and includes the following options:
 
-1. **Access Key** (String) or **Service Endpoint** - The access key to use to authenticate with the CodePush service. This value can be generated using the [CodePush CLI](https://github.com/Microsoft/code-push/tree/master/cli#authentication) and provided either directly to the task (via the `Access Key` authentication method), or configured within a service endpoint that you reference from the task (via the `Service Endpoint` authentication method).
+1. **Authentication Method** - Specifies how you would like to authenticate with the CodePush server. The available options are:
+
+    1. **Access Key** - Allows you to directly specify an access key to the task. This value can either have been generated by the CodePush CLI, or provided to you by the HockeyApp portal after you auto-provisioned your CodePush account and app.
+    
+    2. **Service Endpoint (CodePush)** - Allows you to reference a globally configured CodePush service endpoint.
+    
+    4. **Service Endpoint (HockeyApp)** - Allows you to reference a globally configured HockeyApp service endpoint.
 
 2. **App Name** (String, Required) - The name of the app that has the deployments you are targetting for promotion.
 
@@ -122,11 +144,13 @@ The **CodePush Promote** task allows you to promote a previously released update
 6. Live long and prosper!
 
 ## Contact Us
+
 * [Email us your questions](mailto:codepushfeed@microsoft.com)
 * [Ask for help on StackOverflow](https://stackoverflow.com/questions/tagged/codepush)
 * [Follow the CodePush blog](http://microsoft.github.io/code-push/blog/index.html)
 
 ## Terms of Use
+
 By downloading and running this project, you agree to the license terms of the third party application software, Microsoft products, and components to be installed. 
 
 The third party software and products are provided to you by third parties. You are responsible for reading and accepting the relevant license terms for all software that will be installed. Microsoft grants you no rights to third party software.

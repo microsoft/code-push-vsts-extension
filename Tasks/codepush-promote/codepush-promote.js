@@ -55,7 +55,7 @@ function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
 }
 
 function ensureLoggedOut() {
-    exec(buildCommand("logout", /*positionArgs*/ null, { local: true }), { silent: true });
+    exec(buildCommand("logout"), { silent: true });
 }
 
 // The main function to be executed.
@@ -64,8 +64,8 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
     var authType = tl.getInput("authType", false);
     if (authType === "AccessKey") {
         accessKey = tl.getInput("accessKey", true);
-    } else if (authType === "ServiceEndpoint") {
-        var serviceAccount = tl.getEndpointAuthorization(tl.getInput("serviceEndpoint", true));
+    } else if (authType === "ServiceEndpointCodePush" || authType === "ServiceEndpointHockeyApp") {
+        var serviceAccount = tl.getEndpointAuthorization(tl.getInput(authType, true));
         accessKey = serviceAccount.parameters.password;
     }
 

@@ -22,21 +22,31 @@
             "name": "authType",
             "type": "pickList",
             "label": "Authentication Method",
-            "defaultValue": "ServiceEndpoint",
+            "defaultValue": "AccessKey",
             "helpMarkDown": "",
             "options": {
                 "AccessKey": "Access Key",
-                "ServiceEndpoint": "Service Endpoint"
+                "ServiceEndpointCodePush": "Service Endpoint (CodePush)",
+                "ServiceEndpointHockeyApp": "Service Endpoint (HockeyApp)"
             }
         },
         {
-            "name": "serviceEndpoint",
+            "name": "serviceEndpointCodePush",
             "type": "connectedService:codepush-auth-key",
-            "label": "Service Endpoint",
+            "label": "Service Endpoint (CodePush)",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
-            "visibleRule": "authType = ServiceEndpoint"
+            "visibleRule": "authType = ServiceEndpointCodePush"
+        },
+        {
+            "name": "serviceEndpointHockeyApp",
+            "type": "connectedService:hockeyapp-endpoint-type",
+            "label": "Service Endpoint (HockeyApp)",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "HockeyApp service endpoint that is configured with your account credentials.",
+            "visibleRule": "authType = ServiceEndpointHockeyApp"
         },
         {
             "name": "accessKey",
@@ -95,12 +105,28 @@
             "helpMarkDown": "Description of the update being released.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
         },
         {
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix)."
+        },
+        {
             "name": "isMandatory",
             "type": "boolean",
             "label": "Mandatory",
             "defaultValue": false,
             "required": false,
             "helpMarkDown": "Specifies whether the release should be considered mandatory"
+        },
+        {
+            "name": "isDisabled",
+            "type": "boolean",
+            "label": "Disabled",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users."
         }
     ],
     "execution": {

@@ -9,7 +9,9 @@ const PACKAGE_PATH      = "TestApp/www";
 const APP_STORE_VERSION = "1.0.0";
 const DEPLOYMENT_NAME   = "TestDeployment";
 const DESCRIPTION       = "This is a Test App";
+const ROLLOUT           = "25";
 const IS_MANDATORY      = true;
+const IS_DISABLED       = true;
 
 describe("CodePush Deploy Task", function() {
   var spies = [];
@@ -56,7 +58,7 @@ describe("CodePush Deploy Task", function() {
     spies.push(tl.setResult);
     
     try {
-      CodePush.performDeployTask(ACCESS_KEY, APP_NAME, PACKAGE_PATH, APP_STORE_VERSION, DEPLOYMENT_NAME, DESCRIPTION, IS_MANDATORY);
+      CodePush.performDeployTask(ACCESS_KEY, APP_NAME, PACKAGE_PATH, APP_STORE_VERSION, DEPLOYMENT_NAME, DESCRIPTION, ROLLOUT, IS_MANDATORY. IS_DISABLED);
     } catch (e) {
       assert(shouldFail, "Threw an unexpected error");
     }
@@ -76,10 +78,10 @@ describe("CodePush Deploy Task", function() {
     performDeployTask(); 
     
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --mandatory",
-      "logout --local"
+      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --rollout " + ROLLOUT + " --mandatory --disabled",
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);
@@ -92,10 +94,10 @@ describe("CodePush Deploy Task", function() {
     performDeployTask();
     
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --mandatory",
-      "logout --local"
+      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --rollout " + ROLLOUT + " --mandatory --disabled",
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);
@@ -108,9 +110,9 @@ describe("CodePush Deploy Task", function() {
     performDeployTask(/*shouldFail*/ true);
     
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
-      "logout --local"
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);
@@ -123,10 +125,10 @@ describe("CodePush Deploy Task", function() {
     performDeployTask(/*shouldFail*/ true);
 
     var expectedCommands = [
-      "logout --local",
+      "logout",
       "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --mandatory",
-      "logout --local"
+      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --rollout " + ROLLOUT + " --mandatory --disabled",
+      "logout"
     ];
     
     checkCommandsEqual(expectedCommands, execStub);
