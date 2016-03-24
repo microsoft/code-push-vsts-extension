@@ -74,7 +74,7 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, dep
   appStoreVersion = appStoreVersion || tl.getInput("appStoreVersion", true);
   deploymentName  = deploymentName || tl.getInput("deploymentName", false);
   description     = description || tl.getInput("description", false);
-  rollout         = rollout || tl.getInput("rollout", null);
+  rollout         = rollout || tl.getInput("rollout", false);
   isMandatory     = isMandatory || tl.getInput("isMandatory", false);
   isDisabled      = isDisabled || tl.getInput("isDisabled", false);
   
