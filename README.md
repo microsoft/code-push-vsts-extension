@@ -100,11 +100,11 @@ The **CodePush Promote** task allows you to promote a previously released update
     
     4. **Service Endpoint (HockeyApp)** - Allows you to reference a globally configured HockeyApp service endpoint.
 
-2. **App Name** (String, Required) - The name of the app that has the deployments you are targetting for promotion.
+2. **App Name** *(String, Required)* - The name of the app that has the deployments you are targeting for promotion.
 
-3. **Source Deployment** (String) - Name of the deployment you want to promote the latest release from. Defaults to `Staging`.
+3. **Source Deployment** *(String)* - Name of the deployment you want to promote the latest release from. Defaults to `Staging`.
 
-4. **Destination Deployment** (String) - Name of the deployment you want to promote the release to. Defaults to `Production`.
+4. **Destination Deployment** *(String)* - Name of the deployment you want to promote the release to. Defaults to `Production`.
 
 ##Installation
 
