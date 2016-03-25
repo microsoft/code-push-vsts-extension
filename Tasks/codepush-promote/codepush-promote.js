@@ -29,7 +29,7 @@ function buildCommand(cmd, positionArgs, optionFlags) {
 
             command = command + " --" + flag;
             // For boolean flags, the presence of the flag is enough to indicate its value.
-            if (flagValue != "true" && flagValue != "false") {
+            if (flagValue != "true") {
                 command = command + " " + flagValue;
             }
         }
@@ -59,7 +59,7 @@ function ensureLoggedOut() {
 }
 
 // The main function to be executed.
-function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDeploymentName) {
+function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDeploymentName, description, rollout, isMandatory, isDisabled) {
     // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
     var authType = tl.getInput("authType", false);
     if (authType === "AccessKey") {
@@ -69,15 +69,26 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
         accessKey = serviceAccount.parameters.password;
     }
 
-    appName = appName || tl.getInput("appName", true);
+    appName              = appName || tl.getInput("appName", true);
     sourceDeploymentName = sourceDeploymentName || tl.getInput("sourceDeploymentName", true);
     targetDeploymentName = targetDeploymentName || tl.getInput("targetDeploymentName", true);
-
+    description          = description || tl.getInput("description", false);
+    rollout              = rollout || tl.getInput("rollout", false);
+    isMandatory          = isMandatory || tl.getInput("isMandatory", true);
+    isDisabled           = isDisabled || tl.getInput("isDisabled", true);
+  
     if (!accessKey) {
         console.error("Access key required");
         tl.setResult(1, "Access key required");
     }
   
+    var updateMetadata = {
+        description: description,
+        disabled: isDisabled === "Inherit" ? null : isDisabled,        
+        mandatory: isMandatory === "Inherit" ? null : isMandatory,
+        rollout: rollout        
+    };
+    
     // Ensure all other users are logged out.
     ensureLoggedOut();
   
@@ -88,7 +99,7 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
     executeCommandAndHandleResult(
         "promote",
         [appName, sourceDeploymentName, targetDeploymentName],
-        {});
+        updateMetadata);
   
     // Log out.
     ensureLoggedOut();
