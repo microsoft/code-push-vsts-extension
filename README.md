@@ -108,7 +108,7 @@ The **CodePush Promote** task allows you to promote a previously released update
 
 #### Update Metadata
 
-By default, when a release is promoted from one deployment to another, the newly created release will "inherit" not just the update contents, but also the metadata (e.g. `description`). This ensures that the exact same thing that you tested in one enivronment, will be promoted to another. However, if you need to override one or mote properties in the newly created release within the target deployment (e.g. because you use `mandatory` differently between environments), you can use the following fields:s 
+By default, when a release is promoted from one deployment to another, the newly created release will "inherit" not just the update contents, but also the metadata (e.g. `description`). This ensures that what is being promoted is the exact same thing that you tested in the source deployment. However, if you need to override one or more properties in the newly created release within the target deployment (e.g. because you use `mandatory` differently between environments), you can use the following fields:
 
 1. **Description** *(String)* - Description of the update being released. Leaving this field blank will result in the update inheriting the description from the release being promoted. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
 
