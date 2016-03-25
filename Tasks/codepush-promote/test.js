@@ -7,6 +7,10 @@ const ACCESS_KEY               = "key123";
 const APP_NAME                 = "TestApp";
 const SOURCE_DEPLOYMENT_NAME   = "TestSourceDeployment";
 const TARGET_DEPLOYMENT_NAME   = "TestTargetDeployment";
+const DESCRIPTION              = "";
+const ROLLOUT                  = "25%";
+const IS_MANDATORY             = "false";
+const IS_DISABLED              = "Inherit";
 
 describe("CodePush Promote Task", function() {
   var spies = [];
@@ -37,6 +41,7 @@ describe("CodePush Promote Task", function() {
     return execStub;
   }
   
+  
   function checkCommandsEqual(expectedCommands, execStub) {
     assert.equal(execStub.callCount, expectedCommands.length, "Expected " + expectedCommands.length + " commands, but executed " + execStub.callCount);
     expectedCommands.forEach(function(expectedCommand, i) {
@@ -53,7 +58,7 @@ describe("CodePush Promote Task", function() {
     spies.push(tl.setResult);
     
     try {
-      CodePush.performPromoteTask(ACCESS_KEY, APP_NAME, SOURCE_DEPLOYMENT_NAME, TARGET_DEPLOYMENT_NAME);
+      CodePush.performPromoteTask(ACCESS_KEY, APP_NAME, SOURCE_DEPLOYMENT_NAME, TARGET_DEPLOYMENT_NAME, DESCRIPTION, ROLLOUT, IS_MANDATORY, IS_DISABLED);
     } catch (e) {
       assert(shouldFail, "Threw an unexpected error");
     }
@@ -75,7 +80,7 @@ describe("CodePush Promote Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey " + ACCESS_KEY,
-      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME,
+      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME + " --mandatory false --rollout " + ROLLOUT,
       "logout"
     ];
     
@@ -91,7 +96,7 @@ describe("CodePush Promote Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey " + ACCESS_KEY,
-      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME,
+      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME + " --mandatory false --rollout " + ROLLOUT,
       "logout"
     ];
     

@@ -17,6 +17,13 @@
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) for $(appName)",
+    "groups": [
+        {
+            "name": "updateMetadata",
+            "displayName": "Update Metadata",
+            "isExpanded": false
+        }
+    ],
     "inputs": [
         {
             "name": "authType",
@@ -84,6 +91,52 @@
             },
             "properties": {
                 "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "description",
+            "type": "string",
+            "label": "Description",
+            "defaultValue": "",
+            "required": false,
+            "groupName": "updateMetadata",
+            "helpMarkDown": "Description of the update being released. Leaving this field blank will result in the update inheriting the description from the release being promoted.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
+        },
+        {
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "",
+            "required": false,
+            "groupName": "updateMetadata",
+            "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix). Note that the rollout property will not be inherited from the release being promoted."
+        },
+        {
+            "name": "isMandatory",
+            "type": "pickList",
+            "label": "Mandatory",
+            "defaultValue": "Inherit",
+            "required": true,
+            "groupName": "updateMetadata",
+            "helpMarkDown": "Specifies whether the release should be considered mandatory. Selecting \"Inherit\" will use the value from the release being promoted.",
+            "options": {
+                "Inherit": "Inherit",
+                "false": "No",
+                "true": "Yes"
+            }
+        },
+        {
+            "name": "isDisabled",
+            "type": "pickList",
+            "label": "Disabled",
+            "defaultValue": "Inherit",
+            "required": true,
+            "groupName": "updateMetadata",
+            "helpMarkDown": "Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Selecting \"Inherit\" will use the value from the release being promoted.",
+            "options": {
+                "Inherit": "Inherit",
+                "false": "No",
+                "true": "Yes"
             }
         }
     ],
