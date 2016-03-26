@@ -22,15 +22,11 @@ function buildCommand(cmd, positionArgs, optionFlags) {
         // If the value is falsey, the option flag doesn't have to be specified.
         if (optionFlags[flag]) {
             var flagValue = "" + optionFlags[flag];
-            // If the value contains spaces, wrap in double quotes.
-            if (flagValue.indexOf(" ") >= 0) {
-                flagValue = "\"" + flagValue + "\"";
-            }
 
             command = command + " --" + flag;
             // For boolean flags, the presence of the flag is enough to indicate its value.
             if (flagValue != "true") {
-                command = command + " " + flagValue;
+                command = command + " \"" + flagValue + "\"";
             }
         }
     }

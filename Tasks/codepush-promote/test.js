@@ -79,8 +79,8 @@ describe("CodePush Promote Task", function() {
     
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
-      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME + " --mandatory false --rollout " + ROLLOUT,
+      "login --accessKey \"" + ACCESS_KEY + "\"",
+      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME + " --mandatory \"false\" --rollout \"" + ROLLOUT + "\"",
       "logout"
     ];
     
@@ -95,8 +95,8 @@ describe("CodePush Promote Task", function() {
     
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
-      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME + " --mandatory false --rollout " + ROLLOUT,
+      "login --accessKey \"" + ACCESS_KEY + "\"",
+      "promote " + APP_NAME + " " + SOURCE_DEPLOYMENT_NAME + " " + TARGET_DEPLOYMENT_NAME + " --mandatory \"false\" --rollout \"" + ROLLOUT + "\"",
       "logout"
     ];
     
@@ -111,7 +111,7 @@ describe("CodePush Promote Task", function() {
     
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
+      "login --accessKey \"" + ACCESS_KEY + "\"",
       "logout"
     ];
     
@@ -126,7 +126,7 @@ describe("CodePush Promote Task", function() {
 
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
+      "login --accessKey \"" + ACCESS_KEY + "\"",
       "logout"
     ];
     
