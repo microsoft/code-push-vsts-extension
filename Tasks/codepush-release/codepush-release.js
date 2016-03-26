@@ -22,15 +22,11 @@ function buildCommand(cmd, positionArgs, optionFlags) {
     // If the value is falsey, the option flag doesn't have to be specified.
     if (optionFlags[flag]) {
       var flagValue = "" + optionFlags[flag];
-      // If the value contains spaces, wrap in double quotes.
-      if (flagValue.indexOf(" ") >= 0) {
-        flagValue = "\"" + flagValue + "\"";
-      }
       
       command = command + " --" + flag;
       // For boolean flags, the presence of the flag is enough to indicate its value.
       if (flagValue != "true" && flagValue != "false") {
-        command = command + " " + flagValue;
+        command = command + " \"" + flagValue + "\"";
       }
     }
   }
@@ -75,8 +71,8 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, dep
   deploymentName  = deploymentName || tl.getInput("deploymentName", false);
   description     = description || tl.getInput("description", false);
   rollout         = rollout || tl.getInput("rollout", false);
-  isMandatory     = isMandatory || tl.getInput("isMandatory", false);
-  isDisabled      = isDisabled || tl.getInput("isDisabled", false);
+  isMandatory     = isMandatory || tl.getBoolInput("isMandatory", false);
+  isDisabled      = isDisabled || tl.getBoolInput("isDisabled", false);
   
   if (!accessKey) {
       console.error("Access key required");

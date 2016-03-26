@@ -10,7 +10,7 @@ const APP_STORE_VERSION = "1.0.0";
 const DEPLOYMENT_NAME   = "TestDeployment";
 const DESCRIPTION       = "This is a Test App";
 const ROLLOUT           = "25";
-const IS_MANDATORY      = true;
+const IS_MANDATORY      = false;
 const IS_DISABLED       = true;
 
 describe("CodePush Deploy Task", function() {
@@ -79,8 +79,8 @@ describe("CodePush Deploy Task", function() {
     
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --rollout " + ROLLOUT + " --mandatory --disabled",
+      "login --accessKey \"" + ACCESS_KEY + "\"",
+      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
       "logout"
     ];
     
@@ -95,8 +95,8 @@ describe("CodePush Deploy Task", function() {
     
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName " + DEPLOYMENT_NAME + " --description \"" + DESCRIPTION + "\" --rollout " + ROLLOUT + " --mandatory --disabled",
+      "login --accessKey \"" + ACCESS_KEY + "\"",
+      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
       "logout"
     ];
     
@@ -111,7 +111,7 @@ describe("CodePush Deploy Task", function() {
     
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
+      "login --accessKey \"" + ACCESS_KEY + "\"",
       "logout"
     ];
     
@@ -126,7 +126,7 @@ describe("CodePush Deploy Task", function() {
 
     var expectedCommands = [
       "logout",
-      "login --accessKey " + ACCESS_KEY,
+      "login --accessKey \"" + ACCESS_KEY + "\"",
       "logout"
     ];
     
