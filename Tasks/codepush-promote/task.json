@@ -16,7 +16,7 @@
         "Patch": "0"
     },
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) for $(appName)",
+    "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) ($(appName))",
     "groups": [
         {
             "name": "updateMetadata",
