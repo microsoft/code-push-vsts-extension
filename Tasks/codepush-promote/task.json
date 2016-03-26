@@ -2,7 +2,7 @@
     "id": "4e901d0e-189b-4403-a030-1d06ff8a3b28",
     "name": "CodePushPromote",
     "friendlyName": "CodePush - Promote",
-    "description": "A VSTS build/release task for promoting CodePush releases from one deployment to another",
+    "description": "Promote a CodePush release from one deployment to another",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [

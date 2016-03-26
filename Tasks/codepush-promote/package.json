@@ -1,7 +1,7 @@
 {
   "name": "vsts-task-code-push-promote",
   "version": "1.2.0",
-  "description": "A VSTS build/release task for promoting CodePush releases from one deployment to another",
+  "description": "Promote a CodePush release from one deployment to another",
   "main": "codepush-promote.js",
   "scripts": {
     "deploy": "tfx build tasks upload --task-path ./ --overwrite",
