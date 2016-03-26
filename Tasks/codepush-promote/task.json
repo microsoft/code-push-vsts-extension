@@ -56,12 +56,21 @@
             "visibleRule": "authType = ServiceEndpointHockeyApp"
         },
         {
+            "name": "accessKey",
+            "type": "string",
+            "label": "Access Key",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Access key used to authenticate with the CodePush service.",
+            "visibleRule": "authType = AccessKey"
+        },
+        {
             "name": "appName",
             "type": "string",
             "label": "App Name",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Name of the app you want to promote a release for"
+            "helpMarkDown": "Name of the app you want to promote a release for."
         },
         {
             "name": "sourceDeploymentName",
@@ -69,7 +78,7 @@
             "label": "Source Deployment",
             "defaultValue": "Staging",
             "required": true,
-            "helpMarkDown": "Name of the deployment you want to promote the latest release from",
+            "helpMarkDown": "Name of the deployment you want to promote the latest release from.",
             "options": {
                 "Production": "Production",
                 "Staging": "Staging"
@@ -84,7 +93,7 @@
             "label": "Destination Deployment",
             "defaultValue": "Production",
             "required": true,
-            "helpMarkDown": "Name of the deployment you want to promote the release to",
+            "helpMarkDown": "Name of the deployment you want to promote the release to.",
             "options": {
                 "Production": "Production",
                 "Staging": "Staging"
