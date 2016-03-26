@@ -1,10 +1,10 @@
 {
   "name": "vsts-task-code-push-release",
-  "version": "1.1.0",
-  "description": "A VSTS build/release task for releasing app updates to the CodePush service",
+  "version": "1.2.0",
+  "description": "Release an app update to the CodePush service",
   "main": "codepush-release.js",
   "scripts": {
-    "deploy": "tfx build tasks upload ./ --overwrite",
+    "deploy": "tfx build tasks upload --task-path ./ --overwrite",
     "test": "mocha test.js"
   },
   "author": "Microsoft Corporation",

@@ -1,8 +1,8 @@
 {
     "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
-    "name": "codepush-release",
-    "friendlyName": "CodePush Release",
-    "description": "A VSTS build/release task for releasing app updates to the CodePush service",
+    "name": "CodePushRelease",
+    "friendlyName": "CodePush - Release",
+    "description": "Release an app update to the CodePush service",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -16,7 +16,14 @@
         "Patch": "0"
     },
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Release $(packagePath) to CodePush ($(appName) - $(deploymentName)) ",
+    "instanceNameFormat": "Release update to $(deploymentName) ($(appName))",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": true
+        }
+    ],
     "inputs": [
         {
             "name": "authType",
@@ -33,7 +40,7 @@
         {
             "name": "serviceEndpointCodePush",
             "type": "connectedService:codepush-auth-key",
-            "label": "Service Endpoint (CodePush)",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
@@ -41,8 +48,8 @@
         },
         {
             "name": "serviceEndpointHockeyApp",
-            "type": "connectedService:hockeyapp-endpoint-type",
-            "label": "Service Endpoint (HockeyApp)",
+            "type": "connectedService:HockeyApp",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "HockeyApp service endpoint that is configured with your account credentials.",
@@ -54,7 +61,7 @@
             "label": "Access Key",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Access key used to authenticate with the CodePush service",
+            "helpMarkDown": "Access key used to authenticate with the CodePush service.",
             "visibleRule": "authType = AccessKey"
         },
         {
@@ -63,7 +70,7 @@
             "label": "App Name",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Name of the app you want to release an update for"
+            "helpMarkDown": "Name of the app you want to release an update for."
         },
         {
             "name": "packagePath",
@@ -71,7 +78,7 @@
             "label": "Update Contents Path",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to the file or directory that contains the content you want to release"
+            "helpMarkDown": "Path to the file or directory that contains the content you want to release."
         },
         {
             "name": "appStoreVersion",
@@ -79,7 +86,7 @@
             "label": "Target Binary Version",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The binary version that this update is targeting (must be semver compliant)"
+            "helpMarkDown": "The binary version that this update is targeting (must be semver compliant)."
         },
         {
             "name": "deploymentName",
@@ -87,7 +94,7 @@
             "label": "Deployment",
             "defaultValue": "Staging",
             "required": false,
-            "helpMarkDown": "Name of the deployment you want to release the update to",
+            "helpMarkDown": "Name of the deployment you want to release the update to.",
             "options": {
                 "Production": "Production",
                 "Staging": "Staging"
@@ -110,6 +117,7 @@
             "label": "Rollout",
             "defaultValue": "",
             "required": false,
+            "groupName": "advanced",
             "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix)."
         },
         {
@@ -118,7 +126,8 @@
             "label": "Mandatory",
             "defaultValue": false,
             "required": false,
-            "helpMarkDown": "Specifies whether the release should be considered mandatory"
+            "groupName": "advanced",
+            "helpMarkDown": "Specifies whether the release should be considered mandatory."
         },
         {
             "name": "isDisabled",
@@ -126,6 +135,7 @@
             "label": "Disabled",
             "defaultValue": false,
             "required": false,
+            "groupName": "advanced",
             "helpMarkDown": "Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users."
         }
     ],

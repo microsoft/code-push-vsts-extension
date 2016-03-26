@@ -1,8 +1,8 @@
 {
     "id": "4e901d0e-189b-4403-a030-1d06ff8a3b28",
-    "name": "codepush-promote",
-    "friendlyName": "CodePush Promote",
-    "description": "A VSTS build/release task for promoting CodePush releases from one deployment to another",
+    "name": "CodePushPromote",
+    "friendlyName": "CodePush - Promote",
+    "description": "Promote a CodePush release from one deployment to another",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -16,12 +16,12 @@
         "Patch": "0"
     },
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) for $(appName)",
+    "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) ($(appName))",
     "groups": [
         {
-            "name": "updateMetadata",
-            "displayName": "Update Metadata",
-            "isExpanded": false
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": true
         }
     ],
     "inputs": [
@@ -40,7 +40,7 @@
         {
             "name": "serviceEndpointCodePush",
             "type": "connectedService:codepush-auth-key",
-            "label": "Service Endpoint (CodePush)",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
@@ -48,8 +48,8 @@
         },
         {
             "name": "serviceEndpointHockeyApp",
-            "type": "connectedService:hockeyapp-endpoint-type",
-            "label": "Service Endpoint (HockeyApp)",
+            "type": "connectedService:HockeyApp",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "HockeyApp service endpoint that is configured with your account credentials.",
@@ -103,12 +103,21 @@
             }
         },
         {
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix). Note that the rollout property will not be inherited from the release being promoted."
+        },
+        {
             "name": "description",
             "type": "pickList",
             "label": "Description",
             "defaultValue": "Inherit",
             "required": true,
-            "groupName": "updateMetadata",
+            "groupName": "advanced",
             "helpMarkDown": "Description of the update being released. Selecting \"Inherit\" will use the value from the release being promoted.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description.",
             "options": {
                 "Inherit": "Inherit"
@@ -118,21 +127,12 @@
             }
         },
         {
-            "name": "rollout",
-            "type": "string",
-            "label": "Rollout",
-            "defaultValue": "",
-            "required": false,
-            "groupName": "updateMetadata",
-            "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix). Note that the rollout property will not be inherited from the release being promoted."
-        },
-        {
             "name": "isMandatory",
             "type": "pickList",
             "label": "Mandatory",
             "defaultValue": "Inherit",
             "required": true,
-            "groupName": "updateMetadata",
+            "groupName": "advanced",
             "helpMarkDown": "Specifies whether the release should be considered mandatory. Selecting \"Inherit\" will use the value from the release being promoted.",
             "options": {
                 "Inherit": "Inherit",
@@ -146,7 +146,7 @@
             "label": "Disabled",
             "defaultValue": "Inherit",
             "required": true,
-            "groupName": "updateMetadata",
+            "groupName": "advanced",
             "helpMarkDown": "Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Selecting \"Inherit\" will use the value from the release being promoted.",
             "options": {
                 "Inherit": "Inherit",
