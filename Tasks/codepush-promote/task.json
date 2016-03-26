@@ -1,7 +1,7 @@
 {
     "id": "4e901d0e-189b-4403-a030-1d06ff8a3b28",
-    "name": "codepush-promote",
-    "friendlyName": "CodePush Promote",
+    "name": "CodePushPromote",
+    "friendlyName": "CodePush - Promote",
     "description": "A VSTS build/release task for promoting CodePush releases from one deployment to another",
     "author": "Microsoft Corporation",
     "category": "Deploy",
@@ -21,7 +21,7 @@
         {
             "name": "updateMetadata",
             "displayName": "Update Metadata",
-            "isExpanded": false
+            "isExpanded": true
         }
     ],
     "inputs": [
@@ -103,6 +103,14 @@
             }
         },
         {
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix). Note that the rollout property will not be inherited from the release being promoted."
+        },
+        {
             "name": "description",
             "type": "pickList",
             "label": "Description",
@@ -116,15 +124,6 @@
             "properties": {
                 "EditableOptions": "True"
             }
-        },
-        {
-            "name": "rollout",
-            "type": "string",
-            "label": "Rollout",
-            "defaultValue": "",
-            "required": false,
-            "groupName": "updateMetadata",
-            "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix). Note that the rollout property will not be inherited from the release being promoted."
         },
         {
             "name": "isMandatory",

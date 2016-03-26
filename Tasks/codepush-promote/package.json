@@ -4,7 +4,7 @@
   "description": "A VSTS build/release task for promoting CodePush releases from one deployment to another",
   "main": "codepush-promote.js",
   "scripts": {
-    "deploy": "tfx build tasks upload ./ --overwrite",
+    "deploy": "tfx build tasks upload --task-path ./ --overwrite",
     "test": "mocha test.js"
   },
   "author": "Microsoft Corporation",

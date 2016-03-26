@@ -60,7 +60,7 @@ In addition to specifying your access key directly within a build task instance 
 
 In addition to the custom service endpoint, this extension also contributes the following two build and release tasks:
 
-### CodePush Release
+### CodePush - Release
 
 The **CodePush Release** task allows you to release an update to the CodePush server, and includes the following options:
 
@@ -88,7 +88,7 @@ The **CodePush Release** task allows you to release an update to the CodePush se
 
 9. **Disabled** *(Boolean)* - Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Defaults to `false`.
 
-### CodePush Promote
+### CodePush - Promote
 
 The **CodePush Promote** task allows you to promote a previously released update from one deployment to another, and includes the following options:
 
@@ -106,17 +106,17 @@ The **CodePush Promote** task allows you to promote a previously released update
 
 4. **Destination Deployment** *(String)* - Name of the deployment you want to promote the release to. Defaults to `Production`.
 
+5. **Rollout** *(String)* - Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a "%" suffix). Note that the rollout property will not be inherited from the release being promoted. Defaults to `null`, which is equivalent to `100`, and therefore, makes the release available to everyone.
+
 #### Update Metadata
 
 By default, when a release is promoted from one deployment to another, the newly created release will "inherit" not just the update contents, but also the metadata (e.g. `description`). This ensures that what is being promoted is the exact same thing that you tested in the source deployment. However, if you need to override one or more properties in the newly created release within the target deployment (e.g. because you use `mandatory` differently between environments), you can use the following fields:
 
 1. **Description** *(String)* - Description of the update being released. Leaving this field blank will result in the update inheriting the description from the release being promoted. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
 
-2. **Rollout** *(String)* - Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a "%" suffix). Note that the rollout property will not be inherited from the release being promoted. Defaults to `null`, which is equivalent to `100`, and therefore, makes the release available to everyone.
+2. **Mandatory** *(Boolean)* - Specifies whether the release should be considered mandatory. Selecting `Inherit` will use the value from the release being promoted. Defaults to `Inherit`.
 
-3. **Mandatory** *(Boolean)* - Specifies whether the release should be considered mandatory. Selecting `Inherit` will use the value from the release being promoted. Defaults to `Inherit`.
-
-4. **Disabled** *(Boolean)* - Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Selecting `Inherit` will use the value from the release being promoted. Defaults to `Inherit`.
+3. **Disabled** *(Boolean)* - Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Selecting `Inherit` will use the value from the release being promoted. Defaults to `Inherit`.
 
 ##Installation
 
