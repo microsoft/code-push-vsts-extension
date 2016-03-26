@@ -104,12 +104,18 @@
         },
         {
             "name": "description",
-            "type": "string",
+            "type": "pickList",
             "label": "Description",
-            "defaultValue": "",
-            "required": false,
+            "defaultValue": "Inherit",
+            "required": true,
             "groupName": "updateMetadata",
-            "helpMarkDown": "Description of the update being released. Leaving this field blank will result in the update inheriting the description from the release being promoted.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
+            "helpMarkDown": "Description of the update being released. Selecting \"Inherit\" will use the value from the release being promoted.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description.",
+            "options": {
+                "Inherit": "Inherit"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
         },
         {
             "name": "rollout",

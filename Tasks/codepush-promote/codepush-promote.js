@@ -20,7 +20,7 @@ function buildCommand(cmd, positionArgs, optionFlags) {
 
     for (var flag in optionFlags) {
         // If the value is falsey, the option flag doesn't have to be specified.
-        if (optionFlags[flag]) {
+        if (optionFlags[flag] || optionFlags[flag] === "") {
             var flagValue = "" + optionFlags[flag];
 
             command = command + " --" + flag;
@@ -79,7 +79,7 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
     }
   
     var updateMetadata = {
-        description: description,
+        description: description === "Inherit" ? null : description,
         disabled: isDisabled === "Inherit" ? null : isDisabled,        
         mandatory: isMandatory === "Inherit" ? null : isMandatory,
         rollout: rollout        
