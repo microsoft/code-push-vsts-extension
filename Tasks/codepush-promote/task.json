@@ -106,7 +106,7 @@
             "name": "rollout",
             "type": "string",
             "label": "Rollout",
-            "defaultValue": "",
+            "defaultValue": "100%",
             "required": false,
             "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix). Note that the rollout property will not be inherited from the release being promoted."
         },

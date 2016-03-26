@@ -100,7 +100,7 @@
             "name": "description",
             "type": "string",
             "label": "Description",
-            "defaultValue": "",
+            "defaultValue": "100%",
             "required": false,
             "helpMarkDown": "Description of the update being released.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
         },
