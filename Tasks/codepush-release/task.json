@@ -33,7 +33,7 @@
         {
             "name": "serviceEndpointCodePush",
             "type": "connectedService:codepush-auth-key",
-            "label": "Service Endpoint (CodePush)",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
@@ -41,8 +41,8 @@
         },
         {
             "name": "serviceEndpointHockeyApp",
-            "type": "connectedService:hockeyapp-endpoint-type",
-            "label": "Service Endpoint (HockeyApp)",
+            "type": "connectedService:HockeyApp",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "HockeyApp service endpoint that is configured with your account credentials.",
@@ -54,7 +54,7 @@
             "label": "Access Key",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Access key used to authenticate with the CodePush service",
+            "helpMarkDown": "Access key used to authenticate with the CodePush service.",
             "visibleRule": "authType = AccessKey"
         },
         {
@@ -63,7 +63,7 @@
             "label": "App Name",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Name of the app you want to release an update for"
+            "helpMarkDown": "Name of the app you want to release an update for."
         },
         {
             "name": "packagePath",
@@ -71,7 +71,7 @@
             "label": "Update Contents Path",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to the file or directory that contains the content you want to release"
+            "helpMarkDown": "Path to the file or directory that contains the content you want to release."
         },
         {
             "name": "appStoreVersion",
@@ -79,7 +79,7 @@
             "label": "Target Binary Version",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The binary version that this update is targeting (must be semver compliant)"
+            "helpMarkDown": "The binary version that this update is targeting (must be semver compliant)."
         },
         {
             "name": "deploymentName",
@@ -87,7 +87,7 @@
             "label": "Deployment",
             "defaultValue": "Staging",
             "required": false,
-            "helpMarkDown": "Name of the deployment you want to release the update to",
+            "helpMarkDown": "Name of the deployment you want to release the update to.",
             "options": {
                 "Production": "Production",
                 "Staging": "Staging"
@@ -118,7 +118,7 @@
             "label": "Mandatory",
             "defaultValue": false,
             "required": false,
-            "helpMarkDown": "Specifies whether the release should be considered mandatory"
+            "helpMarkDown": "Specifies whether the release should be considered mandatory."
         },
         {
             "name": "isDisabled",

@@ -40,7 +40,7 @@
         {
             "name": "serviceEndpointCodePush",
             "type": "connectedService:codepush-auth-key",
-            "label": "Service Endpoint (CodePush)",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
@@ -48,8 +48,8 @@
         },
         {
             "name": "serviceEndpointHockeyApp",
-            "type": "connectedService:hockeyapp-endpoint-type",
-            "label": "Service Endpoint (HockeyApp)",
+            "type": "connectedService:HockeyApp",
+            "label": "Service Endpoint",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "HockeyApp service endpoint that is configured with your account credentials.",
