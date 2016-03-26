@@ -17,6 +17,13 @@
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "Release update to $(deploymentName) ($(appName))",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": true
+        }
+    ],
     "inputs": [
         {
             "name": "authType",
@@ -100,7 +107,7 @@
             "name": "description",
             "type": "string",
             "label": "Description",
-            "defaultValue": "100%",
+            "defaultValue": "",
             "required": false,
             "helpMarkDown": "Description of the update being released.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
         },
@@ -110,6 +117,7 @@
             "label": "Rollout",
             "defaultValue": "",
             "required": false,
+            "groupName": "advanced",
             "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix)."
         },
         {
@@ -118,6 +126,7 @@
             "label": "Mandatory",
             "defaultValue": false,
             "required": false,
+            "groupName": "advanced",
             "helpMarkDown": "Specifies whether the release should be considered mandatory."
         },
         {
@@ -126,6 +135,7 @@
             "label": "Disabled",
             "defaultValue": false,
             "required": false,
+            "groupName": "advanced",
             "helpMarkDown": "Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users."
         }
     ],

@@ -19,8 +19,8 @@
     "instanceNameFormat": "Promote $(sourceDeploymentName) to $(targetDeploymentName) ($(appName))",
     "groups": [
         {
-            "name": "updateMetadata",
-            "displayName": "Update Metadata",
+            "name": "advanced",
+            "displayName": "Advanced",
             "isExpanded": true
         }
     ],
@@ -106,8 +106,9 @@
             "name": "rollout",
             "type": "string",
             "label": "Rollout",
-            "defaultValue": "100%",
+            "defaultValue": "",
             "required": false,
+            "groupName": "advanced",
             "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix). Note that the rollout property will not be inherited from the release being promoted."
         },
         {
@@ -116,7 +117,7 @@
             "label": "Description",
             "defaultValue": "Inherit",
             "required": true,
-            "groupName": "updateMetadata",
+            "groupName": "advanced",
             "helpMarkDown": "Description of the update being released. Selecting \"Inherit\" will use the value from the release being promoted.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description.",
             "options": {
                 "Inherit": "Inherit"
@@ -131,7 +132,7 @@
             "label": "Mandatory",
             "defaultValue": "Inherit",
             "required": true,
-            "groupName": "updateMetadata",
+            "groupName": "advanced",
             "helpMarkDown": "Specifies whether the release should be considered mandatory. Selecting \"Inherit\" will use the value from the release being promoted.",
             "options": {
                 "Inherit": "Inherit",
@@ -145,7 +146,7 @@
             "label": "Disabled",
             "defaultValue": "Inherit",
             "required": true,
-            "groupName": "updateMetadata",
+            "groupName": "advanced",
             "helpMarkDown": "Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Selecting \"Inherit\" will use the value from the release being promoted.",
             "options": {
                 "Inherit": "Inherit",
