@@ -38,6 +38,15 @@
             }
         },
         {
+            "name": "accessKey",
+            "type": "string",
+            "label": "Access Key",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Access key used to authenticate with the CodePush service.",
+            "visibleRule": "authType = AccessKey"
+        },
+        {
             "name": "serviceEndpointCodePush",
             "type": "connectedService:codepush-auth-key",
             "label": "Service Endpoint",
@@ -56,21 +65,12 @@
             "visibleRule": "authType = ServiceEndpointHockeyApp"
         },
         {
-            "name": "accessKey",
-            "type": "string",
-            "label": "Access Key",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Access key used to authenticate with the CodePush service.",
-            "visibleRule": "authType = AccessKey"
-        },
-        {
             "name": "appName",
             "type": "string",
             "label": "App Name",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Name of the app you want to release an update for."
+            "helpMarkDown": "Name of the app you want to release the update for."
         },
         {
             "name": "deploymentName",
