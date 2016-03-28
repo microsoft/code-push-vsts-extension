@@ -72,25 +72,25 @@ The **CodePush - Release** task allows you to release an update to the CodePush 
     
     4. **Service Endpoint (HockeyApp)** - Allows you to reference a globally configured HockeyApp service endpoint.
 
-2. **App Name** *(String, Required)* - The name of the app you want to release the update for.
+2. **App Name** *(String, Required)* - Name of the app you want to release the update for.
 
-3. **Update Contents Path** *(File path, Required)* - Path to the file or directory that contains the content(s) you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to either your generated JS bundle file (e.g. `ios/main.jsbundle`) or a directory containing your JS bundle and assets, depending on if you're using the React Native assets system. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#update-contents-parameter) for more details.
+3. **Deployment** *(String)* - Name of the deployment you want to release the update to. Defaults to `Staging`.
 
-4. **Target Binary Version** *(String, Required)* - The binary version that this release is targeting. The value must be [semver](http://semver.org/) compliant. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#target-binary-version-parameter) for more details.
+4. **Update Contents Path** *(File path, Required)* - Path to the file or directory that contains the update you want to release. For Cordova this should be the platform-specific `www` folder (e.g `platforms/ios/www`) and for React Native this should point to either your generated JS bundle file (e.g. `ios/main.jsbundle`) or a directory containing your JS bundle and assets, depending on if you're using the React Native assets system. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#update-contents-parameter) for more details.
 
-5. **Deployment** *(String)* - Name of the deployment you want to release the update to. Defaults to `Staging`.
+5. **Target Binary Version** *(String, Required)* - Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#target-binary-version-parameter) for more details.
 
-6. **Description** *(String)* - Description of the update being released. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
+#### Update Metadata
 
-#### Advanced
+In addition to the basic properties, the follow options provide more advanced control over the release and how it will be distributed to your end users:
 
-In addition to the basic release properties, the follow options provide more advanced control over the update and how it will be distributed to your end users:
+1. **Rollout** *(String)* - Percentage of users this release should be immediately available to. Defaults to `100%`.
 
-1. **Rollout** *(String)* - Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a "%" suffix). Defaults to `null`, which is equivalent to `100`, and therefore, makes the release available to everyone.
+6. **Description** *(String)* - Description of the changes made to the app in this release. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
 
-2. **Mandatory** *(Boolean)* - Specifies whether the release should be considered mandatory or not. Defaults to `false`.
+2. **Mandatory** *(Boolean)* - Specifies whether this release should be considered mandatory. Defaults to `false`.
 
-3. **Disabled** *(Boolean)* - Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Defaults to `false`.
+3. **Disabled** *(Boolean)* - Specifies whether this release should be immediately downloadable. Defaults to `false`.
 
 ### CodePush - Promote
 
@@ -104,23 +104,23 @@ The **CodePush - Promote** task allows you to promote a previously released upda
     
     4. **Service Endpoint (HockeyApp)** - Allows you to reference a globally configured HockeyApp service endpoint.
 
-2. **App Name** *(String, Required)* - The name of the app that has the deployments you are targeting for promotion.
+2. **App Name** *(String, Required)* - Name of the app that has the deployments you are targeting for promotion.
 
 3. **Source Deployment** *(String)* - Name of the deployment you want to promote the latest release from. Defaults to `Staging`.
 
 4. **Destination Deployment** *(String)* - Name of the deployment you want to promote the release to. Defaults to `Production`.
 
-#### Advanced
+#### Update Metadata
 
 By default, when a release is promoted from one deployment to another, the newly created release will "inherit" not just the update contents, but also the metadata (e.g. `description`). This ensures that what is being promoted is the exact same thing that you tested in the source deployment. However, if you need to override one or more properties in the newly created release within the target deployment (e.g. because you use `mandatory` differently between environments), you can use the following fields:
 
-1. **Rollout** *(String)* - Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a "%" suffix). Note that the rollout property will not be inherited from the release being promoted. Defaults to `null`, which is equivalent to `100`, and therefore, makes the release available to everyone.
+1. **Rollout** *(String)* - Percentage of users this release should be immediately available to. Defaults to `100%`
 
-2. **Description** *(String)* - Description of the update being released. Leaving this field blank will result in the update inheriting the description from the release being promoted. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release.
+2. **Description** *(String)* - Description of the changes made to the app in this release. Selecting `Inherit` will use the description from the release being promoted. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release. Defaults to `Inherit`.
 
-3. **Mandatory** *(Boolean)* - Specifies whether the release should be considered mandatory. Selecting `Inherit` will use the value from the release being promoted. Defaults to `Inherit`.
+3. **Mandatory** *(Boolean)* - Specifies whether this release should be considered mandatory. Selecting `Inherit` will use the mandatory attribute from the release being promoted. Defaults to `Inherit`.
 
-4. **Disabled** *(Boolean)* - Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users. Selecting `Inherit` will use the value from the release being promoted. Defaults to `Inherit`.
+4. **Disabled** *(Boolean)* - Specifies whether this release should be immediately downloadable. Selecting `Inherit` will use the disabled attribute from the release being promoted. Defaults to `Inherit`.
 
 ##Installation
 

@@ -80,7 +80,7 @@ describe("CodePush Deploy Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey \"" + ACCESS_KEY + "\"",
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
+      "release \"" + APP_NAME + "\" \"" + PACKAGE_PATH + "\" \"" + APP_STORE_VERSION + "\" --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
       "logout"
     ];
     
@@ -96,7 +96,7 @@ describe("CodePush Deploy Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey \"" + ACCESS_KEY + "\"",
-      "release " + APP_NAME + " " + PACKAGE_PATH + " " + APP_STORE_VERSION + " --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
+      "release \"" + APP_NAME + "\" \"" + PACKAGE_PATH + "\" \"" + APP_STORE_VERSION + "\" --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
       "logout"
     ];
     
