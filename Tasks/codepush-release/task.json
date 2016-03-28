@@ -73,6 +73,21 @@
             "helpMarkDown": "Name of the app you want to release an update for."
         },
         {
+            "name": "deploymentName",
+            "type": "pickList",
+            "label": "Deployment",
+            "defaultValue": "Staging",
+            "required": false,
+            "helpMarkDown": "Name of the deployment you want to release the update to.",
+            "options": {
+                "Production": "Production",
+                "Staging": "Staging"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
             "name": "packagePath",
             "type": "filePath",
             "label": "Update Contents Path",
@@ -89,19 +104,13 @@
             "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3)."
         },
         {
-            "name": "deploymentName",
-            "type": "pickList",
-            "label": "Deployment",
-            "defaultValue": "Staging",
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "100%",
             "required": false,
-            "helpMarkDown": "Name of the deployment you want to release the update to.",
-            "options": {
-                "Production": "Production",
-                "Staging": "Staging"
-            },
-            "properties": {
-                "EditableOptions": "True"
-            }
+            "groupName": "advanced",
+            "helpMarkDown": "Percentage of users this release should be immediately available to."
         },
         {
             "name": "description",
@@ -109,16 +118,8 @@
             "label": "Description",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
-        },
-        {
-            "name": "rollout",
-            "type": "string",
-            "label": "Rollout",
-            "defaultValue": "",
-            "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Percentage of users this release should be immediately available to."
+            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
         },
         {
             "name": "isMandatory",
