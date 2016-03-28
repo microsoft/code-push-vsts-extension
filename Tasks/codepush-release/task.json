@@ -78,7 +78,7 @@
             "label": "Update Contents Path",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to the file or directory that contains the content you want to release."
+            "helpMarkDown": "Path to the file or directory that contains the update you want to release."
         },
         {
             "name": "appStoreVersion",
@@ -86,7 +86,7 @@
             "label": "Target Binary Version",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The binary version that this update is targeting (must be semver compliant)."
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3)."
         },
         {
             "name": "deploymentName",
@@ -109,7 +109,7 @@
             "label": "Description",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Description of the update being released.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
+            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
         },
         {
             "name": "rollout",
@@ -118,7 +118,7 @@
             "defaultValue": "",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Percentage of users you want this update to be available for, specified as a number between `1` and `100` (you can optionally specify a \"%\" suffix)."
+            "helpMarkDown": "Percentage of users this release should be immediately available to."
         },
         {
             "name": "isMandatory",
@@ -127,7 +127,7 @@
             "defaultValue": false,
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Specifies whether the release should be considered mandatory."
+            "helpMarkDown": "Whether this release should be considered mandatory."
         },
         {
             "name": "isDisabled",
@@ -136,7 +136,7 @@
             "defaultValue": false,
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Specifies whether the release should be disabled, and therefore, not immediately downloadable by end-users."
+            "helpMarkDown": "Whether this release should be immediately downloadable."
         }
     ],
     "execution": {
