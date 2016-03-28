@@ -15,7 +15,7 @@ function buildCommand(cmd, positionArgs, optionFlags) {
     var command = codePushCommandPrefix + " " + cmd;
 
     positionArgs && positionArgs.forEach(function (positionArg) {
-        command = command + " " + positionArg;
+        command = command + " \"" + positionArg + "\"";
     });
 
     for (var flag in optionFlags) {
