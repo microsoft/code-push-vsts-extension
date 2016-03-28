@@ -2,7 +2,7 @@
     "id": "4e901d0e-189b-4403-a030-1d06ff8a3b28",
     "name": "CodePushPromote",
     "friendlyName": "CodePush - Promote",
-    "description": "Promote a CodePush release from one deployment to another",
+    "description": "Promote the latest CodePush release from one app deployment to another",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -20,7 +20,7 @@
     "groups": [
         {
             "name": "advanced",
-            "displayName": "Advanced",
+            "displayName": "Update Metadata",
             "isExpanded": true
         }
     ],

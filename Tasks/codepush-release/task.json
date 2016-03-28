@@ -2,7 +2,7 @@
     "id": "b69d19a0-7f6d-11e5-a86a-c199aa7a6cf0",
     "name": "CodePushRelease",
     "friendlyName": "CodePush - Release",
-    "description": "Release an app update to the CodePush service",
+    "description": "Release an update to a CodePush app deployment",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -20,7 +20,7 @@
     "groups": [
         {
             "name": "advanced",
-            "displayName": "Advanced",
+            "displayName": "Update Metadata",
             "isExpanded": true
         }
     ],
