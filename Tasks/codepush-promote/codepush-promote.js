@@ -68,7 +68,7 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
     appName              = appName || tl.getInput("appName", true);
     sourceDeploymentName = sourceDeploymentName || tl.getInput("sourceDeploymentName", true);
     targetDeploymentName = targetDeploymentName || tl.getInput("targetDeploymentName", true);
-    appStoreVersion          = appStoreVersion || tl.getInput("appStoreVersion", false);
+    appStoreVersion      = appStoreVersion || tl.getInput("appStoreVersion", false);
     description          = description || tl.getInput("description", false);
     rollout              = rollout || tl.getInput("rollout", false);
     isMandatory          = isMandatory || tl.getInput("isMandatory", true);
