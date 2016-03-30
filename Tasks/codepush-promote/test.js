@@ -7,6 +7,7 @@ const ACCESS_KEY               = "key123";
 const APP_NAME                 = "TestApp";
 const SOURCE_DEPLOYMENT_NAME   = "TestSourceDeployment";
 const TARGET_DEPLOYMENT_NAME   = "TestTargetDeployment";
+const TARGET_BINARY_VERSION    = "1.0.1";
 const DESCRIPTION              = "Inherit";
 const ROLLOUT                  = "25%";
 const IS_MANDATORY             = "false";
@@ -58,7 +59,7 @@ describe("CodePush Promote Task", function() {
     spies.push(tl.setResult);
     
     try {
-      CodePush.performPromoteTask(ACCESS_KEY, APP_NAME, SOURCE_DEPLOYMENT_NAME, TARGET_DEPLOYMENT_NAME, DESCRIPTION, ROLLOUT, IS_MANDATORY, IS_DISABLED);
+      CodePush.performPromoteTask(ACCESS_KEY, APP_NAME, SOURCE_DEPLOYMENT_NAME, TARGET_DEPLOYMENT_NAME, TARGET_BINARY_VERSION, DESCRIPTION, ROLLOUT, IS_MANDATORY, IS_DISABLED);
     } catch (e) {
       assert(shouldFail, "Threw an unexpected error");
     }
@@ -80,7 +81,7 @@ describe("CodePush Promote Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey \"" + ACCESS_KEY + "\"",
-      "promote \"" + APP_NAME + "\" \"" + SOURCE_DEPLOYMENT_NAME + "\" \"" + TARGET_DEPLOYMENT_NAME + "\" --mandatory \"false\" --rollout \"" + ROLLOUT + "\"",
+      "promote \"" + APP_NAME + "\" \"" + SOURCE_DEPLOYMENT_NAME + "\" \"" + TARGET_DEPLOYMENT_NAME + "\" --targetBinaryVersion \"" + TARGET_BINARY_VERSION + "\" --mandatory \"false\" --rollout \"" + ROLLOUT + "\"",
       "logout"
     ];
     
@@ -96,7 +97,7 @@ describe("CodePush Promote Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey \"" + ACCESS_KEY + "\"",
-      "promote \"" + APP_NAME + "\" \"" + SOURCE_DEPLOYMENT_NAME + "\" \"" + TARGET_DEPLOYMENT_NAME + "\" --mandatory \"false\" --rollout \"" + ROLLOUT + "\"",
+      "promote \"" + APP_NAME + "\" \"" + SOURCE_DEPLOYMENT_NAME + "\" \"" + TARGET_DEPLOYMENT_NAME + "\" --targetBinaryVersion \"" + TARGET_BINARY_VERSION + "\" --mandatory \"false\" --rollout \"" + ROLLOUT + "\"",
       "logout"
     ];
     

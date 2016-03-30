@@ -103,6 +103,14 @@
             }
         },
         {
+            "name": "appStoreVersion",
+            "type": "string",
+            "label": "Target Binary Version",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3)."
+        },
+        {
             "name": "rollout",
             "type": "string",
             "label": "Rollout",
