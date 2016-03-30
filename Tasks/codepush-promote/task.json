@@ -111,15 +111,6 @@
             "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3)."
         },
         {
-            "name": "rollout",
-            "type": "string",
-            "label": "Rollout",
-            "defaultValue": "100%",
-            "required": false,
-            "groupName": "advanced",
-            "helpMarkDown": "Percentage of users this release should be immediately available to. Note that the rollout property will not be inherited from the release being promoted."
-        },
-        {
             "name": "description",
             "type": "pickList",
             "label": "Description",
@@ -133,6 +124,15 @@
             "properties": {
                 "EditableOptions": "True"
             }
+        },
+        {
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "100%",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Percentage of users this release should be immediately available to. Note that the rollout property will not be inherited from the release being promoted."
         },
         {
             "name": "isMandatory",
