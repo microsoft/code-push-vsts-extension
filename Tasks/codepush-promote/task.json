@@ -103,14 +103,6 @@
             }
         },
         {
-            "name": "appStoreVersion",
-            "type": "string",
-            "label": "Target Binary Version",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3)."
-        },
-        {
             "name": "description",
             "type": "pickList",
             "label": "Description",
@@ -118,6 +110,21 @@
             "required": true,
             "groupName": "advanced",
             "helpMarkDown": "Description of the changes made to the app in this release. Selecting \"Inherit\" will use the description from the release being promoted.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description.",
+            "options": {
+                "Inherit": "Inherit"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "appStoreVersion",
+            "type": "pickList",
+            "label": "Target Binary Version",
+            "defaultValue": "Inherit",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Selecting \"Inherit\" will use the target binary version from the release being promoted.",
             "options": {
                 "Inherit": "Inherit"
             },
