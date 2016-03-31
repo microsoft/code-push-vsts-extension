@@ -103,6 +103,15 @@
             }
         },
         {
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "100%",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Percentage of users this release should be immediately available to. Note that the rollout property will not be inherited from the release being promoted."
+        },
+        {
             "name": "description",
             "type": "pickList",
             "label": "Description",
@@ -124,22 +133,13 @@
             "defaultValue": "Inherit",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Selecting \"Inherit\" will use the target binary version from the release being promoted.",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targeting (e.g. 1.1.0, ~1.2.3). Selecting \"Inherit\" will use the target binary version from the release being promoted.",
             "options": {
                 "Inherit": "Inherit"
             },
             "properties": {
                 "EditableOptions": "True"
             }
-        },
-        {
-            "name": "rollout",
-            "type": "string",
-            "label": "Rollout",
-            "defaultValue": "100%",
-            "required": false,
-            "groupName": "advanced",
-            "helpMarkDown": "Percentage of users this release should be immediately available to. Note that the rollout property will not be inherited from the release being promoted."
         },
         {
             "name": "isMandatory",
