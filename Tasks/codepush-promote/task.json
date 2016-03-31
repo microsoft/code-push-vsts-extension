@@ -127,6 +127,21 @@
             }
         },
         {
+            "name": "appStoreVersion",
+            "type": "pickList",
+            "label": "Target Binary Version",
+            "defaultValue": "Inherit",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targeting (e.g. 1.1.0, ~1.2.3). Selecting \"Inherit\" will use the target binary version from the release being promoted.",
+            "options": {
+                "Inherit": "Inherit"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
             "name": "isMandatory",
             "type": "pickList",
             "label": "Mandatory",

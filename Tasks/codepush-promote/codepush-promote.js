@@ -55,7 +55,7 @@ function ensureLoggedOut() {
 }
 
 // The main function to be executed.
-function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDeploymentName, description, rollout, isMandatory, isDisabled) {
+function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDeploymentName, appStoreVersion, description, rollout, isMandatory, isDisabled) {
     // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
     var authType = tl.getInput("authType", false);
     if (authType === "AccessKey") {
@@ -68,6 +68,7 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
     appName              = appName || tl.getInput("appName", true);
     sourceDeploymentName = sourceDeploymentName || tl.getInput("sourceDeploymentName", true);
     targetDeploymentName = targetDeploymentName || tl.getInput("targetDeploymentName", true);
+    appStoreVersion      = appStoreVersion || tl.getInput("appStoreVersion", false);
     description          = description || tl.getInput("description", false);
     rollout              = rollout || tl.getInput("rollout", false);
     isMandatory          = isMandatory || tl.getInput("isMandatory", true);
@@ -79,6 +80,7 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
     }
   
     var updateMetadata = {
+        targetBinaryVersion: appStoreVersion === "Inherit" ? null : appStoreVersion,
         description: description === "Inherit" ? null : description,
         disabled: isDisabled === "Inherit" ? null : isDisabled,        
         mandatory: isMandatory === "Inherit" ? null : isMandatory,
