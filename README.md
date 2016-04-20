@@ -118,9 +118,11 @@ By default, when a release is promoted from one deployment to another, the newly
 
 2. **Description** *(String)* - Description of the changes made to the app in this release. Selecting `Inherit` will use the description from the release being promoted. When this task is used within a VSTS release definition, this field can be set to the `$(Release.ReleaseDescription)` variable in order to inherit the description that was given to the release. Defaults to `Inherit`.
 
-3. **Mandatory** *(Boolean)* - Specifies whether this release should be considered mandatory. Selecting `Inherit` will use the mandatory attribute from the release being promoted. Defaults to `Inherit`.
+3. **Target Binary Version** *(String)* - Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Selecting `Inherit` will use the target binary version attribute from the release being promoted. Defaults to `Inherit`. View the [CLI docs](http://microsoft.github.io/code-push/docs/cli.html#target-binary-version-parameter) for more details.
 
-4. **Disabled** *(Boolean)* - Specifies whether this release should be immediately downloadable. Selecting `Inherit` will use the disabled attribute from the release being promoted. Defaults to `Inherit`.
+4. **Mandatory** *(Boolean)* - Specifies whether this release should be considered mandatory. Selecting `Inherit` will use the mandatory attribute from the release being promoted. Defaults to `Inherit`.
+
+5. **Disabled** *(Boolean)* - Specifies whether this release should be immediately downloadable. Selecting `Inherit` will use the disabled attribute from the release being promoted. Defaults to `Inherit`.
 
 ##Installation
 
