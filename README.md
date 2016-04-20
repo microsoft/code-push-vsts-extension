@@ -48,10 +48,14 @@ In addition to specifying your access key directly within a build task instance 
 
 3. Click on the **Services** tab
 
-4. Click on **New Service Endpoint** and select **CodePush** or **HockeyApp**
+4. Click on **New Service Endpoint** and select **CodePush**
 
-5. Give the new endpoint a name (e.g. "MyApp-CodePush") and enter the access key you generated in step #1
+   *NOTE: If you're using CodePush as part of an integration with HockeyApp, you can also select the **HockeyApp** service endpoint type instead.*
 
+5. Give the new endpoint a name (e.g. "MyApp-iOS") and enter the access key you generated in step #1
+
+   <img src="images/service-endpoint.png" width="500" />
+   
 6. Select this endpoint via the name you chose in #5 whenever you add either the **CodePush - Release** or **CodePush - Promote** tasks to a build or release definition
 
 7. Release app updates!
