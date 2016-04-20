@@ -42,7 +42,7 @@ In addition to specifying your access key directly within a build task instance 
 
 4. Click on **New Service Endpoint** and select **CodePush**
 
-   *NOTE: If you're using CodePush as part of an integration with HockeyApp, you can also select the **HockeyApp** service endpoint type instead.*
+   *NOTE: If you're using CodePush as part of an integration with HockeyApp, you can also select the __HockeyApp__ service endpoint type instead.*
 
 5. Give the new endpoint a name (e.g. "MyApp-iOS") and enter the access key you generated in step #1
 
