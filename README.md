@@ -28,7 +28,7 @@ These tasks can be used with either VSTS or TFS 2015 on-prem servers (see below)
 
 4. Click **Add build step...** and select the neccessary tasks to generate your release assets (e.g. **Gulp**, **Cordova Build**, **React Native Prepare**)
 
-5. Click **Add build step...** and select **CodePush Release** from the **Deploy** category
+5. Click **Add build step...** and select **CodePush - Release** from the **Deploy** category
 
 6. Configure the deploy step with the access key created in step #1, specifying your app name, deployment name and target binary version, and pointing to the output of the task(s) you added in step #4 (e.g. the directory containing your compiled/processed JS/HTML/CSS) 
 
@@ -52,7 +52,7 @@ In addition to specifying your access key directly within a build task instance 
 
 5. Give the new endpoint a name (e.g. "MyApp-CodePush") and enter the access key you generated in step #1
 
-6. Select this endpoint via the name you chose in #5 whenever you add either the **CodePush Release** or **CodePush Promote** tasks to a build or release definition
+6. Select this endpoint via the name you chose in #5 whenever you add either the **CodePush - Release** or **CodePush - Promote** tasks to a build or release definition
 
 7. Release app updates!
 
@@ -130,7 +130,7 @@ By default, when a release is promoted from one deployment to another, the newly
 
 1. Install the [Visual Studio Team Services Extension for CodePush](https://marketplace.visualstudio.com/items/ms-vsclient.code-push)
 
-2. You will now find the **CodePush Release** and **CodePush Promote** tasks underneath the **Deploy** category
+2. You will now find the **CodePush - Release** and **CodePush - Promote** tasks underneath the **Deploy** category
 
 ### TFS 2015 Update 1 or Earlier
 
