@@ -1,0 +1,173 @@
+{
+    "id": "F5990527-F512-4C14-9F8E-1254240DC3CB",
+    "name": "CodePushReleaseCordova",
+    "friendlyName": "CodePush - Release Cordova",
+    "description": "Release an update to a CodePush Cordova app deployment",
+    "author": "Microsoft Corporation",
+    "category": "Deploy",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "demands": [],
+    "version": {
+        "Major": "0",
+        "Minor": "0",
+        "Patch": "1"
+    },
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Prepare and release cordova update to $(deploymentName) ($(appName))",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Update Metadata",
+            "isExpanded": true
+        }
+    ],
+    "inputs": [
+        {
+            "name": "authType",
+            "type": "pickList",
+            "label": "Authentication Method",
+            "defaultValue": "AccessKey",
+            "helpMarkDown": "",
+            "options": {
+                "AccessKey": "Access Key",
+                "ServiceEndpointCodePush": "Service Endpoint (CodePush)",
+                "ServiceEndpointHockeyApp": "Service Endpoint (HockeyApp)"
+            }
+        },
+        {
+            "name": "accessKey",
+            "type": "string",
+            "label": "Access Key",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Access key used to authenticate with the CodePush service.",
+            "visibleRule": "authType = AccessKey"
+        },
+        {
+            "name": "serviceEndpointCodePush",
+            "type": "connectedService:codepush-auth-key",
+            "label": "Service Endpoint",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "CodePush service endpoint that is configured with your account credentials.",
+            "visibleRule": "authType = ServiceEndpointCodePush"
+        },
+        {
+            "name": "serviceEndpointHockeyApp",
+            "type": "connectedService:HockeyApp",
+            "label": "Service Endpoint",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "HockeyApp service endpoint that is configured with your account credentials.",
+            "visibleRule": "authType = ServiceEndpointHockeyApp"
+        },
+        {
+            "name": "appName",
+            "type": "string",
+            "label": "App Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Name of the app you want to release the update for."
+        },
+        {
+            "name": "deploymentName",
+            "type": "pickList",
+            "label": "Deployment",
+            "defaultValue": "Staging",
+            "required": false,
+            "helpMarkDown": "Name of the deployment you want to release the update to.",
+            "options": {
+                "Production": "Production",
+                "Staging": "Staging"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "platform",
+            "type": "pickList",
+            "label": "Platform",
+            "defaultValue": "android",
+            "required": true,
+            "helpMarkDown": "Platform to build/prepare the release for.",
+            "options": {
+                "android": "Android",
+                "ios": "iOS"
+            }
+        },
+        {
+            "name": "shouldBuild",
+            "type": "boolean",
+            "label": "Build?",
+            "defaultValue": false,
+            "required": true,
+            "helpMarkDown":"This task runs cordova prepare to set up assets by default. Checking this box will tell it to do a cordova build instead of a cordova prepare. Use this if you have a build hook that sets up assets."
+        },
+        {
+            "name": "appStoreVersion",
+            "type": "string",
+            "label": "Target Binary Version",
+            "defaultValue": "autodetect",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Default will autodetect from config.xml.",
+            "options": {
+                "autodetect": "Autodetect"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "rollout",
+            "type": "string",
+            "label": "Rollout",
+            "defaultValue": "100%",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Percentage of users this release should be immediately available to."
+        },
+        {
+            "name": "description",
+            "type": "string",
+            "label": "Description",
+            "defaultValue": "",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
+        },
+        {
+            "name": "isMandatory",
+            "type": "boolean",
+            "label": "Mandatory",
+            "defaultValue": false,
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Whether this release should be considered mandatory."
+        },
+        {
+            "name": "isDisabled",
+            "type": "boolean",
+            "label": "Disabled",
+            "defaultValue": false,
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Whether this release should be immediately downloadable."
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "codepush-release-cordova.js",
+            "argumentFormat": ""
+        },
+        "PowerShell": {
+            "target": "$(currentDirectory)\\codepush-release-cordova.ps1",
+            "argumentFormat": "",
+            "workingDirectory": "$(currentDirectory)"
+        }
+    }
+}
