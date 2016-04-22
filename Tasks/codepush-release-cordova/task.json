@@ -127,14 +127,14 @@
         },
         {
             "name": "appStoreVersion",
-            "type": "string",
+            "type": "pickList",
             "label": "Target Binary Version",
             "defaultValue": "autodetect",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Default will autodetect from config.xml.",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Default will auto-detect from config.xml.",
             "options": {
-                "autodetect": "Autodetect"
+                "autodetect": "Auto-Detect"
             },
             "properties": {
                 "EditableOptions": "True"
