@@ -86,13 +86,13 @@ function performDeployTask(accessKey, appName, appStoreVersion, platform, deploy
   
     // Log in to the CodePush CLI.
     executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
-  
+
     // Run release command.
     executeCommandAndHandleResult(
         "release-cordova",
         [appName, platform],
         {
-            targetBinaryVersion: appStoreVersion,
+            targetBinaryVersion: (appStoreVersion == "autodetect" ? false : appStoreVersion),
             deploymentName: deploymentName,
             description: description,
             rollout: rollout,
