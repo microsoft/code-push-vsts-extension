@@ -5,7 +5,8 @@ param (
     [string]$serviceEndpointHockeyApp,
     [string]$appName,
     [string]$deploymentName,
-    [string]$packagePath,
+    [string]$platform,
+    [string]$shouldBuild,
     [string]$appStoreVersion,
     [string]$rollout,
     [string]$description,
@@ -19,7 +20,8 @@ $env:INPUT_serviceEndpointCodePush = $serviceEndpointCodePush
 $env:INPUT_serviceEndpointHockeyApp = $serviceEndpointHockeyApp
 $env:INPUT_appName = $appName
 $env:INPUT_deploymentName = $deploymentName
-$env:INPUT_packagePath = $packagePath
+$env:INPUT_platform = $platform
+$env:INPUT_shouldBuild = $shouldBuild
 $env:INPUT_appStoreVersion = $appStoreVersion
 $env:INPUT_rolloutput = $rollout
 $env:INPUT_description = $description
