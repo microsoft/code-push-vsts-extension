@@ -2,7 +2,7 @@
     "id": "F5990527-F512-4C14-9F8E-1254240DC3CB",
     "name": "CodePushReleaseCordova",
     "friendlyName": "CodePush - Release (Cordova)",
-    "description": "Release an update to a CodePush Cordova app deployment",
+    "description": "Release a Cordova app update to the CodePush service",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -11,12 +11,12 @@
     ],
     "demands": [],
     "version": {
-        "Major": "0",
+        "Major": "1",
         "Minor": "0",
-        "Patch": "1"
+        "Patch": "0"
     },
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Prepare and release cordova update to $(deploymentName) ($(appName))",
+    "instanceNameFormat": "Release update to $(deploymentName) ($(appName))",
     "groups": [
         {
             "name": "advanced",
@@ -93,7 +93,7 @@
             "label": "Platform",
             "defaultValue": "android",
             "required": true,
-            "helpMarkDown": "Platform to build/prepare the release for.",
+            "helpMarkDown": "Mobile platform you want to create the release for.",
             "options": {
                 "android": "Android",
                 "ios": "iOS"
@@ -102,10 +102,10 @@
         {
             "name": "shouldBuild",
             "type": "boolean",
-            "label": "Build?",
+            "label": "Build",
             "defaultValue": false,
             "required": true,
-            "helpMarkDown":"This task runs cordova prepare to set up assets by default. Checking this box will tell it to do a cordova build instead of a cordova prepare. Use this if you have a build hook that sets up assets."
+            "helpMarkDown":"Whether to run \"cordova build\" instead of \"cordova prepare\" (the default behaviour). This can be useful if your app has Cordova build hooks that need to be executed."
         },
         {
             "name": "rollout",
@@ -132,7 +132,7 @@
             "defaultValue": "autodetect",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Default will auto-detect from config.xml.",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Selecting \"Auto-Detect\" will use the version from your app's config.xml.",
             "options": {
                 "autodetect": "Auto-Detect"
             },

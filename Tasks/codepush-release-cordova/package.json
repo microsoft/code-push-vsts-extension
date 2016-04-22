@@ -1,7 +1,7 @@
 {
   "name": "vsts-task-code-push-release-cordova",
-  "version": "0.0.1",
-  "description": "Release an app update to the CodePush service",
+  "version": "1.0.0",
+  "description": "Release a Cordova app update to the CodePush service",
   "main": "codepush-release-cordova.js",
   "scripts": {
     "deploy": "tfx build tasks upload --task-path ./ --overwrite",
