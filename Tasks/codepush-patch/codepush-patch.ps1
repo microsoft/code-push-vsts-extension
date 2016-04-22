@@ -5,12 +5,12 @@ param (
     [string]$serviceEndpointHockeyApp,
     [string]$appName,
     [string]$deploymentName,
-    [string]$packagePath,
-    [string]$appStoreVersion,
-    [string]$rollout,
+    [string]$releaseLabel,
     [string]$description,
     [string]$isMandatory,
-    [string]$isDisabled
+    [string]$isDisabled,
+    [string]$rollout
+    [string]$appStoreVersion
 ) 
   
 $env:INPUT_authType = $authType
@@ -19,11 +19,11 @@ $env:INPUT_serviceEndpointCodePush = $serviceEndpointCodePush
 $env:INPUT_serviceEndpointHockeyApp = $serviceEndpointHockeyApp
 $env:INPUT_appName = $appName
 $env:INPUT_deploymentName = $deploymentName
-$env:INPUT_packagePath = $packagePath
-$env:INPUT_appStoreVersion = $appStoreVersion
-$env:INPUT_rolloutput = $rollout
+$env:INPUT_releaseLabel = $releaseLabel
 $env:INPUT_description = $description
 $env:INPUT_isMandatory = $isMandatory
 $env:INPUT_isDisabled = $isDisabled
+$env:INPUT_rolloutput = $rollout
+$env:INPUT_appStoreVersion = $appStoreVersion
 
 node codepush-release.js
