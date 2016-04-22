@@ -55,7 +55,7 @@ function ensureLoggedOut() {
 }
 
 // The main function to be executed.
-function performPatchTask(accessKey, appName, packagePath, appStoreVersion, deploymentName, description, rollout, isMandatory, isDisabled, label) {
+function performPatchTask(accessKey, appName, deploymentName, label, description, isDisabled, isMandatory, rollout, appStoreVersion) {
     // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
     var authType = tl.getInput("authType", false);
     if (authType === "AccessKey") {
