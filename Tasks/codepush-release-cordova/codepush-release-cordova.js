@@ -55,7 +55,7 @@ function ensureLoggedOut() {
 }
 
 // The main function to be executed.
-function performDeployTask(accessKey, appName, packagePath, appStoreVersion, platform, deploymentName, description, rollout, isMandatory, isDisabled, shouldBuild) {
+function performDeployTask(accessKey, appName, appStoreVersion, platform, deploymentName, description, rollout, isMandatory, isDisabled, shouldBuild) {
     // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
     var authType = tl.getInput("authType", false);
     if (authType === "AccessKey") {
@@ -92,13 +92,13 @@ function performDeployTask(accessKey, appName, packagePath, appStoreVersion, pla
         "release-cordova",
         [appName, platform],
         {
-            build: shouldBuild,
             targetBinaryVersion: appStoreVersion,
             deploymentName: deploymentName,
             description: description,
             rollout: rollout,
             mandatory: isMandatory,
-            disabled: isDisabled
+            disabled: isDisabled,
+            build: shouldBuild
         }
         );
   

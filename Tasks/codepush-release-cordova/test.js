@@ -1,17 +1,18 @@
 var sinon = require("sinon");
 var assert = require("assert");
 var tl = require("vsts-task-lib");
-var CodePush = require("./codepush-release");
+var CodePush = require("./codepush-release-cordova");
 
 const ACCESS_KEY        = "key123";
 const APP_NAME          = "TestApp";
-const PACKAGE_PATH      = "TestApp/www";
+const PLATFORM          = "ios";
 const APP_STORE_VERSION = "1.0.0";
 const DEPLOYMENT_NAME   = "TestDeployment";
 const DESCRIPTION       = "This is a Test App";
 const ROLLOUT           = "25";
 const IS_MANDATORY      = false;
 const IS_DISABLED       = true;
+const SHOULD_BUILD      = true;
 
 describe("CodePush Deploy Task", function() {
   var spies = [];
@@ -58,7 +59,7 @@ describe("CodePush Deploy Task", function() {
     spies.push(tl.setResult);
     
     try {
-      CodePush.performDeployTask(ACCESS_KEY, APP_NAME, PACKAGE_PATH, APP_STORE_VERSION, DEPLOYMENT_NAME, DESCRIPTION, ROLLOUT, IS_MANDATORY, IS_DISABLED);
+      CodePush.performDeployTask(ACCESS_KEY, APP_NAME, APP_STORE_VERSION, PLATFORM, DEPLOYMENT_NAME, DESCRIPTION, ROLLOUT, IS_MANDATORY, IS_DISABLED, SHOULD_BUILD);
     } catch (e) {
       assert(shouldFail, "Threw an unexpected error");
     }
@@ -80,7 +81,7 @@ describe("CodePush Deploy Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey \"" + ACCESS_KEY + "\"",
-      "release \"" + APP_NAME + "\" \"" + PACKAGE_PATH + "\" \"" + APP_STORE_VERSION + "\" --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
+      "release-cordova \"" + APP_NAME + "\" \"" + PLATFORM + "\" --targetBinaryVersion \"" + APP_STORE_VERSION + "\" --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled --build",
       "logout"
     ];
     
@@ -96,7 +97,7 @@ describe("CodePush Deploy Task", function() {
     var expectedCommands = [
       "logout",
       "login --accessKey \"" + ACCESS_KEY + "\"",
-      "release \"" + APP_NAME + "\" \"" + PACKAGE_PATH + "\" \"" + APP_STORE_VERSION + "\" --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled",
+      "release-cordova \"" + APP_NAME + "\" \"" + PLATFORM + "\" --targetBinaryVersion \"" + APP_STORE_VERSION + "\" --deploymentName \"" + DEPLOYMENT_NAME + "\" --description \"" + DESCRIPTION + "\" --rollout \"" + ROLLOUT + "\" --disabled --build",
       "logout"
     ];
     
@@ -105,7 +106,7 @@ describe("CodePush Deploy Task", function() {
   
   
   it("Should logout and throw error if login fails", function() {
-    var execStub = stubExecToFailOnCommandType("login")
+    var execStub = stubExecToFailOnCommandType("login");
     
     performDeployTask(/*shouldFail*/ true);
     
