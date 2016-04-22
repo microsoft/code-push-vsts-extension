@@ -1,7 +1,7 @@
 {
     "id": "F5990527-F512-4C14-9F8E-1254240DC3CB",
     "name": "CodePushReleaseCordova",
-    "friendlyName": "CodePush - Release Cordova",
+    "friendlyName": "CodePush - Release (Cordova)",
     "description": "Release an update to a CodePush Cordova app deployment",
     "author": "Microsoft Corporation",
     "category": "Deploy",
@@ -108,21 +108,6 @@
             "helpMarkDown":"This task runs cordova prepare to set up assets by default. Checking this box will tell it to do a cordova build instead of a cordova prepare. Use this if you have a build hook that sets up assets."
         },
         {
-            "name": "appStoreVersion",
-            "type": "string",
-            "label": "Target Binary Version",
-            "defaultValue": "autodetect",
-            "required": false,
-            "groupName": "advanced",
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Default will autodetect from config.xml.",
-            "options": {
-                "autodetect": "Autodetect"
-            },
-            "properties": {
-                "EditableOptions": "True"
-            }
-        },
-        {
             "name": "rollout",
             "type": "string",
             "label": "Rollout",
@@ -139,6 +124,21 @@
             "required": false,
             "groupName": "advanced",
             "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description."
+        },
+        {
+            "name": "appStoreVersion",
+            "type": "string",
+            "label": "Target Binary Version",
+            "defaultValue": "autodetect",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Default will autodetect from config.xml.",
+            "options": {
+                "autodetect": "Autodetect"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
         },
         {
             "name": "isMandatory",
