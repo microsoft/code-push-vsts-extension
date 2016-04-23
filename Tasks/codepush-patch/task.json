@@ -93,7 +93,7 @@
             "label": "Release Label",
             "defaultValue": "latest",
             "required": false,
-            "helpMarkDown": "Optional label of the release to update. Defaults to the latest release within the specified deployment.",
+            "helpMarkDown": "Label of the release to update (e.g. v23). Selecting \"Latest\" will update the latest release in the specified deployment.",
             "options": {
                 "latest": "Latest"
             },
