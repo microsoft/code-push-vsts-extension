@@ -8,8 +8,8 @@ const APP_NAME = "TestApp";
 const DEPLOYMENT_NAME = "TestDeployment";
 const LABEL = "TestLabel"
 const DESCRIPTION = "This is a Test App";
-const IS_DISABLED = true;
-const IS_MANDATORY = false;
+const IS_DISABLED = "true";
+const IS_MANDATORY = "noChange";
 const ROLLOUT = "25";
 const APP_STORE_VERSION = "1.0.0";
 
@@ -80,7 +80,7 @@ describe("CodePush Deploy Task", function () {
         var expectedCommands = [
             "logout",
             `login --accessKey "${ACCESS_KEY}"`,
-            `patch "${APP_NAME}" "${DEPLOYMENT_NAME}" --label "${LABEL}" --description "${DESCRIPTION}" --disabled --rollout "${ROLLOUT}" --targetBinaryVersion "${APP_STORE_VERSION}"`,
+            `patch "${APP_NAME}" "${DEPLOYMENT_NAME}" --label "${LABEL}" --description "${DESCRIPTION}" --disabled "${IS_DISABLED}" --rollout "${ROLLOUT}" --targetBinaryVersion "${APP_STORE_VERSION}"`,
             "logout"
         ];
 
@@ -96,7 +96,7 @@ describe("CodePush Deploy Task", function () {
         var expectedCommands = [
             "logout",
             `login --accessKey "${ACCESS_KEY}"`,
-            `patch "${APP_NAME}" "${DEPLOYMENT_NAME}" --label "${LABEL}" --description "${DESCRIPTION}" --disabled --rollout "${ROLLOUT}" --targetBinaryVersion "${APP_STORE_VERSION}"`,
+            `patch "${APP_NAME}" "${DEPLOYMENT_NAME}" --label "${LABEL}" --description "${DESCRIPTION}" --disabled "${IS_DISABLED}" --rollout "${ROLLOUT}" --targetBinaryVersion "${APP_STORE_VERSION}"`,
             "logout"
         ];
 

@@ -1,7 +1,7 @@
 {
   "name": "vsts-task-code-push-patch",
   "version": "1.0.0",
-  "description": "Patch an app update on the CodePush service",
+  "description": "Update the metadata for an existing release",
   "main": "codepush-patch.js",
   "scripts": {
     "deploy": "tfx build tasks upload --task-path ./ --overwrite",

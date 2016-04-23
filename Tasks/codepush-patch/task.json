@@ -2,7 +2,7 @@
     "id": "D194B5FA-7FBE-4AAD-96EA-45A6253133A8",
     "name": "CodePushPatch",
     "friendlyName": "CodePush - Patch",
-    "description": "Patch an update to a CodePush app deployment",
+    "description": "Update the metadata for an existing release",
     "author": "Microsoft Corporation",
     "category": "Deploy",
     "visibility": [
@@ -16,7 +16,7 @@
         "Patch": "0"
     },
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Patch an update to $(deploymentName) ($(appName))",
+    "instanceNameFormat": "Patch the \"$(releaseLabel)\" release for $(deploymentName) ($(appName))",
     "groups": [
         {
             "name": "advanced",
@@ -90,7 +90,7 @@
         {
             "name": "releaseLabel",
             "type": "pickList",
-            "label": "Patch Target Label",
+            "label": "Release Label",
             "defaultValue": "latest",
             "required": false,
             "helpMarkDown": "Optional label of the release to update. Defaults to the latest release within the specified deployment.",
@@ -102,29 +102,15 @@
             }
         },
         {
-            "name": "appStoreVersion",
-            "type": "pickList",
-            "label": "Target Binary Version",
-            "defaultValue": "noChange",
-            "required": true,
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3).",
-            "options": {
-                "noChange": "Don't Change"
-            },
-            "properties": {
-                "EditableOptions": "True"
-            }
-        },
-        {
             "name": "rollout",
             "type": "pickList",
             "label": "Rollout",
-            "defaultValue": "100%",
+            "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
             "helpMarkDown": "Percentage of users this release should be immediately available to.",
             "options": {
-                "noChange": "Don't Change"
+                "noChange": "-"
             },
             "properties": {
                 "EditableOptions": "True"
@@ -139,7 +125,21 @@
             "groupName": "advanced",
             "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description.",
             "options": {
-                "noChange": "Don't Change"
+                "noChange": "-"
+            },
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "appStoreVersion",
+            "type": "pickList",
+            "label": "Target Binary Version",
+            "defaultValue": "noChange",
+            "required": true,
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3).",
+            "options": {
+                "noChange": "-"
             },
             "properties": {
                 "EditableOptions": "True"
@@ -154,7 +154,7 @@
             "groupName": "advanced",
             "helpMarkDown": "Whether this release should be considered mandatory.",
             "options": {
-                "noChange": "Don't Change",
+                "noChange": "-",
                 "false": "No",
                 "true": "Yes"
             }
@@ -168,7 +168,7 @@
             "groupName": "advanced",
             "helpMarkDown": "Whether this release should be immediately downloadable.",
             "options": {
-                "noChange": "Don't Change",
+                "noChange": "-",
                 "false": "No",
                 "true": "Yes"
             }

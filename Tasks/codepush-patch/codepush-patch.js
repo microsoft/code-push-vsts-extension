@@ -20,14 +20,11 @@ function buildCommand(cmd, positionArgs, optionFlags) {
 
     for (var flag in optionFlags) {
         // If the value is falsey, the option flag doesn't have to be specified.
-        if (optionFlags[flag]) {
+        if (optionFlags[flag] || optionFlags[flag] === "") {
             var flagValue = "" + optionFlags[flag];
 
             command = command + " --" + flag;
-            // For boolean flags, the presence of the flag is enough to indicate its value.
-            if (flagValue != "true" && flagValue != "false") {
-                command = command + " \"" + flagValue + "\"";
-            }
+            command = command + " \"" + flagValue + "\"";
         }
     }
 
@@ -66,11 +63,11 @@ function performPatchTask(accessKey, appName, deploymentName, label, description
     }
 
     appName = appName || tl.getInput("appName", true);
-    deploymentName = deploymentName || tl.getInput("deploymentName", false);
+    deploymentName = deploymentName || tl.getInput("deploymentName", true);
     label = label || tl.getInput("releaseLabel", false);
     description = description || tl.getInput("description", false);
-    isDisabled = isDisabled || tl.getBoolInput("isDisabled", false);
-    isMandatory = isMandatory || tl.getBoolInput("isMandatory", false);
+    isDisabled = isDisabled || tl.getInput("isDisabled", false);
+    isMandatory = isMandatory || tl.getInput("isMandatory", false);
     rollout = rollout || tl.getInput("rollout", false);
     appStoreVersion = appStoreVersion || tl.getInput("appStoreVersion", true);
 
@@ -90,12 +87,12 @@ function performPatchTask(accessKey, appName, deploymentName, label, description
         "patch",
         [appName, deploymentName],
         {
-            label: label,
-            description: description,
-            disabled: isDisabled,
-            mandatory: isMandatory,
-            rollout: rollout,
-            targetBinaryVersion: appStoreVersion
+            label: (label === "latest" ? false : label),
+            description: (description === "noChange" ? false : description),
+            disabled: (isDisabled === "noChange" ? false : isDisabled),
+            mandatory: (isMandatory === "noChange" ? false : isMandatory),
+            rollout: (rollout === "noChange" ? false : rollout),
+            targetBinaryVersion: (appStoreVersion === "noChange" ? false : appStoreVersion)
         }
         );
   
