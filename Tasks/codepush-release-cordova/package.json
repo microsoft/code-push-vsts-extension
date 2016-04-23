@@ -1,0 +1,22 @@
+{
+  "name": "vsts-task-code-push-release-cordova",
+  "version": "1.0.0",
+  "description": "Release a Cordova app update to the CodePush service",
+  "main": "codepush-release-cordova.js",
+  "scripts": {
+    "deploy": "tfx build tasks upload --task-path ./ --overwrite",
+    "test": "mocha test.js"
+  },
+  "author": "Microsoft Corporation",
+  "license": "ISC",
+  "dependencies": {
+    "code-push-cli": "^1.10.0-beta",
+    "vsts-task-lib": "^0.5.7",
+    "shelljs": "^0.6.0"
+  },
+  "devDependencies": {
+    "sinon": "1.17.2",
+    "assert": "1.3.0",
+    "mocha": "~2.4.5"
+  }
+}
