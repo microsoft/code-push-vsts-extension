@@ -16,7 +16,7 @@
         "Patch": "0"
     },
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Patch the \"$(releaseLabel)\" release for $(deploymentName) ($(appName))",
+    "instanceNameFormat": "Patch the $(releaseLabel) release for $(deploymentName) ($(appName))",
     "groups": [
         {
             "name": "advanced",
@@ -137,6 +137,7 @@
             "label": "Target Binary Version",
             "defaultValue": "noChange",
             "required": true,
+            "groupName": "advanced",
             "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3).",
             "options": {
                 "noChange": "-"
