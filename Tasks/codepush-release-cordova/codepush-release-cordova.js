@@ -37,7 +37,7 @@ function buildCommand(cmd, positionArgs, optionFlags) {
 function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
     var command = buildCommand(cmd, positionArgs, optionFlags);
 
-    var result = exec(command, { silent: true });
+    var result = exec(command, { stdio: "inherit" });
 
     if (result.code == 0) {
         module.exports.log(result.output);
