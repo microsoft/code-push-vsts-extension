@@ -1,0 +1,21 @@
+{
+  "name": "vsts-task-code-push-patch",
+  "version": "1.0.0",
+  "description": "Update the metadata for an existing release",
+  "main": "codepush-patch.js",
+  "scripts": {
+    "deploy": "tfx build tasks upload --task-path ./ --overwrite",
+    "test": "mocha test.js"
+  },
+  "author": "Microsoft Corporation",
+  "license": "ISC",
+  "dependencies": {
+    "code-push-cli": "^1.8.2-beta",
+    "vsts-task-lib": "^0.5.7"
+  },
+  "devDependencies": {
+    "sinon": "1.17.2",
+    "assert": "1.3.0",
+    "mocha": "~2.4.5"
+  }
+}
