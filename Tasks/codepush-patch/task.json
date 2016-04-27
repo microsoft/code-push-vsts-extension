@@ -70,7 +70,7 @@
             "label": "App Name",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Name of the app you want to release the update for."
+            "helpMarkDown": "Name of the app you want to update the release for."
         },
         {
             "name": "deploymentName",
@@ -78,7 +78,7 @@
             "label": "Deployment",
             "defaultValue": "Staging",
             "required": false,
-            "helpMarkDown": "Name of the deployment you want to release the update to.",
+            "helpMarkDown": "Name of the deployment you want to update the release for.",
             "options": {
                 "Production": "Production",
                 "Staging": "Staging"
@@ -108,9 +108,9 @@
             "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Percentage of users this release should be immediately available to.",
+            "helpMarkDown": "Percentage of users this release should be immediately available to. Selecting \"Inherit\" won't change the original value.",
             "options": {
-                "noChange": "-"
+                "noChange": "Inherit"
             },
             "properties": {
                 "EditableOptions": "True"
@@ -123,9 +123,9 @@
             "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description.",
+            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description. Selecting \"Inherit\" won't change the original value.",
             "options": {
-                "noChange": "-"
+                "noChange": "Inherit"
             },
             "properties": {
                 "EditableOptions": "True"
@@ -138,9 +138,9 @@
             "defaultValue": "noChange",
             "required": true,
             "groupName": "advanced",
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3).",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Selecting \"Inherit\" won't change the original value.",
             "options": {
-                "noChange": "-"
+                "noChange": "Inherit"
             },
             "properties": {
                 "EditableOptions": "True"
@@ -153,9 +153,9 @@
             "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Whether this release should be considered mandatory.",
+            "helpMarkDown": "Whether this release should be considered mandatory. Selecting \"Inherit\" won't change the original value.",
             "options": {
-                "noChange": "-",
+                "noChange": "Inherit",
                 "false": "No",
                 "true": "Yes"
             }
@@ -167,9 +167,9 @@
             "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Whether this release should be immediately downloadable.",
+            "helpMarkDown": "Whether this release should be immediately downloadable. Selecting \"Inherit\" won't change the original value.",
             "options": {
-                "noChange": "-",
+                "noChange": "Inherit",
                 "false": "No",
                 "true": "Yes"
             }
