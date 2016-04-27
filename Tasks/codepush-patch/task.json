@@ -77,7 +77,7 @@
             "type": "pickList",
             "label": "Deployment",
             "defaultValue": "Staging",
-            "required": false,
+            "required": true,
             "helpMarkDown": "Name of the deployment you want to update the release for.",
             "options": {
                 "Production": "Production",
@@ -92,7 +92,7 @@
             "type": "pickList",
             "label": "Release Label",
             "defaultValue": "latest",
-            "required": false,
+            "required": true,
             "helpMarkDown": "Label of the release to update (e.g. v23). Selecting \"Latest\" will update the latest release in the specified deployment.",
             "options": {
                 "latest": "Latest"
@@ -106,9 +106,9 @@
             "type": "pickList",
             "label": "Rollout",
             "defaultValue": "noChange",
-            "required": false,
+            "required": true,
             "groupName": "advanced",
-            "helpMarkDown": "Percentage of users this release should be immediately available to. Selecting \"Inherit\" won't change the original value.",
+            "helpMarkDown": "Percentage of users this release should be immediately available to. Selecting \"Inherit\" will leave this attribute unmodified.",
             "options": {
                 "noChange": "Inherit"
             },
@@ -123,7 +123,7 @@
             "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description. Selecting \"Inherit\" won't change the original value.",
+            "helpMarkDown": "Description of the changes made to the app in this release.<br />Note: This can be set to **$(Release.ReleaseDescription)** if being run within a release definition, and you want to inherit the release's description. Selecting \"Inherit\" will leave this attribute unmodified.",
             "options": {
                 "noChange": "Inherit"
             },
@@ -138,7 +138,7 @@
             "defaultValue": "noChange",
             "required": true,
             "groupName": "advanced",
-            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Selecting \"Inherit\" won't change the original value.",
+            "helpMarkDown": "Semver expression that specifies the binary app version(s) this release is targetting (e.g. 1.1.0, ~1.2.3). Selecting \"Inherit\" will leave this attribute unmodified.",
             "options": {
                 "noChange": "Inherit"
             },
@@ -153,7 +153,7 @@
             "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Whether this release should be considered mandatory. Selecting \"Inherit\" won't change the original value.",
+            "helpMarkDown": "Whether this release should be considered mandatory. Selecting \"Inherit\" will leave this attribute unmodified.",
             "options": {
                 "noChange": "Inherit",
                 "false": "No",
@@ -167,7 +167,7 @@
             "defaultValue": "noChange",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Whether this release should be immediately downloadable. Selecting \"Inherit\" won't change the original value.",
+            "helpMarkDown": "Whether this release should be immediately downloadable. Selecting \"Inherit\" will leave this attribute unmodified.",
             "options": {
                 "noChange": "Inherit",
                 "false": "No",
