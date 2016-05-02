@@ -58,6 +58,9 @@
             "path": "Tasks/codepush-release-cordova"
         },
         {
+            "path": "Tasks/codepush-patch"
+        },
+        {
             "path": "images",
             "addressable": true
         }
@@ -85,6 +88,14 @@
             "targets": [ "ms.vss-distributed-task.tasks" ],
             "properties": {
                 "name": "Tasks/codepush-release-cordova"
+            }
+        },
+        {
+            "id": "codepush.tasks.patch",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [ "ms.vss-distributed-task.tasks" ],
+            "properties": {
+                "name": "Tasks/codepush-patch"
             }
         },
         {
