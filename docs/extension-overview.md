@@ -62,13 +62,13 @@ In addition to specifying your access key directly within each build task instan
 
 In addition to the custom service endpoint, this extension also contributes the following build and release tasks:
 
-* [__CodePush - Release__](#code-push---release) - Allows automating the release of general-purpose content to the CodePush server. This task provides the most flexibility, but should only be used if the platform-specific tasks (e.g. Cordova) aren't appropriate for your needs.
+* [__CodePush - Release__](#codepush---release) - Allows automating the release of general-purpose content to the CodePush server. This task provides the most flexibility, but should only be used if the platform-specific tasks (e.g. Cordova) aren't appropriate for your needs.
 
 * [__CodePush - Release (Cordova)__](#codepush---release-cordova) - Allows automating the generation and release of Cordova app updates. Represents a simplified, Cordova-specific version of general-purposes release task, and is recommended for all Cordova scenarios.
 
-* [__CodePush - Patch__](#codepush-patch) - Allows automating the modification of a previously released update. This can be useful for scenarios such as increasing the rollout of a release that was originally "flighted" (e.g. to `25%` of users)  or enabling a release that was disabled by default.
+* [__CodePush - Patch__](#codepush---patch) - Allows automating the modification of a previously released update. This can be useful for scenarios such as increasing the rollout of a release that was originally "flighted" (e.g. to `25%` of users)  or enabling a release that was disabled by default.
 
-* [__CodePush - Promote__](#codepush-promote) - Allows automating the promotion of a previously released update from one deployment to another (e.g. `Staging` -> `Production`). 
+* [__CodePush - Promote__](#codepush---promote) - Allows automating the promotion of a previously released update from one deployment to another (e.g. `Staging` -> `Production`). 
 
 ### CodePush - Release
 
