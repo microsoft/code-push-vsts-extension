@@ -10,7 +10,7 @@
   "author": "Microsoft Corporation",
   "license": "ISC",
   "dependencies": {
-    "code-push-cli": "^1.8.2-beta",
+    "code-push-cli": "^1.10.0-beta",
     "vsts-task-lib": "^0.5.7"
   },
   "devDependencies": {
