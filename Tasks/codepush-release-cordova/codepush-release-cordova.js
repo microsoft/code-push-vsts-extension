@@ -56,6 +56,9 @@ function ensureLoggedOut() {
 
 // The main function to be executed.
 function performDeployTask(accessKey, appName, appStoreVersion, platform, deploymentName, description, rollout, isMandatory, isDisabled, shouldBuild) {
+    var cwd = tl.getVariable("BUILD_SOURCEDIRECTORY", false) || tl.getVariable("BUILD_SOURCESDIRECTORY", false);
+    process.chdir(cwd);
+    
     // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
     var authType = tl.getInput("authType", false);
     if (authType === "AccessKey") {
