@@ -89,11 +89,11 @@ function performDeployTask(accessKey, appName, appStoreVersion, platform, deploy
     executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
 
     // Try to find cordova and prepare the environment if not found. 
+    var originalPath = process.env["PATH"];
+    process.env["PATH"] = path.join(process.cwd(), "node_modules", ".bin") + (process.platform == "win32" ? ";" : ":") + originalPath;
     if (!which("cordova")) {
         console.log("cordova cli not found. Installing...");
         exec("npm install cordova");
-        var originalPath = process.env["PATH"];
-        process.env["PATH"] = path.join(process.cwd(), "node_modules", ".bin") + (process.platform == "win32" ? ";" : ":") + originalPath;
     }
 
     // Run release command.
