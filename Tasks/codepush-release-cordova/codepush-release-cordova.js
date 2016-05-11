@@ -39,9 +39,7 @@ function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
 
     var result = exec(command, { stdio: "inherit" });
 
-    if (result.code == 0) {
-        module.exports.log(result.output);
-    } else {
+    if (result.code != 0) {
         tl.setResult(1, result.output);
         ensureLoggedOut();
         throw new Error(result.output);
@@ -58,7 +56,7 @@ function ensureLoggedOut() {
 function performDeployTask(accessKey, appName, appStoreVersion, platform, deploymentName, description, rollout, isMandatory, isDisabled, shouldBuild) {
     var cwd = tl.getVariable("BUILD_SOURCEDIRECTORY", false) || tl.getVariable("BUILD_SOURCESDIRECTORY", false);
     process.chdir(cwd);
-    
+
     // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
     var authType = tl.getInput("authType", false);
     if (authType === "AccessKey") {
@@ -83,12 +81,20 @@ function performDeployTask(accessKey, appName, appStoreVersion, platform, deploy
         console.error("Access key required");
         tl.setResult(1, "Access key required");
     }
-  
+
     // Ensure all other users are logged out.
     ensureLoggedOut();
-  
+
     // Log in to the CodePush CLI.
     executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
+
+    // Try to find cordova and prepare the environment if not found. 
+    var originalPath = process.env["PATH"];
+    process.env["PATH"] = path.join(process.cwd(), "node_modules", ".bin") + (process.platform == "win32" ? ";" : ":") + originalPath;
+    if (!which("cordova")) {
+        console.log("cordova cli not found. Installing...");
+        exec("npm install cordova");
+    }
 
     // Run release command.
     executeCommandAndHandleResult(
@@ -103,8 +109,8 @@ function performDeployTask(accessKey, appName, appStoreVersion, platform, deploy
             disabled: isDisabled,
             build: shouldBuild
         }
-        );
-  
+    );
+
     // Log out.
     ensureLoggedOut();
 }
