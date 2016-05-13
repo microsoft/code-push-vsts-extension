@@ -1,5 +1,6 @@
 var path = require("path");
 var tl = require("vsts-task-lib");
+var execSync = require("child_process").execSync;
 require("shelljs/global");
 
 // Global variables.
@@ -31,31 +32,41 @@ function buildCommand(cmd, positionArgs, optionFlags) {
         }
     }
 
+    tl.debug("Finished Building Command: " + command);
     return command;
 }
 
 function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
     var command = buildCommand(cmd, positionArgs, optionFlags);
 
-    var result = exec(command, { stdio: "inherit" });
-
-    if (result.code != 0) {
-        tl.setResult(1, result.output);
+    tl.debug("Attempting execution of command: " + command);
+    try {
+        var result = execSync(command, { stdio: 'inherit' });
+    } catch (e) {
         ensureLoggedOut();
-        throw new Error(result.output);
+        tl.setResult(e.status, "Command failed: " + cmd);
+        throw e;
     }
 
     return result;
 }
 
-function ensureLoggedOut() {
-    exec(buildCommand("logout"), { silent: true });
+function ensureLoggedOut(silent) {
+    execSync(buildCommand("logout"), { stdio: (silent ? "inherit" : "ignore") });
 }
 
 // The main function to be executed.
 function performDeployTask(accessKey, appName, appStoreVersion, platform, deploymentName, description, rollout, isMandatory, isDisabled, shouldBuild) {
     var cwd = tl.getVariable("BUILD_SOURCEDIRECTORY", false) || tl.getVariable("BUILD_SOURCESDIRECTORY", false);
+    tl.debug("Swapping to working directory: " + cwd);
     process.chdir(cwd);
+
+    if (process.cwd() != cwd) {
+        tl.debug("Working directories do not match: ");
+        tl.debug("cwd: " + process.cwd());
+        tl.debug("expected cwd: " + cwd);
+        tl.debug("task will likely fail");
+    }
 
     // If function arguments are provided (e.g. during test), use those, else, get user inputs provided by VSTS.
     var authType = tl.getInput("authType", false);
@@ -83,18 +94,21 @@ function performDeployTask(accessKey, appName, appStoreVersion, platform, deploy
     }
 
     // Ensure all other users are logged out.
-    ensureLoggedOut();
+    try {
+        ensureLoggedOut();
+    } catch (e) {
+        // not logged in
+    }
+
 
     // Log in to the CodePush CLI.
     executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
 
-    // Try to find cordova and prepare the environment if not found. 
+    // Always pull a local cordova. This is to work around a point in time issue with the hosted agents having a broken globally resolved cordova command.
     var originalPath = process.env["PATH"];
     process.env["PATH"] = path.join(process.cwd(), "node_modules", ".bin") + (process.platform == "win32" ? ";" : ":") + originalPath;
-    if (!which("cordova")) {
-        console.log("cordova cli not found. Installing...");
-        exec("npm install cordova");
-    }
+    console.log("Installing local cordova cli...");
+    execSync("npm install cordova", { stdio: "inherit" });
 
     // Run release command.
     executeCommandAndHandleResult(
