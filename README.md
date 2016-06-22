@@ -213,3 +213,5 @@ By default, when a release is promoted from one deployment to another, the newly
 * [Email us your questions](mailto:codepushfeed@microsoft.com)
 * [Ask for help on StackOverflow](https://stackoverflow.com/questions/tagged/codepush)
 * [Follow the CodePush blog](http://microsoft.github.io/code-push/blog/index.html)
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
