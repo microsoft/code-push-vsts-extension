@@ -37,7 +37,7 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
     var codePushSdk = new CodePushSdk(accessKey);
     return codePushSdk.promote(appName, sourceDeploymentName, targetDeploymentName, updateMetadata)
         .done(function() {
-            console.log("Successfully promoted " + sourceDeploymentName + " to " + targetDeploymentName);
+            console.log("Successfully promoted the \"" + sourceDeploymentName + "\" deployment of the \"" + appName + "\" app to the \"" + targetDeploymentName + "\" deployment.");
         }, function(error) {
             tl.setResult(1, error.message);
             throw error;
