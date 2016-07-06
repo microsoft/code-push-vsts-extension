@@ -1,58 +1,5 @@
-var path = require("path");
 var tl = require("vsts-task-lib");
-require("shelljs/global");
-
-// Global variables.
-var codePushCommandPrefix = "node " + path.join(__dirname, "node_modules", "code-push-cli", "script", "cli");
-
-// Export for unit testing.
-function log(message) {
-    console.log(message);
-}
-
-// Helper functions.
-function buildCommand(cmd, positionArgs, optionFlags) {
-    var command = codePushCommandPrefix + " " + cmd;
-
-    positionArgs && positionArgs.forEach(function (positionArg) {
-        command = command + " \"" + positionArg + "\"";
-    });
-
-    for (var flag in optionFlags) {
-        // If the value is falsey, the option flag doesn't have to be specified.
-        if (optionFlags[flag] || optionFlags[flag] === "") {
-            var flagValue = "" + optionFlags[flag];
-
-            command = command + " --" + flag;
-            // For boolean flags, the presence of the flag is enough to indicate its value.
-            if (flagValue != "true") {
-                command = command + " \"" + flagValue + "\"";
-            }
-        }
-    }
-
-    return command;
-}
-
-function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
-    var command = buildCommand(cmd, positionArgs, optionFlags);
-
-    var result = exec(command, { silent: true });
-
-    if (result.code == 0) {
-        module.exports.log(result.output);
-    } else {
-        tl.setResult(1, result.output);
-        ensureLoggedOut();
-        throw new Error(result.output);
-    }
-
-    return result;
-}
-
-function ensureLoggedOut() {
-    exec(buildCommand("logout"), { silent: true });
-}
+var CodePushSdk = require("code-push");
 
 // The main function to be executed.
 function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDeploymentName, appStoreVersion, description, rollout, isMandatory, isDisabled) {
@@ -84,31 +31,19 @@ function performPromoteTask(accessKey, appName, sourceDeploymentName, targetDepl
         description: description === "Inherit" ? null : description,
         disabled: isDisabled === "Inherit" ? null : isDisabled,        
         mandatory: isMandatory === "Inherit" ? null : isMandatory,
-        rollout: rollout        
+        rollout: parseInt(rollout.replace("%", ""))        
     };
     
-    // Ensure all other users are logged out.
-    ensureLoggedOut();
-  
-    // Log in to the CodePush CLI.
-    executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
-  
-    // Run promote command.
-    executeCommandAndHandleResult(
-        "promote",
-        [appName, sourceDeploymentName, targetDeploymentName],
-        updateMetadata);
-  
-    // Log out.
-    ensureLoggedOut();
+    var codePushSdk = new CodePushSdk(accessKey);
+    return codePushSdk.promote(appName, sourceDeploymentName, targetDeploymentName, updateMetadata)
+        .done(function() {
+            tl.setResult(1, "Successfully promoted " + sourceDeploymentName + " to " + targetDeploymentName);
+        }, function(error) {
+            throw error;
+        });
 }
 
 module.exports = {
-    buildCommand: buildCommand,
-    commandPrefix: codePushCommandPrefix,
-    ensureLoggedOut: ensureLoggedOut,
-    executeCommandAndHandleResult: executeCommandAndHandleResult,
-    log: log,
     performPromoteTask: performPromoteTask
 }
 
