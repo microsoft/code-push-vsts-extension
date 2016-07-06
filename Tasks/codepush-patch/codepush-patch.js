@@ -38,8 +38,9 @@ function performPatchTask(accessKey, appName, deploymentName, label, description
             targetBinaryVersion: (appStoreVersion === "noChange" ? false : appStoreVersion)
         })
         .done(function() {
-            tl.setResult(1, "Successfully patched " + appName + " - " + deploymentName + " (" + label + ")");
+            console.log("Successfully patched " + appName + " - " + deploymentName + " (" + label + ")");
         }, function(error) {
+            tl.setResult(1, error.message);
             throw error;
         });
 }
