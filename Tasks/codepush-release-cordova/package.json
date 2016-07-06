@@ -1,6 +1,6 @@
 {
   "name": "vsts-task-code-push-release-cordova",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Release a Cordova app update to the CodePush service",
   "main": "codepush-release-cordova.js",
   "scripts": {

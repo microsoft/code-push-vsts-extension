@@ -1,6 +1,6 @@
 {
   "name": "vsts-task-code-push-patch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Update the metadata for an existing release",
   "main": "codepush-patch.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "author": "Microsoft Corporation",
   "license": "ISC",
   "dependencies": {
-    "code-push-cli": "^1.10.0-beta",
+    "code-push": "github:Microsoft/code-push#code-push-sdk-lite",
     "vsts-task-lib": "^0.5.7"
   },
   "devDependencies": {

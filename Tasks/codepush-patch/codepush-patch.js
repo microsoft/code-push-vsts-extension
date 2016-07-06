@@ -1,55 +1,5 @@
-var path = require("path");
 var tl = require("vsts-task-lib");
-require("shelljs/global");
-
-// Global variables.
-var codePushCommandPrefix = "node " + path.join(__dirname, "node_modules", "code-push-cli", "script", "cli");
-
-// Export for unit testing.
-function log(message) {
-    console.log(message);
-}
-
-// Helper functions.
-function buildCommand(cmd, positionArgs, optionFlags) {
-    var command = codePushCommandPrefix + " " + cmd;
-
-    positionArgs && positionArgs.forEach(function (positionArg) {
-        command = command + " \"" + positionArg + "\"";
-    });
-
-    for (var flag in optionFlags) {
-        // If the value is falsey, the option flag doesn't have to be specified.
-        if (optionFlags[flag] || optionFlags[flag] === "") {
-            var flagValue = "" + optionFlags[flag];
-
-            command = command + " --" + flag;
-            command = command + " \"" + flagValue + "\"";
-        }
-    }
-
-    return command;
-}
-
-function executeCommandAndHandleResult(cmd, positionArgs, optionFlags) {
-    var command = buildCommand(cmd, positionArgs, optionFlags);
-
-    var result = exec(command, { silent: true });
-
-    if (result.code == 0) {
-        module.exports.log(result.output);
-    } else {
-        tl.setResult(1, result.output);
-        ensureLoggedOut();
-        throw new Error(result.output);
-    }
-
-    return result;
-}
-
-function ensureLoggedOut() {
-    exec(buildCommand("logout"), { silent: true });
-}
+var CodePushSdk = require("code-push");
 
 // The main function to be executed.
 function performPatchTask(accessKey, appName, deploymentName, label, description, isDisabled, isMandatory, rollout, appStoreVersion) {
@@ -75,37 +25,26 @@ function performPatchTask(accessKey, appName, deploymentName, label, description
         console.error("Access key required");
         tl.setResult(1, "Access key required");
     }
-  
-    // Ensure all other users are logged out.
-    ensureLoggedOut();
-  
-    // Log in to the CodePush CLI.
-    executeCommandAndHandleResult("login", /*positionArgs*/ null, { accessKey: accessKey });
-  
-    // Run release command.
-    executeCommandAndHandleResult(
-        "patch",
-        [appName, deploymentName],
+    
+    var codePushSdk = new CodePushSdk(accessKey);
+    codePushSdk.patchRelease(
+        appName, deploymentName, (label === "latest" ? null : label), 
         {
-            label: (label === "latest" ? false : label),
-            description: (description === "noChange" ? false : description),
-            disabled: (isDisabled === "noChange" ? false : isDisabled),
-            mandatory: (isMandatory === "noChange" ? false : isMandatory),
-            rollout: (rollout === "noChange" ? false : rollout),
-            targetBinaryVersion: (appStoreVersion === "noChange" ? false : appStoreVersion)
-        }
-        );
-  
-    // Log out.
-    ensureLoggedOut();
+            description: (description === "noChange" ? null : description),
+            disabled: (isDisabled === "noChange" ? null : isDisabled),
+            mandatory: (isMandatory === "noChange" ? null : isMandatory),
+            rollout: (rollout === "noChange" ? null : parseInt(rollout.replace("%", ""))),
+            targetBinaryVersion: (appStoreVersion === "noChange" ? null : appStoreVersion)
+        })
+        .done(function() {
+            console.log("Successfully updated the " + (label ? label : "latest") + " release of \"" + appName + "\" app's \"" + deploymentName + "\" deployment.");
+        }, function(error) {
+            tl.setResult(1, error.message);
+            throw error;
+        });
 }
 
 module.exports = {
-    buildCommand: buildCommand,
-    commandPrefix: codePushCommandPrefix,
-    ensureLoggedOut: ensureLoggedOut,
-    executeCommandAndHandleResult: executeCommandAndHandleResult,
-    log: log,
     performPatchTask: performPatchTask
 }
 
