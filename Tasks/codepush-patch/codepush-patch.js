@@ -28,14 +28,13 @@ function performPatchTask(accessKey, appName, deploymentName, label, description
     
     var codePushSdk = new CodePushSdk(accessKey);
     codePushSdk.patchRelease(
-        appName, deploymentName, label, 
+        appName, deploymentName, (label === "latest" ? null : label), 
         {
-            label: (label === "latest" ? false : label),
-            description: (description === "noChange" ? false : description),
-            disabled: (isDisabled === "noChange" ? false : isDisabled),
-            mandatory: (isMandatory === "noChange" ? false : isMandatory),
+            description: (description === "noChange" ? null : description),
+            disabled: (isDisabled === "noChange" ? null : isDisabled),
+            mandatory: (isMandatory === "noChange" ? null : isMandatory),
             rollout: (rollout === "noChange" ? null : parseInt(rollout.replace("%", ""))),
-            targetBinaryVersion: (appStoreVersion === "noChange" ? false : appStoreVersion)
+            targetBinaryVersion: (appStoreVersion === "noChange" ? null : appStoreVersion)
         })
         .done(function() {
             console.log("Successfully patched " + appName + " - " + deploymentName + " (" + label + ")");
