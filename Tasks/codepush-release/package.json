@@ -10,8 +10,8 @@
   "author": "Microsoft Corporation",
   "license": "ISC",
   "dependencies": {
-    "code-push-cli": "^1.10.0-beta",
-    "vsts-task-lib": "^0.5.7"
+    "azure-pipelines-task-lib": "^2.8.0",
+    "code-push-cli": "^1.10.0-beta"
   },
   "devDependencies": {
     "sinon": "1.17.2",
