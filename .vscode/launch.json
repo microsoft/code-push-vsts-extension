@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program CodePush Release",
+            "program": "${workspaceRoot}/Tasks/codepush-release/codepush-release.js",
+            "env": {
+                "INPUT_appName": "",
+                "INPUT_authType": "AccessKey",
+                "INPUT_accessKey": "",
+                "INPUT_serviceEndpointCodePush": "",
+                "INPUT_serviceEndpointHockeyApp": "",
+                "INPUT_deploymentName": "Staging",
+                "INPUT_packagePath": "",
+                "INPUT_appStoreVersion": "1.0",
+                "INPUT_rolloutput": "100%",
+                "INPUT_description": "",
+                "INPUT_isMandatory": "",
+                "INPUT_isDisabled": "",
+
+            }
+        }
+    ]
+}
