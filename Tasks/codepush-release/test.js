@@ -1,6 +1,6 @@
 var sinon = require("sinon");
 var assert = require("assert");
-var tl = require("vsts-task-lib");
+var tl = require("azure-pipelines-task-lib");
 var CodePush = require("./codepush-release");
 
 const ACCESS_KEY        = "key123";
