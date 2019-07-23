@@ -1,6 +1,6 @@
 {
   "name": "vsts-task-code-push-promote",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Promote a CodePush release from one deployment to another",
   "main": "codepush-promote.js",
   "scripts": {
