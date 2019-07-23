@@ -10,6 +10,9 @@
   "author": "Microsoft Corporation",
   "license": "ISC",
   "dependencies": {
+    "@types/assert": "^1.4.2",
+    "@types/mocha": "^5.2.7",
+    "@types/sinon": "^7.0.13",
     "azure-pipelines-task-lib": "^2.8.0",
     "code-push-cli": "^2.1.9",
     "shelljs": "^0.8.3"
