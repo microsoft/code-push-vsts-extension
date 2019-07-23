@@ -4,18 +4,12 @@
   "description": "Promote a CodePush release from one deployment to another",
   "main": "codepush-promote.js",
   "scripts": {
-    "deploy": "tfx build tasks upload --task-path ./ --overwrite",
-    "test": "mocha test.js"
+    "deploy": "tfx build tasks upload --task-path ./ --overwrite"
   },
   "author": "Microsoft Corporation",
   "license": "ISC",
   "dependencies": {
-    "code-push": "github:Microsoft/code-push#code-push-sdk-lite",
-    "vsts-task-lib": "^0.5.7"
-  },
-  "devDependencies": {
-    "sinon": "1.17.2",
-    "assert": "1.3.0",
-    "mocha": "~2.4.5"
+    "azure-pipelines-task-lib": "^2.8.0",
+    "code-push": "^2.0.7"
   }
 }
