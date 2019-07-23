@@ -4,8 +4,7 @@
   "description": "Promote a CodePush release from one deployment to another",
   "main": "codepush-promote.js",
   "scripts": {
-    "deploy": "tfx build tasks upload --task-path ./ --overwrite",
-    "test": "mocha test.js"
+    "deploy": "tfx build tasks upload --task-path ./ --overwrite"
   },
   "author": "Microsoft Corporation",
   "license": "ISC",
