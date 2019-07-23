@@ -28,4 +28,4 @@ $env:INPUT_description = $description
 $env:INPUT_isMandatory = $isMandatory
 $env:INPUT_isDisabled = $isDisabled
 
-node codepush-release.js
+node codepush-release-cordova.js
