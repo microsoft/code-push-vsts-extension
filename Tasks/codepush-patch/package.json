@@ -4,18 +4,12 @@
   "description": "Update the metadata for an existing release",
   "main": "codepush-patch.js",
   "scripts": {
-    "deploy": "tfx build tasks upload --task-path ./ --overwrite",
-    "test": "mocha test.js"
+    "deploy": "tfx build tasks upload --task-path ./ --overwrite"
   },
   "author": "Microsoft Corporation",
   "license": "ISC",
   "dependencies": {
-    "code-push": "github:Microsoft/code-push#code-push-sdk-lite",
-    "vsts-task-lib": "^0.5.7"
-  },
-  "devDependencies": {
-    "sinon": "1.17.2",
-    "assert": "1.3.0",
-    "mocha": "~2.4.5"
+    "code-push": "^2.0.7",
+    "azure-pipelines-task-lib": "^2.8.0"
   }
 }
