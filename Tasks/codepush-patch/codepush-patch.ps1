@@ -9,7 +9,7 @@ param (
     [string]$description,
     [string]$isMandatory,
     [string]$isDisabled,
-    [string]$rollout
+    [string]$rollout,
     [string]$appStoreVersion
 ) 
   
@@ -26,4 +26,4 @@ $env:INPUT_isDisabled = $isDisabled
 $env:INPUT_rolloutput = $rollout
 $env:INPUT_appStoreVersion = $appStoreVersion
 
-node codepush-release.js
+node codepush-patch.js
