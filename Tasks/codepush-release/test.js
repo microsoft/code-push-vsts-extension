@@ -18,7 +18,7 @@ describe("CodePush Deploy Task", function() {
   
   before(function() {
     // Silence console output from the build task.
-    sinon.stub(CodePush, "log", function() { });
+    sinon.stub(CodePush, "log").callsFake(function() { });
   });
   
   afterEach(function() {
@@ -31,7 +31,7 @@ describe("CodePush Deploy Task", function() {
   
   function stubExecToFailOnCommandType(commandType) {
     // If commandType not specified, all will succeed.
-    var execStub = sinon.stub(global, "exec", function(command) {
+    var execStub = sinon.stub(global, "exec").callsFake(function(command) {
       return {
         code: !commandType || command.indexOf(commandType) == -1 ? 0 : 1,
         output: command
@@ -54,7 +54,7 @@ describe("CodePush Deploy Task", function() {
     var performDeployTaskSpy = sinon.spy(CodePush, "performDeployTask");
     spies.push(CodePush.performDeployTask)
     
-    var tlSetResultSpy = sinon.stub(tl, "setResult", function() {});
+    var tlSetResultSpy = sinon.stub(tl, "setResult").callsFake(function() {});
     spies.push(tl.setResult);
     
     try {
