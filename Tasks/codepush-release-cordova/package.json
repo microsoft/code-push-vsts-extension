@@ -13,7 +13,7 @@
     "@types/shelljs": "^0.8.5",
     "azure-pipelines-task-lib": "^2.8.0",
     "code-push-cli": "^2.1.9",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
     "assert": "^2.0.0",
