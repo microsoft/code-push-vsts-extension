@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "azure-pipelines-task-lib": "^2.8.0",
-    "code-push": "^2.0.7"
+    "code-push": "^4.0.5"
   }
 }
