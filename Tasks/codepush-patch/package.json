@@ -9,7 +9,7 @@
   "author": "Microsoft Corporation",
   "license": "ISC",
   "dependencies": {
-    "code-push": "^2.0.7",
+    "code-push": "^4.0.5",
     "azure-pipelines-task-lib": "^2.8.0"
   }
 }
